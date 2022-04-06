@@ -8,12 +8,14 @@
 <script>
 import HelloWorld from "./components/HelloWorld.vue";
 import Wongsapat from "./components/Wongsapat.vue";
+import Puriwat from './components/Puriwat.vue'
 
 export default {
   name: "App",
   components: {
     HelloWorld,
     Wongsapat,
+    Puriwat
   },
 };
 </script>
