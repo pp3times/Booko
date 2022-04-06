@@ -1,18 +1,21 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="to Your Wongsapat App"/>
-  <HelloWorld msg="Hi Puriwat"/>
+  <img alt="Vue logo" src="./assets/logo.png" />
+  <HelloWorld msg="to Your Wongsapat App" />
+  <HelloWorld msg="Hi Puriwat" />
+  <Wongsapat />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import HelloWorld from "./components/HelloWorld.vue";
+import Wongsapat from "./components/Wongsapat.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    HelloWorld,
+    Wongsapat,
+  },
+};
 </script>
 
 <style>
