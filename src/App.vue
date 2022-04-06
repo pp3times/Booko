@@ -1,5 +1,6 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
+  <HelloWorld msg="to Your Wongsapat App"/>
   <HelloWorld msg="Hi Puriwat"/>
 </template>
 
