@@ -1,21 +1,23 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="to Your Wongsapat App"/>
-  <HelloWorld msg="Hi Puriwat"/>
-  <Puriwat first_name="Puriwat" last_name="Udompittayasit"/>
+  <img alt="Vue logo" src="./assets/logo.png" />
+  <HelloWorld msg="to Your Wongsapat App" />
+  <HelloWorld msg="Hi Puriwat" />
+  <Wongsapat />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import HelloWorld from "./components/HelloWorld.vue";
+import Wongsapat from "./components/Wongsapat.vue";
 import Puriwat from './components/Puriwat.vue'
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     HelloWorld,
+    Wongsapat,
     Puriwat
-  }
-}
+  },
+};
 </script>
 
 <style>
