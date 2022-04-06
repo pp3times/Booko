@@ -1,6 +1,6 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Puriwat App"/>
+  <HelloWorld msg="Hi Puriwat"/>
 </template>
 
 <script>
