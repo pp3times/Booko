@@ -1,4 +1,4 @@
-# bookko
+# frontend
 
 ## Project setup
 ```
