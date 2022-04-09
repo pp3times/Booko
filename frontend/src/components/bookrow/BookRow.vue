@@ -1,5 +1,6 @@
 <template>
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 gap-y-10 max-w-6xl">
+ <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 gap-y-10 max-w-6xl">
+  <!-- <div class="grid grid-cols-12 gap-2 gap-y-10 max-w-6xl"> -->
     <!-- Video 1 -->
     <Book />
     <Book />

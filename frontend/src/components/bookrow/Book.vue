@@ -8,7 +8,7 @@
             <Test />
           </a>
           <p
-            class="absolute right-2 bottom-2 bg-red-900 text-gray-100 text-xs px-1 py"
+            class="absolute right-2 bottom-2 bg-red-500 text-gray-100 text-xs px-1 py"
           >
             Flash Sale
           </p>

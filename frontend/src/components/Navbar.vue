@@ -1,35 +1,19 @@
 <template>
   <div class="bg-black">
     <nav
-      class="
-        container
-        px-6
-        py-8
-        mx-auto
-        md:flex md:justify-between md:items-center
-      "
+      class="container px-6 py-8 mx-auto md:flex md:justify-between md:items-center"
     >
       <div class="flex items-center justify-between">
         <router-link
           to="/"
-          class="
-            text-xl
-            font-bold
-            text-gray-100
-            md:text-2xl
-            hover:text-indigo-400
-          "
+          class="text-xl font-bold text-gray-100 md:text-2xl hover:text-indigo-400"
           >Booko
         </router-link>
         <!-- Mobile menu button -->
         <div @click="toggleNav" class="flex md:hidden">
           <button
             type="button"
-            class="
-              text-gray-100
-              hover:text-gray-400
-              focus:outline-none focus:text-gray-400
-            "
+            class="text-gray-100 hover:text-gray-400 focus:outline-none focus:text-gray-400"
           >
             <svg viewBox="0 0 24 24" class="w-6 h-6 fill-current">
               <path
@@ -44,32 +28,35 @@
       <!-- Mobile Menu open: "block", Menu closed: "hidden" -->
       <ul
         :class="showMenu ? 'flex' : 'hidden'"
-        class="
-          flex-col
-          mt-8
-          space-y-4
-          md:flex md:space-y-0 md:flex-row md:items-center md:space-x-10 md:mt-0
-        "
+        class="flex-col mt-8 space-y-4 md:flex md:space-y-0 md:flex-row md:items-center md:space-x-10 md:mt-0"
       >
         <li class="text-gray-100 hover:text-indigo-400">
-					<router-link to="/">Home</router-link>
-				</li>
+          <router-link to="/">Home</router-link>
+        </li>
         <li class="text-gray-100 hover:text-indigo-400">
-					<router-link to="/about">About</router-link>
-				</li>
-        <li class="text-gray-100 hover:text-indigo-400">Blogs</li>
+          <router-link to="/about">About</router-link>
+        </li>
+        <li class="text-gray-100 hover:text-indigo-400 cursor-pointer" @click="enableSave">
+          Search
+        </li>
         <li class="text-gray-100 hover:text-indigo-400">Contact Us</li>
-				<li class="text-gray-100 hover:text-indigo-400">
-					<button>LOGIN</button>
-				</li>
+        <li>
+          <button class="text-gray-100 hover:text-indigo-400 px-4 py-2 bg-sky-300 rounded-sm">LOGIN</button>
+        </li>
       </ul>
     </nav>
   </div>
 </template>
 <script>
-import { ref } from 'vue';
+import { ref } from "vue";
 export default {
-	name: 'Navbar',
+  name: "Navbar",
+  props: ["isShow"],
+  methods: {
+    enableSave() {
+      this.$emit("change-hidden", !this.isShow);
+    },
+  },
   setup() {
     let showMenu = ref(false);
     const toggleNav = () => (showMenu.value = !showMenu.value);

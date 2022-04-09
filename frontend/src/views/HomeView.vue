@@ -1,7 +1,10 @@
 <template>
   <div>
-    <Navbar />
-		<Category />
+    <Navbar :is-hidden="isShow" v-on:change-hidden="onChangeHidden" />
+		<!-- <h1>{{ isShow }}</h1> -->
+    <!-- <SearchBar />
+    <Category /> -->
+		<TopBar v-if="isShow" />
     <Promotion />
     <Popular />
     <div class="relative flex py-24 px-24 items-center bg-black">
@@ -9,7 +12,7 @@
       <span class="flex-shrink mx-4 text-white">Content</span>
       <div class="flex-grow border-t border-white"></div>
     </div>
-		<!-- <Popular /> -->
+    <Popular />
     <Footer />
   </div>
 </template>
@@ -21,10 +24,22 @@ import Navbar from "@/components/Navbar.vue";
 import Promotion from "@/components/special/Promotion.vue";
 import Footer from "@/components/Footer.vue";
 import Popular from "@/components/bookrow/Popular.vue";
-import Category from "@/components/Category.vue";
+// import Category from "@/components/TopBar/Category.vue";
+// import SearchBar from "@/components/TopBar/SearchBar.vue";
+import TopBar from "@/components/TopBar/TopBar.vue";
 
 export default {
   name: "HomeView",
+	data() {
+		return {
+			isShow: false
+		};
+	},
+	methods: {
+		onChangeHidden() {
+			this.isShow = !this.isShow;
+		}
+	},
   components: {
     // HelloWorld
     // Book,
@@ -32,7 +47,9 @@ export default {
     Promotion,
     Footer,
     Popular,
-		Category,
+		TopBar,
+    // Category,
+    // SearchBar,
   },
 };
 </script>
