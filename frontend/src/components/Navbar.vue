@@ -55,11 +55,7 @@
 
         <li class="text-gray-100 hover:text-red-300">Contact Us</li>
         <li>
-          <button
-            class="text-gray-100 font-bold hover:text-red-600 hover:bg-white transition duration-300 px-4 py-2 bg-red-600 rounded-sm"
-          >
-            LOGIN
-          </button>
+          <router-link to="/auth" class="text-gray-100 font-bold hover:text-red-600 hover:bg-white transition duration-300 px-4 py-2 bg-red-600 rounded-sm">LOGIN</router-link>
         </li>
         <li>
           <router-link to="/cart">
