@@ -22,6 +22,12 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "cart" */ "../views/CartView.vue"),
   },
+  {
+    path: "/auth",
+    name: "auth",
+    component: () =>
+      import(/* webpackChunkName: "cart" */ "../views/AuthView.vue"),
+  },
 ];
 
 const router = createRouter({
