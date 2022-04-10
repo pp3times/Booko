@@ -1,22 +1,46 @@
 <template>
- <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 gap-y-10 max-w-6xl">
-  <!-- <div class="grid grid-cols-12 gap-2 gap-y-10 max-w-6xl"> -->
-    <!-- Video 1 -->
-    <Book />
-    <Book />
-    <Book />
-    <Book />
-    <Book />
-    <Book />
+  <div>
+    <div
+      class="flex items-start justify-center flex-col px-24"
+      v-for="(book, index) in bookData"
+      :key="index"
+    >
+      <h3 class="py-10 text-4xl underline underline-offset-4 text-white">
+        {{ index }}
+        <!-- {{ book }} -->
+      </h3>
+      <div class="flex items-center justify-center flex-col">
+        <div
+          class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10 gap-y-10 max-w-6xl"
+        >
+          <!-- <div class="grid grid-cols-12 gap-2 gap-y-10 max-w-6xl"> -->
+          <div v-for="(list, index2) in book" :key="index2">
+            <Book
+              :imgUrl="list.img"
+              :bookName="list.name"
+              :bookAuthor="list.writer"
+              :bookPrice="list.price"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import Book from "@/components/bookrow/Book.vue";
+import bookData from "@/data/book.json";
+
 export default {
   name: "BookRow",
   components: {
     Book,
+  },
+  data() {
+    return {
+      bookData,
+    };
   },
 };
 </script>

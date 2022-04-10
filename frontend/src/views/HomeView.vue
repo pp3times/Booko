@@ -7,12 +7,12 @@
 		<TopBar v-if="isShow" />
     <Promotion />
     <Popular />
-    <div class="relative flex py-24 px-24 items-center bg-black">
+    <!-- <div class="relative flex py-24 px-24 items-center bg-black">
       <div class="flex-grow border-t border-white"></div>
       <span class="flex-shrink mx-4 text-white">Content</span>
       <div class="flex-grow border-t border-white"></div>
     </div>
-    <Popular />
+    <Popular /> -->
     <Footer />
   </div>
 </template>

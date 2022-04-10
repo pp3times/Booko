@@ -7,9 +7,10 @@
     >
       <div class="cover">
         <div class="book_shadow"></div>
-        <img
+        <!-- <img
           src="https://www.lib.kmitl.ac.th/wp-content/uploads/2022/01/978-3-662-62746-4.jpg"
-        />
+        /> -->
+        <img :src="imgUrl" />
         <div class="side side-1"></div>
         <div class="side side-2"></div>
       </div>
@@ -32,7 +33,13 @@
 
 <script>
 export default {
-	name: 'Test',
+  name: "Test",
+  props: {
+    imgUrl: {
+      type: String,
+      required: true,
+    },
+  },
 };
 </script>
 
