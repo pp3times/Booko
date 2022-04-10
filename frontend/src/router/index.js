@@ -28,6 +28,12 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "cart" */ "../views/AuthView.vue"),
   },
+  {
+    path: "/payment",
+    name: "payment",
+    component: () =>
+      import(/* webpackChunkName: "cart" */ "../views/PaymentView.vue"),
+  },
 ];
 
 const router = createRouter({
