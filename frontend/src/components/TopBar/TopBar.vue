@@ -1,16 +1,18 @@
 <template>
   <div>
-    <SearchBar />
-    <Category />
+    <div>
+      <!-- <SearchBar /> -->
+      <Category />
+    </div>
   </div>
 </template>
 
 <script>
-import SearchBar from "@/components/TopBar/SearchBar.vue";
+// import SearchBar from "@/components/TopBar/SearchBar.vue";
 import Category from "@/components/TopBar/Category.vue";
 
 export default {
-  components: { SearchBar, Category },
+  components: { Category },
   name: "TopBar",
 };
 </script>

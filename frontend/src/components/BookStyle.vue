@@ -7,33 +7,18 @@
     >
       <div class="cover">
         <div class="book_shadow"></div>
-        <!-- <img
-          src="https://www.lib.kmitl.ac.th/wp-content/uploads/2022/01/978-3-662-62746-4.jpg"
-        /> -->
         <img :src="imgUrl" />
         <div class="side side-1"></div>
         <div class="side side-2"></div>
       </div>
     </a>
     <sp class=""></sp>
-
-    <!-- <a
-      href="https://link.springer.com/book/10.1007/978-3-662-62746-4"
-      class="block"
-      target="_blank"
-    >
-      <h5 class="cl-white book-title-wrap size-rm text-white">
-        Machine Learning for Cyber Physical Systems
-      </h5>
-			<h5 class="text-white">Jürgen</h5>
-			<h6 class="text-white">฿280</h6>
-    </a> -->
   </div>
 </template>
 
 <script>
 export default {
-  name: "Test",
+  name: "BookStyle",
   props: {
     imgUrl: {
       type: String,

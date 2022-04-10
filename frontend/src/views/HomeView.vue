@@ -1,10 +1,27 @@
 <template>
   <div>
-    <Navbar :is-hidden="isShow" v-on:change-hidden="onChangeHidden" />
-		<!-- <h1>{{ isShow }}</h1> -->
-    <!-- <SearchBar />
-    <Category /> -->
-		<TopBar v-if="isShow" />
+    <Navbar />
+    <!-- <h1>{{ isShow }}</h1> -->
+    <SearchBar :isHidden="isShow" v-on:change-hidden="onChangeHidden" />
+    <!-- <Category /> -->
+    <!-- <transition
+      enter-active-class="duration-500 ease-out"
+      enter-class="-translate-x-full opacity-0"
+      enter-to-class="translate-x-0 opacity-100"
+      leave-active-class="duration-500 ease-in"
+      leave-class="translate-x-0 opacity-100"
+      leave-to-class="-translate-x-full opacity-0"
+    > -->
+    <transition
+      enter-active-class="duration-500 delay-500 ease-out"
+      enter-class="-translate-x-full opacity-0"
+      enter-to-class="translate-x-0 opacity-100"
+      leave-active-class="duration-500 ease-in"
+      leave-class="translate-x-0 opacity-100"
+      leave-to-class="-translate-x-full opacity-0"
+    >
+      <TopBar v-if="isShow" />
+    </transition>
     <Promotion />
     <Popular />
     <!-- <div class="relative flex py-24 px-24 items-center bg-black">
@@ -25,21 +42,21 @@ import Promotion from "@/components/special/Promotion.vue";
 import Footer from "@/components/Footer.vue";
 import Popular from "@/components/bookrow/Popular.vue";
 // import Category from "@/components/TopBar/Category.vue";
-// import SearchBar from "@/components/TopBar/SearchBar.vue";
+import SearchBar from "@/components/TopBar/SearchBar.vue";
 import TopBar from "@/components/TopBar/TopBar.vue";
 
 export default {
   name: "HomeView",
-	data() {
-		return {
-			isShow: false
-		};
-	},
-	methods: {
-		onChangeHidden() {
-			this.isShow = !this.isShow;
-		}
-	},
+  data() {
+    return {
+      isShow: false,
+    };
+  },
+  methods: {
+    onChangeHidden() {
+      this.isShow = !this.isShow;
+    },
+  },
   components: {
     // HelloWorld
     // Book,
@@ -47,9 +64,9 @@ export default {
     Promotion,
     Footer,
     Popular,
-		TopBar,
+    TopBar,
     // Category,
-    // SearchBar,
+    SearchBar,
   },
 };
 </script>
