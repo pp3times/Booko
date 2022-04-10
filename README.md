@@ -1,4 +1,4 @@
-# Booko - Online Book Store and Book Publishing Platform 📚
+# Booko - Online Book Store Platform 📚
 
 ## **Tech Stack:**
 - vue (frontend)
