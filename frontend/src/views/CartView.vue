@@ -1,5 +1,6 @@
 <template>
   <div>
+		<BoardCast />
     <Navbar />
     <h1>This is an CartView page</h1>
     <div class="w-full max-w-lg p-4 px-8 py-10 overflow-hidden bg-white shadow-xl-blue rounded-xl">
@@ -42,11 +43,13 @@
 
 <script>
 import Navbar from "@/components/Navbar.vue";
+import BoardCast from "@/components/TopBar/BoardCast.vue";
 
 export default {
   name: "CartView",
   components: {
     Navbar,
+		BoardCast
   },
   data () {
       return {
