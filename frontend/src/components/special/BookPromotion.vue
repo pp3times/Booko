@@ -16,17 +16,17 @@
     </a>
     <sp class=""></sp>
 
-    <a
+    <!-- <a
       href="https://link.springer.com/book/10.1007/978-3-662-62746-4"
       class="block"
       target="_blank"
     >
-      <h5 class="cl-white book-title-wrap size-rm text-white">
+      <h5 class="cl-white book-title-wrap size-rm text-black">
         Machine Learning for Cyber Physical Systems
       </h5>
 			<h5 class="text-white">Jürgen</h5>
 			<h6 class="text-white">฿280</h6>
-    </a>
+    </a> -->
   </div>
 </template>
 
@@ -38,7 +38,7 @@ export default {
 
 <style lang="css" scoped>
 .book_shadow {
-  background: #0003;
+  background: rgba(0, 0, 0, 0.462);
   height: 1rem;
   width: 100%;
   border-radius: 100%;
@@ -58,7 +58,7 @@ export default {
 }
 
 .cover {
-  width: 80%;
+  width: 110%;
   margin: auto;
   display: block;
   position: relative;
@@ -67,7 +67,9 @@ export default {
   transform: rotateY(-30deg) rotateX(30deg) translateY(0px) translateX(0px);
   transition: 0.6s cubic-bezier(0.42, -0.35, 0, 1.46);
   cursor: pointer;
+	animation: book-flip 8s ease-in-out infinite;
 }
+
 .cover img {
   width: 100%;
   position: relative;
@@ -112,4 +114,17 @@ export default {
 .book-wrap:hover .book-title-wrap {
   opacity: 1;
 }
+
+@keyframes book-flip {
+	0% {
+		transform: rotateY(0deg) rotateX(0deg) translateY(0px) translateX(0px);
+	}
+	50% {
+		transform: rotateY(-30deg) rotateX(30deg) translateY(0px) translateX(0px);
+	}
+	100% {
+		transform: rotateY(0deg) rotateX(0deg) translateY(0px) translateX(0px);
+	}
+}
+
 </style>

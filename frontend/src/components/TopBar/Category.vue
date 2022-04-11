@@ -1,45 +1,10 @@
 <template>
-  <div class="px-10">
+  <div class="px-[6.5rem] font-ibmp">
     <div class="flex font-bold text-2xl py-3">หมวดหมู่หนังสือ</div>
     <hr />
     <div
       class="py-5 -mx-3 overflow-y-auto whitespace-nowrap scroll-hidden flex"
     >
-      <a
-        class="text-gray-700 leading-5 hover:text-blue-600 hover:underline mx-4 md:my-0"
-        href="#"
-        v-for="(book, index) in bookData"
-        :key="index"
-        >{{ index }}</a
-      >
-      <a
-        class="text-gray-700 leading-5 hover:text-blue-600 hover:underline mx-4 md:my-0"
-        href="#"
-        v-for="(book, index) in bookData"
-        :key="index"
-        >{{ index }}</a
-      >
-      <a
-        class="text-gray-700 leading-5 hover:text-blue-600 hover:underline mx-4 md:my-0"
-        href="#"
-        v-for="(book, index) in bookData"
-        :key="index"
-        >{{ index }}</a
-      >
-      <a
-        class="text-gray-700 leading-5 hover:text-blue-600 hover:underline mx-4 md:my-0"
-        href="#"
-        v-for="(book, index) in bookData"
-        :key="index"
-        >{{ index }}</a
-      >
-      <a
-        class="text-gray-700 leading-5 hover:text-blue-600 hover:underline mx-4 md:my-0"
-        href="#"
-        v-for="(book, index) in bookData"
-        :key="index"
-        >{{ index }}</a
-      >
       <a
         class="text-gray-700 leading-5 hover:text-blue-600 hover:underline mx-4 md:my-0"
         href="#"

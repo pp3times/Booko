@@ -1,13 +1,6 @@
 <template>
-  <!-- <div class="flex items-start justify-center flex-col px-24 h-86 bg-black"> -->
-  <!-- <div class="flex"> -->
-  <div class="bg-black">
+  <div class="bg-white my-10">
     <BookRow />
-    <!-- <Book />
-      <Book />
-      <Book />
-      <Book /> -->
-    <!-- </div> -->
   </div>
 </template>
 
@@ -17,7 +10,6 @@ import BookRow from "@/components/bookrow/BookRow.vue";
 export default {
   name: "Popular",
   components: {
-    // HelloWorld
     BookRow,
   },
 };

@@ -1,7 +1,6 @@
 <template>
   <div>
     <div>
-      <!-- <SearchBar /> -->
       <Category />
     </div>
   </div>

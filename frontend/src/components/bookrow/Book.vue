@@ -8,7 +8,7 @@
           <BookStyle :imgUrl="imgUrl" />
         </a>
         <p
-          class="absolute right-2 bottom-2 bg-red-500 text-gray-100 text-xs px-1 py z-[200]"
+          class="absolute right-2 bottom-2 bg-primary-light text-gray-100 text-xs px-1 py z-[200]"
         >
           Flash Sale
         </p>
@@ -17,7 +17,7 @@
         <!-- Description -->
         <div clas="flex flex-col">
           <a href="https://link.springer.com/book/10.1007/978-3-662-62746-4">
-            <p class="text-gray-100 text-xl font-semibold">
+            <p class="text-primary text-xl font-semibold">
               {{ bookName }}
             </p>
           </a>

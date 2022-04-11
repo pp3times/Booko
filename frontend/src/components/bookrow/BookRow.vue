@@ -5,7 +5,7 @@
       v-for="(book, index) in bookData"
       :key="index"
     >
-      <h3 class="py-10 text-4xl underline underline-offset-4 text-white">
+      <h3 class="py-10 text-4xl underline underline-offset-4 text-primary-dark">
         {{ index }}
         <!-- {{ book }} -->
       </h3>
