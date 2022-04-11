@@ -1,12 +1,12 @@
 <template>
-  <div class="h-screen">
+  <div class="h-screen font-ibmp bg-zinc-300">
     <Navbar />
     <div class="flex justify-center items-center h-full text-4xl">
-    <div class="flex justify-start items-center flex-col bg-slate-600 text-white h-11/12 w-2/6 p-10">
-      <h1 >ช่องทางการชำระเงิน</h1>
+    <div class="flex justify-start items-center flex-col bg-primary text-white h-11/12 w-2/6 p-10 ">
+      <h1 class="font-bold" >ช่องทางการชำระเงิน</h1>
 
       <div class="m-5 text-lg">
-      <h1 class="text-3xl">ชำระเงินผ่านช่องทาง 2c2p</h1>
+      <h1 class="text-3xl font-semibold">ชำระเงินผ่านช่องทาง 2c2p</h1>
       <p>ท่านสามารถเลือกช่องทางการชำระเงินที่ท่านสะดวกได้หลังจากกดเลือกที่ตัวเลือก “ชำระเงินออนไลน์ทุกช่องทางผ่าน 2C2P” โดยจะมีวิธีการชำระเงินให้เลือกดังต่อไปนี้</p>
       </div>
 

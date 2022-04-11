@@ -37,6 +37,10 @@
           <router-link to="/about">เกี่ยวกับ</router-link>
         </li>
 
+
+         <li class="text-gray-500 hover:text-primary">
+          <router-link to="/payment">ช่องทางการชำระเงิน</router-link>
+        </li>
         <li class="text-gray-500 hover:text-primary">ติดต่อ</li>
         <li>
           <router-link
