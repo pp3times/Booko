@@ -1,5 +1,6 @@
 <template>
   <div>
+		<BoardCast />
     <Navbar />
     <div class="container mx-auto mt-10">
     <div class="flex shadow-md my-10">
@@ -123,11 +124,13 @@
 
 <script>
 import Navbar from "@/components/Navbar.vue";
+import BoardCast from "@/components/TopBar/BoardCast.vue";
 
 export default {
   name: "CartView",
   components: {
     Navbar,
+		BoardCast
   },
   data () {
       return {

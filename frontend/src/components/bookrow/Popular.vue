@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white my-10">
+  <div class="bg-white my-10 font-ibmp">
     <BookRow />
   </div>
 </template>

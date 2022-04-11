@@ -1,21 +1,20 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const cors = require("cors");
+// import express
+import express from "express";
+// import cors
+import cors from "cors";
+// import routes
+import Router from "./routes/routes.js";
+
+// init express
 const app = express();
-var corsOptions = {
-  origin: "http://localhost:8081",
-};
-app.use(cors(corsOptions));
-// parse requests of content-type - application/json
-app.use(bodyParser.json());
-// parse requests of content-type - application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: true }));
-// simple route
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to Booko application." });
-});
-// set port, listen for requests
-const PORT = process.env.PORT || 8081;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}.`);
-});
+
+// use express json
+app.use(express.json());
+
+// use cors
+app.use(cors());
+
+// use router
+app.use(Router);
+
+app.listen(3000, () => console.log("Server running at http://localhost:3000"));
