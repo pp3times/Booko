@@ -1,5 +1,5 @@
 <template>
-  <div class="h-screen font-ibmp bg-zinc-300">
+  <div class="h-screen font-ibmp bg-zinc-200">
     <Navbar />
     <div class="flex justify-center items-center h-full text-4xl">
     <div class="flex justify-start items-center flex-col bg-primary text-white h-11/12 w-2/6 p-10 ">

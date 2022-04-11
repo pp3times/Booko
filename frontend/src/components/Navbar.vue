@@ -41,7 +41,9 @@
          <li class="text-gray-500 hover:text-primary">
           <router-link to="/payment">ช่องทางการชำระเงิน</router-link>
         </li>
-        <li class="text-gray-500 hover:text-primary">ติดต่อ</li>
+        <li class="text-gray-500 hover:text-primary">
+          <router-link to="/Contact">ติดต่อ</router-link>
+        </li>
         <li>
           <router-link
             to="/auth"
