@@ -1,8 +1,6 @@
 <template>
   <div>
-    <div>
-      <Category />
-    </div>
+    <Category />
   </div>
 </template>
 
