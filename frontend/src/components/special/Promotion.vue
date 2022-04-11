@@ -1,5 +1,5 @@
 <template>
-  <div class="h-[83vh] bg-[#f3f3f3] flex justify-between font-ibmp">
+  <div class="h-[77vh] bg-[#f3f3f3] flex justify-between font-ibmp">
     <div class="h-full flex items-center justify-center w-3/5">
       <BookPromotion />
     </div>

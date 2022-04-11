@@ -58,7 +58,7 @@ export default {
 }
 
 .cover {
-  width: 110%;
+  width: 100%;
   margin: auto;
   display: block;
   position: relative;
