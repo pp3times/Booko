@@ -2,18 +2,18 @@
   <!-- <div class="col-span-12 sm:col-span-6 md:col-span-3"> -->
   <div class="">
     <card class="w-full flex flex-col">
-      <div class="relative h-[16rem]">
+      <div class="relative h-52 md:h-[16rem]">
         <!-- Image Video -->
         <a href="#">
           <BookStyle :imgUrl="imgUrl" />
         </a>
         <p
-          class="absolute right-2 bottom-2 bg-primary-light text-gray-100 text-xs px-1 py z-[200]"
+          class="absolute right-2 bottom-2 bg-primary-light text-gray-100 text-xs px-1 z-[200]"
         >
           Flash Sale
         </p>
       </div>
-      <div class="flex flex-row mt-2 gap-2 justify-center">
+      <div class="flex flex-row mt-0 sm:mt-2 lg:mt-10 gap-2 justify-center">
         <!-- Description -->
         <div clas="flex flex-col">
           <a href="https://link.springer.com/book/10.1007/978-3-662-62746-4">

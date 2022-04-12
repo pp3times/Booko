@@ -1,9 +1,11 @@
 <template>
   <div class="font-ibmp">
-    <main class="flex w-full items-center justify-center bg-white pb-2 px-24">
+    <main class="flex w-full items-center justify-center bg-white pb-2 container px-5 mx-auto">
+    <!-- <main class="flex w-full items-center justify-center bg-white pb-2 px-24 lg:px-48"> -->
       <!-- component -->
+			<!-- container  -->
       <div
-        class="m-2 rounded-sm px-2 py-2 font-semibold text-white h-full cursor-pointer"
+        class="m-2 rounded-sm pr-2 py-2 font-semibold text-white h-full cursor-pointer"
         @click="enableSave"
       >
         <svg

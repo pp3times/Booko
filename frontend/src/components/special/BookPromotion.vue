@@ -5,7 +5,7 @@
       class="block"
       target="_blank"
     >
-      <div class="cover">
+      <div class="cover w-40 md:w-[80%] xl:w-full">
         <div class="book_shadow"></div>
         <img
           src="https://www.lib.kmitl.ac.th/wp-content/uploads/2022/01/978-3-662-62746-4.jpg"
@@ -58,7 +58,6 @@ export default {
 }
 
 .cover {
-  width: 100%;
   margin: auto;
   display: block;
   position: relative;

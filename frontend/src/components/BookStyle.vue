@@ -5,7 +5,7 @@
       class="block"
       target="_blank"
     >
-      <div class="cover">
+      <div class="cover w-28 sm:w-40 md:w-[80%] xl:w-[60%]">
         <div class="book_shadow"></div>
         <img :src="imgUrl" />
         <div class="side side-1"></div>
@@ -50,7 +50,6 @@ export default {
 }
 
 .cover {
-  width: 80%;
   margin: auto;
   display: block;
   position: relative;

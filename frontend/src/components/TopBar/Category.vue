@@ -1,5 +1,5 @@
 <template>
-  <div class="px-[6.5rem] font-ibmp">
+  <div class="font-ibmp container px-5 mx-auto">
     <div class="flex font-bold text-2xl py-3">หมวดหมู่หนังสือ</div>
     <hr />
     <div

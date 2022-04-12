@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      class="flex items-start justify-center flex-col px-24"
+      class="flex items-start justify-center flex-col container px-5 mx-auto"
       v-for="(book, index) in bookData"
       :key="index"
     >
@@ -11,7 +11,7 @@
       </h3>
       <div class="flex items-center justify-center flex-col">
         <div
-          class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10 gap-y-10 max-w-6xl"
+          class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10 gap-y-10 max-w-6xl lg:max-w-full"
         >
           <!-- <div class="grid grid-cols-12 gap-2 gap-y-10 max-w-6xl"> -->
           <div v-for="(list, index2) in book" :key="index2">
