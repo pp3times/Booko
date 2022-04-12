@@ -4,161 +4,96 @@
     <div
       id="container"
       style="min-height: 480px"
-      class="
-        container
-        mx-auto
-        shadow-lg
-        relative
-        overflow-hidden
-        max-w-full
-        w-1/2
-        mt-16
-      "
+      class="container mx-auto shadow-lg relative overflow-hidden max-w-full w-1/2 mt-16"
     >
       <div class="form-container signup-container">
-        <form
-          action=""
-          class="flex flex-col justify-center p-10 items-center text-center"
-        >
+        <div class="flex flex-col justify-center p-10 items-center text-center">
           <h1 class="text-2xl font-bold">สร้างบัญชีผู้ใช้</h1>
-          <div class="flex items-center border-b border-teal-500 py-2 mt-7">
+          <!-- <div class="flex items-center border-b border-teal-500 py-2 mt-7">
             <input
-              class="
-                appearance-none
-                bg-transparent
-                border-none
-                w-full
-                text-gray-700
-                mr-32
-                py-1
-                px-2
-                leading-tight
-                focus:outline-none
-              "
+              class="appearance-none bg-transparent border-none w-full text-gray-700 mr-32 py-1 px-2 leading-tight focus:outline-none"
               type="text"
               placeholder="อีเมลแอดเดรส"
             />
-          </div>
-          <div class="flex items-center border-b border-teal-500 py-2 max-w-sm">
+          </div> -->
+          <div class="flex items-center border-b border-teal-500 py-2 mt-7">
             <input
-              class="
-                appearance-none
-                bg-transparent
-                border-none
-                w-full
-                text-gray-700
-                mr-32
-                py-1
-                px-2
-                leading-tight
-                focus:outline-none
-              "
-              type="password"
-              placeholder="รหัสผ่าน"
+              class="appearance-none bg-transparent border-none w-full text-gray-700 mr-32 py-1 px-2 leading-tight focus:outline-none"
+              type="text"
+              placeholder="firstname"
+              v-model="firstname"
+            />
+          </div>
+          <div class="flex items-center border-b border-teal-500 py-2">
+            <input
+              class="appearance-none bg-transparent border-none w-full text-gray-700 mr-32 py-1 px-2 leading-tight focus:outline-none"
+              type="text"
+              placeholder="lastname"
+              v-model="lastname"
+            />
+          </div>
+          <div class="flex items-center border-b border-teal-500 py-2">
+            <input
+              class="appearance-none bg-transparent border-none w-full text-gray-700 mr-32 py-1 px-2 leading-tight focus:outline-none"
+              type="text"
+              placeholder="username"
+              v-model="username"
             />
           </div>
           <div class="flex items-center border-b border-teal-500 py-2 max-w-sm">
             <input
-              class="
-                appearance-none
-                bg-transparent
-                border-none
-                w-full
-                text-gray-700
-                mr-32
-                py-1
-                px-2
-                leading-tight
-                focus:outline-none
-              "
+              class="appearance-none bg-transparent border-none w-full text-gray-700 mr-32 py-1 px-2 leading-tight focus:outline-none"
+              type="password"
+              placeholder="รหัสผ่าน"
+              v-model="password"
+            />
+          </div>
+          <div class="flex items-center border-b border-teal-500 py-2 max-w-sm">
+            <input
+              class="appearance-none bg-transparent border-none w-full text-gray-700 mr-32 py-1 px-2 leading-tight focus:outline-none"
               type="password"
               placeholder="ยืนยันรหัสผ่าน"
+              v-model="password_repeat"
             />
           </div>
           <button
-            class="
-              bg-primary
-              hover:bg-primary-light
-              text-white
-              font-bold
-              py-2
-              px-4
-              rounded
-              w-26
-              mt-10
-            "
+            class="bg-primary hover:bg-primary-light text-white font-bold py-2 px-4 rounded w-26 mt-10"
+            @click="signUp"
           >
             สมัครสมาชิก
           </button>
-        </form>
+          <p v-if="msg">{{ msg }}</p>
+        </div>
       </div>
       <div class="form-container signin-container">
-        <form
-          action=""
-          class="flex flex-col justify-center p-10 items-center text-center"
-        >
+        <div class="flex flex-col justify-center p-10 items-center text-center">
           <h1 class="text-2xl font-bold">ลงชื่อเข้าสู่ระบบ</h1>
           <div
-            class="
-              flex
-              items-center
-              border-b border-teal-500
-              py-2
-              max-w-sm
-              mt-7
-            "
+            class="flex items-center border-b border-teal-500 py-2 max-w-sm mt-7"
           >
             <input
-              class="
-                appearance-none
-                bg-transparent
-                border-none
-                w-full
-                text-gray-700
-                mr-32
-                py-1
-                px-2
-                leading-tight
-                focus:outline-none
-              "
+              class="appearance-none bg-transparent border-none w-full text-gray-700 mr-32 py-1 px-2 leading-tight focus:outline-none"
               type="text"
-              placeholder="อีเมลแอดเดรส"
+              placeholder="username"
+              v-model="username"
             />
           </div>
           <div class="flex items-center border-b border-teal-500 py-2 max-w-sm">
             <input
-              class="
-                appearance-none
-                bg-transparent
-                border-none
-                w-full
-                text-gray-700
-                mr-32
-                py-1
-                px-2
-                leading-tight
-                focus:outline-none
-              "
+              class="appearance-none bg-transparent border-none w-full text-gray-700 mr-32 py-1 px-2 leading-tight focus:outline-none"
               type="password"
               placeholder="รหัสผ่าน"
+              v-model="password"
             />
           </div>
           <button
-            class="
-              bg-primary
-              hover:bg-primary-light
-              text-white
-              font-bold
-              py-2
-              px-4
-              rounded
-              w-26
-              mt-10
-            "
+            class="bg-primary hover:bg-primary-light text-white font-bold py-2 px-4 rounded w-26 mt-10"
+            @click="login"
           >
             เข้าสู่ระบบ
           </button>
-        </form>
+          <p v-if="msg">{{ msg }}</p>
+        </div>
       </div>
       <div class="overlay-container">
         <div class="overlay bg-primary relative">
@@ -167,17 +102,7 @@
             <p class="mt-2">กดปุ่มด้านล่างเพื่อไปยังแถบเข้าสู่ระบบ</p>
             <button
               id="signin"
-              class="
-                bg-white
-                hover:bg-primary-light
-                text-primary
-                font-bold
-                py-2
-                px-4
-                rounded
-                w-26
-                mt-6
-              "
+              class="bg-white hover:bg-primary-light text-primary font-bold py-2 px-4 rounded w-26 mt-6"
             >
               เข้าสู่ระบบ
             </button>
@@ -187,17 +112,7 @@
             <p class="mt-2">กดปุ่มด้านล่างเพื่อไปยังแถบสร้างบัญชี</p>
             <button
               id="signup"
-              class="
-                bg-white
-                hover:bg-primary-light
-                text-primary
-                font-bold
-                py-2
-                px-4
-                rounded
-                w-26
-                mt-6
-              "
+              class="bg-white hover:bg-primary-light text-primary font-bold py-2 px-4 rounded w-26 mt-6"
             >
               สมัครสมาชิก
             </button>
@@ -208,11 +123,13 @@
   </div>
 </template>
 
-
 <script>
-import Navbar from "@/components/Navbar.vue";
+import Navbar from '@/components/Navbar.vue'
+import AuthService from '@/services/AuthService.js'
+import store from '../store'
+
 export default {
-  name: "AuthView",
+  name: 'AuthView',
   components: {
     Navbar,
   },
@@ -220,22 +137,66 @@ export default {
     return {
       totalSteps: 3,
       currentStep: 1,
-    };
+      firstname: '',
+      lastname: '',
+      username: '',
+      password: '',
+      password_repeat: '',
+      msg: '',
+    }
   },
   mounted() {
-    const signUpButton = document.getElementById("signup");
-    const signInButton = document.getElementById("signin");
-    const container = document.getElementById("container");
+    const signUpButton = document.getElementById('signup')
+    const signInButton = document.getElementById('signin')
+    const container = document.getElementById('container')
 
-    signUpButton.addEventListener("click", () =>
-      container.classList.add("right-panel-active")
-    );
+    signUpButton.addEventListener('click', () =>
+      container.classList.add('right-panel-active')
+    )
 
-    signInButton.addEventListener("click", () =>
-      container.classList.remove("right-panel-active")
-    );
+    signInButton.addEventListener('click', () =>
+      container.classList.remove('right-panel-active')
+    )
   },
-};
+  methods: {
+    async signUp() {
+      try {
+        const credentials = {
+          firstname: this.firstname,
+          lastname: this.lastname,
+          username: this.username,
+          password: this.password,
+          password_repeat: this.password_repeat,
+        }
+        const response = await AuthService.signUp(credentials)
+        this.msg = response.msg
+        this.$router.push('/')
+      } catch (error) {
+        this.msg = error.response.data.msg
+      }
+    },
+    async login() {
+      try {
+        const loginCredentials = {
+          username: this.username,
+          password: this.password
+        };
+        const response = await AuthService.login(loginCredentials);
+        this.msg = response.msg;
+
+        const token = response.token;
+        const user = response.user;
+
+				console.log(store);
+        this.$store.dispatch('login', { token, user });
+
+        this.$router.push('/dashboard');
+      } catch (error) {
+        this.msg = error.response.data.msg;
+      }
+    }
+  },
+}
 </script>
 
 <style>
@@ -309,29 +270,29 @@ export default {
   transform: translateX(-20%);
 }
 
-.container.right-panel-active .signin-container{
+.container.right-panel-active .signin-container {
   opacity: 0;
   transform: translateX(100%);
-    }
+}
 
-.container.right-panel-active .overlay-container{
+.container.right-panel-active .overlay-container {
   transform: translateX(-100%);
-    }
+}
 
-.container.right-panel-active .signup-container{
+.container.right-panel-active .signup-container {
   transform: translateX(100%);
   opacity: 1;
   z-index: 5;
-    }
+}
 
-.container.right-panel-active .overlay{
+.container.right-panel-active .overlay {
   transform: translateX(50%);
-    }
+}
 
-.container.right-panel-active .overlay-left{
+.container.right-panel-active .overlay-left {
   transform: translateX(0);
-    }
-.container.right-panel-active .overlay-right{
+}
+.container.right-panel-active .overlay-right {
   transform: translateX(20%);
 }
 </style>

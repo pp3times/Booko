@@ -8,13 +8,28 @@ import Router from "./routes/routes.js";
 // init express
 const app = express();
 
+// var corsOptions = {
+//   origin: "http://localhost:8081"
+// };
+// app.use(cors(corsOptions));
+
 // use express json
 app.use(express.json());
+
+// parse requests of content-type - application/x-www-form-urlencoded
+// app.use(express.urlencoded({ extended: true }));
 
 // use cors
 app.use(cors());
 
-// use router
-app.use(Router);
+app.get("/", (req, res) => {
+	res.send("Hello World!");
+});
 
-app.listen(3000, () => console.log("Server running at http://localhost:3000"));
+// use router
+app.use('/api', Router);
+
+// set port, listen for requests
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => console.log(`Server running at http://localhost:${PORT}`));
