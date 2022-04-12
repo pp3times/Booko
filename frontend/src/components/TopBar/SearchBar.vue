@@ -1,6 +1,6 @@
 <template>
   <div class="font-ibmp">
-    <main class="flex w-full items-center justify-center bg-white pb-2 container px-5 mx-auto">
+    <main class="flex w-full items-center justify-center bg-white pb-2 container px-5 mx-auto ">
     <!-- <main class="flex w-full items-center justify-center bg-white pb-2 px-24 lg:px-48"> -->
       <!-- component -->
 			<!-- container  -->
@@ -40,6 +40,7 @@
           v-model="search"
         />
 
+        <router-link to="/search">
         <button
           type="button"
           class="m-2 rounded px-4 py-2 font-bold text-white"
@@ -47,9 +48,11 @@
             search.length > 0 ? 'bg-primary' : 'bg-gray-500 cursor-not-allowed'
           "
           :disabled="search.length == 0"
+          
         >
           ค้นหา
         </button>
+        </router-link>
       </div>
     </main>
   </div>
@@ -67,7 +70,7 @@ export default {
     enableSave() {
       this.$emit("change-hidden", !this.isShow);
     },
-  },
+}
 };
 </script>
 
