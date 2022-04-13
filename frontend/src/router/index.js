@@ -51,6 +51,18 @@ const routes = [
 		name: "login",
 		component: () =>
 			import(/* webpackChunkName: "cart" */ "../views/Login.vue"),
+	},
+	{
+		path: "/admin",
+		name: "admin",
+		component: () =>
+			import(/* webpackChunkName: "cart" */ "../views/dashboard/Login.vue"),
+	},
+	{
+		path: "/dashboard/book",
+		name: "ManageBook",
+		component: () =>
+			import(/* webpackChunkName: "cart" */ "../views/dashboard/ManageBook.vue"),
 	}
 ];
 

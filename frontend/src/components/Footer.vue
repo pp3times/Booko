@@ -1,5 +1,7 @@
 <template>
-  <div class="w-full font-ibmp min-h-screen flex items-center justify-center bg-primary-dark">
+  <div
+    class="w-full font-ibmp min-h-screen flex items-center justify-center bg-primary-dark"
+  >
     <div class="md:w-2/3 w-full px-4 text-white flex flex-col">
       <div class="w-full text-7xl font-bold">
         <h1 class="w-full md:w-2/3">How can we help you. get in touch</h1>
@@ -9,18 +11,17 @@
           To ensure that all Wikipedia content is verifiable, anyone may
           question an uncited claim. If your work has been tagged
         </p>
-        <div class="w-44 pt-6 md:pt-0">
-          <a
+        <div class="pt-6 md:pt-0 hover:shadow-lg hover:scale-105 transition-all ease-in-out duration-300">
+          <router-link
+            to="/dashboard"
             class="bg-primary justify-center text-center rounded-lg shadow px-10 py-3 flex items-center"
-            >Contact US</a
-          >
+            >เข้าสู่ระบบหลังบ้าน
+          </router-link>
         </div>
       </div>
       <div class="flex flex-col">
         <div class="flex mt-24 mb-12 flex-row justify-between items-center">
-          <div class="text-3xl font-bold">
-            Booko
-          </div>
+          <div class="text-3xl font-bold">Booko</div>
           <a
             class="hidden md:block cursor-pointer text-white hover:text-white uppercase"
             >About</a
@@ -100,11 +101,11 @@
 </template>
 <script>
 export default {
-  name: "Footer",
+  name: 'Footer',
   data() {
     return {
       date: new Date().getFullYear(),
-    };
+    }
   },
-};
+}
 </script>

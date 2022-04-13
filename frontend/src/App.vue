@@ -18,4 +18,9 @@
 nav a.router-link-exact-active {
   color: #01b266;
 }
+
+a.router-link-exact-active .nav-admin {
+	@apply bg-gray-100 opacity-100 text-primary;
+}
+
 </style>
