@@ -1,6 +1,6 @@
 <template>
   <div>
-		<BoardCast />
+		<!-- <BoardCast /> -->
     <Navbar />
     <!-- <h1>{{ isShow }}</h1> -->
     <SearchBar :isHidden="isShow" v-on:change-hidden="onChangeHidden" />
@@ -45,7 +45,7 @@ import Popular from "@/components/bookrow/Popular.vue";
 // import Category from "@/components/TopBar/Category.vue";
 import SearchBar from "@/components/TopBar/SearchBar.vue";
 import TopBar from "@/components/TopBar/TopBar.vue";
-import BoardCast from "@/components/TopBar/BoardCast.vue";
+// import BoardCast from "@/components/TopBar/BoardCast.vue";
 
 export default {
   name: "HomeView",
@@ -69,7 +69,7 @@ export default {
     TopBar,
     // Category,
     SearchBar,
-		BoardCast,
+		// BoardCast,
   },
 };
 </script>
