@@ -64,9 +64,9 @@ router.post('/sign-up', userMiddleware.validateRegister, (req, res, next) => {
           } else {
             // has hashed pw => add to database
             db.query(
-              `INSERT INTO admin (id, firstname, lastname, username, password, last_login) VALUES ('${uuid()}', ${db.escape(
+              `INSERT INTO admin (id, firstname, lastname, email, username, password, last_login) VALUES ('${uuid()}', ${db.escape(
                 req.body.firstname
-              )}, ${db.escape(req.body.lastname)}, ${db.escape(
+              )}, ${db.escape(req.body.lastname)}, ${db.escape(req.body.email)}, ${db.escape(
                 req.body.username
               )}, ${db.escape(hash)}, now())`,
               (err, result) => {
@@ -91,7 +91,7 @@ router.post('/sign-up', userMiddleware.validateRegister, (req, res, next) => {
 
 router.post('/login', (req, res, next) => {
   db.query(
-    `SELECT * FROM admin WHERE username = ${db.escape(req.body.username)};`,
+    `SELECT * FROM admin WHERE email = ${db.escape(req.body.email)};`,
     (err, result) => {
       // user does not exists
       if (err) {
@@ -103,7 +103,7 @@ router.post('/login', (req, res, next) => {
 
       if (!result.length) {
         return res.status(401).send({
-          msg: 'Username or password is incorrect!',
+          msg: 'email or password is incorrect!',
         })
       }
 

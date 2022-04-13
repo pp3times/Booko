@@ -57,6 +57,17 @@ const routes = [
 		name: "search",
 		component: () =>
 			import(/* webpackChunkName: "cart" */ "../views/SearchView.vue"),
+  }
+		path: "/admin",
+		name: "admin",
+		component: () =>
+			import(/* webpackChunkName: "cart" */ "../views/dashboard/Login.vue"),
+	},
+	{
+		path: "/dashboard/book",
+		name: "ManageBook",
+		component: () =>
+			import(/* webpackChunkName: "cart" */ "../views/dashboard/ManageBook.vue"),
 	}
 ];
 
