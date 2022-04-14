@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div class="flex justify-between">
-			<h3 class="text-lg font-semibold text-gray-700">Cards</h3>
+			<h3 class="text-lg font-semibold text-gray-700">Pending Orders</h3>
 			<a
 				href="#"
 				class="inline-block w-6 text-gray-400 hover:text-gray-800"

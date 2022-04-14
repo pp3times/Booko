@@ -15,18 +15,14 @@ export const getProducts = (result) => {
 
 // Get Single Product
 export const getProductById = (id, result) => {
-  db.query(
-    "SELECT * FROM book WHERE product_id = ?",
-    [id],
-    (err, results) => {
-      if (err) {
-        console.log(err);
-        result(err, null);
-      } else {
-        result(null, results[0]);
-      }
+  db.query("SELECT * FROM book WHERE product_id = ?", [id], (err, results) => {
+    if (err) {
+      console.log(err);
+      result(err, null);
+    } else {
+      result(null, results[0]);
     }
-  );
+  });
 };
 
 // Insert Product to Database

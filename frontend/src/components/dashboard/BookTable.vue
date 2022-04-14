@@ -15,25 +15,308 @@
           >
             <h3 class="text-3xl font-semibold">เพิ่มหนังสือ</h3>
             <button
-              class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
-              v-on:click="toggleModal()"
+              class="p-1 ml-auto bg-transparent border-0 text-black opacity-100 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+              @click="toggleModal()"
             >
               <span
-                class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none"
+                class="text-black opacity-100 h-6 w-6 text-xl block outline-none focus:outline-none"
               >
-                ×
+                X
               </span>
             </button>
           </div>
           <!--body-->
-          <div class="relative p-6 flex-auto">
-            <p class="my-4 text-slate-500 text-lg leading-relaxed">
+          <div class="relative p-6">
+            <!-- <p class="my-4 text-slate-500 text-lg leading-relaxed">
               I always felt like I could do anything. That’s the main thing
               people are controlled by! Thoughts- their perception of
               themselves! They're slowed down by their perception of themselves.
               If you're taught you can’t do anything, you won’t do anything. I
               was taught I could do everything.
-            </p>
+            </p> -->
+            <div>
+              <div
+                role="alert"
+                class="w-[60rem] flex justify-between flex-row space-x-5"
+              >
+                <div class="flex flex-col w-1/2">
+                  <label
+                    for="bookname"
+                    class="text-gray-800 text-lg font-bold leading-tight tracking-normal"
+                    >ชื่อหนังสือ</label
+                  >
+                  <input
+                    id="bookname"
+                    class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-lg border-gray-300 rounded border"
+                    placeholder="หนังสือเรียนทดสอบ"
+                  />
+                  <label
+                    for="author"
+                    class="text-gray-800 text-lg font-bold leading-tight tracking-normal"
+                    >ชื่อผู้แต่ง</label
+                  >
+                  <input
+                    id="author"
+                    class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-lg border-gray-300 rounded border"
+                    placeholder="ธนวัฒน์"
+                  />
+                  <label
+                    for="page"
+                    class="text-gray-800 text-lg font-bold leading-tight tracking-normal"
+                    >จำนวนหน้า</label
+                  >
+                  <input
+                    id="page"
+                    class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-lg border-gray-300 rounded border"
+                    placeholder="20"
+                  />
+                  <label
+                    for="page"
+                    class="text-gray-800 text-lg font-bold leading-tight tracking-normal"
+                    >หมวดหมู่หนังสือ</label
+                  >
+                  <!-- <input
+                  id="page"
+                  class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-lg border-gray-300 rounded border"
+                  placeholder="20"
+                /> -->
+                  <div class="relative mb-5 mt-2">
+                    <svg
+                      class="w-2 h-2 absolute top-2 right-0 m-4 pointer-events-none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 412 232"
+                    >
+                      <path
+                        d="M206 171.144L42.678 7.822c-9.763-9.763-25.592-9.763-35.355 0-9.763 9.764-9.763 25.592 0 35.355l181 181c4.88 4.882 11.279 7.323 17.677 7.323s12.796-2.441 17.678-7.322l181-181c9.763-9.764 9.763-25.592 0-35.355-9.763-9.763-25.592-9.763-35.355 0L206 171.144z"
+                        fill="#648299"
+                        fill-rule="nonzero"
+                      />
+                    </svg>
+                    <select
+                      class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal flex items-center text-lg w-full border-gray-300 rounded border h-10 pl-5 pr-10 bg-white hover:border-gray-400 appearance-none"
+                    >
+                      <option>Choose a category</option>
+                      <option>Red</option>
+                      <option>Blue</option>
+                      <option>Yellow</option>
+                      <option>Black</option>
+                      <option>Orange</option>
+                      <option>Purple</option>
+                      <option>Gray</option>
+                      <option>White</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="flex flex-col w-1/2">
+                  <label
+                    for="description"
+                    class="text-gray-800 text-lg font-bold leading-tight tracking-normal"
+                    >รายละเอียดหนังสือ</label
+                  >
+                  <textarea
+                    name="description"
+                    id="description"
+                    cols="30"
+                    rows="30"
+                    class="mb-5 mt-2 py-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-[8.6rem] flex items-center pl-3 text-lg border-gray-300 rounded border"
+                    placeholder="lorem"
+                  ></textarea>
+                  <label
+                    for="page"
+                    class="text-gray-800 text-lg font-bold leading-tight tracking-normal"
+                    >ราคาหนังสือ</label
+                  >
+                  <input
+                    id="page"
+                    class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-lg border-gray-300 rounded border"
+                    placeholder="20"
+                  />
+                  <label
+                    for="page"
+                    class="text-gray-800 text-lg font-bold leading-tight tracking-normal"
+                    >จำนวนสต็อกสินค้า</label
+                  >
+                  <input
+                    id="page"
+                    class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-lg border-gray-300 rounded border"
+                    placeholder="20"
+                  />
+                </div>
+
+                <!-- <label
+                  for="email2"
+                  class="text-gray-800 text-lg font-bold leading-tight tracking-normal"
+                  >Card Number</label
+                >
+                <div class="relative mb-5 mt-2">
+                  <div
+                    class="absolute text-gray-600 flex items-center px-4 border-r h-full"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="icon icon-tabler icon-tabler-credit-card"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" />
+                      <rect x="3" y="5" width="18" height="14" rx="3" />
+                      <line x1="3" y1="10" x2="21" y2="10" />
+                      <line x1="7" y1="15" x2="7.01" y2="15" />
+                      <line x1="11" y1="15" x2="13" y2="15" />
+                    </svg>
+                  </div>
+                  <input
+                    id="email2"
+                    class="text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-16 text-lg border-gray-300 rounded border"
+                    placeholder="XXXX - XXXX - XXXX - XXXX"
+                  />
+                </div>
+                <label
+                  for="expiry"
+                  class="text-gray-800 text-lg font-bold leading-tight tracking-normal"
+                  >Expiry Date</label
+                >
+                <div class="relative mb-5 mt-2">
+                  <div
+                    class="absolute right-0 text-gray-600 flex items-center pr-3 h-full cursor-pointer"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="icon icon-tabler icon-tabler-calendar-event"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" />
+                      <rect x="4" y="5" width="16" height="16" rx="2" />
+                      <line x1="16" y1="3" x2="16" y2="7" />
+                      <line x1="8" y1="3" x2="8" y2="7" />
+                      <line x1="4" y1="11" x2="20" y2="11" />
+                      <rect x="8" y="15" width="2" height="2" />
+                    </svg>
+                  </div>
+                  <input
+                    id="expiry"
+                    class="text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-lg border-gray-300 rounded border"
+                    placeholder="MM/YY"
+                  />
+                </div>
+                <label
+                  for="cvc"
+                  class="text-gray-800 text-lg font-bold leading-tight tracking-normal"
+                  >CVC</label
+                >
+                <div class="relative mb-5 mt-2">
+                  <div
+                    class="absolute right-0 text-gray-600 flex items-center pr-3 h-full cursor-pointer"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="icon icon-tabler icon-tabler-info-circle"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z"></path>
+                      <circle cx="12" cy="12" r="9"></circle>
+                      <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                      <polyline points="11 12 12 12 12 16 13 16"></polyline>
+                    </svg>
+                  </div>
+                  <input
+                    id="cvc"
+                    class="mb-8 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-lg border-gray-300 rounded border"
+                    placeholder="MM/YY"
+                  />
+                </div> -->
+                <!-- <div class="flex items-center justify-start w-full">
+                  <button
+                    class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-8 py-2 text-lg"
+                  >
+                    Submit
+                  </button>
+                  <button
+                    class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 ml-3 bg-gray-100 transition duration-150 text-gray-600 ease-in-out hover:border-gray-400 hover:bg-gray-300 border rounded px-8 py-2 text-lg"
+                    onclick="modalHandler()"
+                  >
+                    Cancel
+                  </button>
+                </div> -->
+                <!-- <button
+                  class="cursor-pointer absolute top-0 right-0 mt-4 mr-5 text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out rounded focus:ring-2 focus:outline-none focus:ring-gray-600"
+                  onclick="modalHandler()"
+                  aria-label="close modal"
+                  role="button"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon icon-tabler icon-tabler-x"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    stroke-width="2.5"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" />
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                  </svg>
+                </button> -->
+              </div>
+            </div>
+            <div class="flex w-full justify-center">
+              <div
+                id="multi-upload-button"
+                class="inline-flex w-1/5 text-center items-center px-4 py-2 bg-gray-600 border border-gray-600 rounded-l font-semibold cursor-pointer text-sm text-white tracking-widest hover:bg-gray-500 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition"
+              >
+                Click to browse
+              </div>
+              <div
+                class="w-full border border-gray-300 rounded-r-md flex items-center justify-between"
+              >
+                <span id="multi-upload-text" class="p-2"></span>
+                <button
+                  id="multi-upload-delete"
+                  class="hidden"
+                  onclick="removeMultiUpload()"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="fill-current text-red-700 w-3 h-3"
+                    viewBox="0 0 320 512"
+                  >
+                    <path
+                      d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <input
+              type="file"
+              id="multi-upload-input"
+              class="hidden"
+              multiple
+            />
           </div>
           <!--footer-->
           <div
@@ -62,7 +345,7 @@
     <div class="mt-4 lg:mt-10">
       <div class="bg-indigo-50 rounded-xl p-4 lg:p-10">
         <div class="flex justify-between items-center mb-10">
-          <h3 class="text-lg font-semibold text-gray-700">Statistics</h3>
+          <h3 class="text-xl font-bold text-gray-700">รายการหนังสือ</h3>
 
           <div class="flex space-x-5">
             <button
@@ -98,7 +381,7 @@
             <!-- card -->
             <div class="flex">
               <img
-                class="h-32 drop-shadow-xl hover:drop-shadow-2xl transition-all ease-in-out duration-300 cursor-pointer border-1 border-primary rounded object-cover"
+                class="h-40 drop-shadow-xl hover:drop-shadow-2xl transition-all ease-in-out duration-300 cursor-pointer border-1 border-primary rounded object-cover"
                 src="https://readery.co/media/catalog/product/cache/1/small_image/360x/17f82f742ffe127f42dca9de82fb58b1/f/i/file_107.jpg"
                 alt="infamous"
               />
@@ -233,7 +516,7 @@
               </div>
             </div>
 
-            <div class="flex flex-col -mt-10 mr-20">
+            <div class="flex flex-col -mt-10 xl:mr-20">
               <span class="font-semibold text-green-500 dark:text-green-300">
                 ยอดขาย : XXX
               </span>
@@ -283,16 +566,16 @@
 
 <script>
 export default {
-  name: 'BookTable',
+  name: "BookTable",
   data() {
     return {
       showModal: false,
-    }
+    };
   },
   methods: {
     toggleModal() {
-      this.showModal = !this.showModal
+      this.showModal = !this.showModal;
     },
   },
-}
+};
 </script>
