@@ -69,7 +69,7 @@
           </svg>
         </div>
         <div class="px-4 text-gray-700">
-          <h3 class="text-sm tracking-wider">Total Post</h3>
+          <h3 class="text-sm tracking-wider">Total Book</h3>
           <p class="text-3xl">39,265</p>
         </div>
       </div>
@@ -94,7 +94,7 @@
           </svg>
         </div>
         <div class="px-4 text-gray-700">
-          <h3 class="text-sm tracking-wider">Total Comment</h3>
+          <h3 class="text-sm tracking-wider">Total Order</h3>
           <p class="text-3xl">142,334</p>
         </div>
       </div>
@@ -137,7 +137,7 @@
       </div>
 
       <div class="px-4 py-2 bg-white border rounded-md overflow-hidden shadow">
-        <h3 class="text-xl text-gray-600 mb-4">Sessions by device</h3>
+        <h3 class="text-xl text-gray-600 mb-4">Orders by status</h3>
         <apexchart
           type="donut"
           :height="300"
@@ -148,7 +148,7 @@
 
       <div class="grid grid-rows-2 gap-4">
         <div class="px-4 py-2 bg-white border rounded-md shadow">
-          <h3 class="text-xl text-gray-600 mb-2">Popular Post</h3>
+          <h3 class="text-xl text-gray-600 mb-2">Popular Book</h3>
 
           <div class="flex flex-col">
             <div class="align-middle inline-block min-w-full">
@@ -160,14 +160,14 @@
                         scope="col"
                         class="py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                       >
-                        Post Title
+                        Book Name
                       </th>
 
                       <th
                         scope="col"
                         class="py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                       >
-                        Views
+                        Sale
                       </th>
                     </tr>
                   </thead>
@@ -193,7 +193,7 @@
           </div>
         </div>
         <div class="px-4 py-2 bg-white border rounded-md shadow">
-          <h3 class="text-xl text-gray-600 mb-2">Top Contributor</h3>
+          <h3 class="text-xl text-gray-600 mb-2">Top Buyer</h3>
 
           <div class="flex flex-col">
             <div class="align-middle inline-block min-w-full">
@@ -212,14 +212,14 @@
                         scope="col"
                         class="py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
                       >
-                        Commit
+                        Bought
                       </th>
 
                       <th
                         scope="col"
                         class="py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
                       >
-                        Issue
+                        Review
                       </th>
                     </tr>
                   </thead>
@@ -278,7 +278,7 @@
           <div
             class="flex flex-col space-y-2 items-center px-4 mb-2 py-2 border-b-2 text-gray-600 sm:flex-row sm:justify-between"
           >
-            <h3 class="tracking-wider">Top Author</h3>
+            <h3 class="tracking-wider">Top Book</h3>
             <TabList class="flex space-x-1">
               <Tab v-slot="{ selected }">
                 <button
@@ -615,7 +615,7 @@ export default {
       chart: {
         id: "sessions-chart",
       },
-      labels: ["Desktop", "Mobile", "Tablet"],
+      labels: ["Complete", "Incomplete", "Cancel"],
       legend: {
         position: "bottom",
       },

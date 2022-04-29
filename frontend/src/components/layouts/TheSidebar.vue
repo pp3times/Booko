@@ -13,7 +13,7 @@
         <li
           class="px-4 py-2 text-xs uppercase tracking-wider text-gray-500 font-bold"
         >
-          Section
+          Normal Section
         </li>
 
         <router-link
@@ -227,17 +227,20 @@
               </svg> -->
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5 mr-2 fill-white"
+                class="h-5 w-5 mr-2"
+                fill="none"
                 viewBox="0 0 24 24"
+                stroke="currentColor"
               >
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
-                  d="M12.008 0c-4.225 0-10.008 1.001-10.008 4.361v15.277c0 3.362 6.209 4.362 10.008 4.362 3.783 0 9.992-1.001 9.992-4.361v-15.278c0-3.361-5.965-4.361-9.992-4.361zm0 2c3.638 0 7.992.909 7.992 2.361 0 1.581-5.104 2.361-7.992 2.361-3.412.001-8.008-.905-8.008-2.361 0-1.584 4.812-2.361 8.008-2.361zm7.992 17.386c0 1.751-5.104 2.614-7.992 2.614-3.412 0-8.008-1.002-8.008-2.614v-2.04c2.117 1.342 5.17 1.78 8.008 1.78 2.829 0 5.876-.438 7.992-1.78v2.04zm0-4.873c0 1.75-5.104 2.614-7.992 2.614-3.412-.001-8.008-1.002-8.008-2.614v-2.364c2.116 1.341 5.17 1.78 8.008 1.78 2.839 0 5.881-.442 7.992-1.78v2.364zm-7.992-2.585c-3.426 0-8.008-1.006-8.008-2.614v-2.371c2.117 1.342 5.17 1.78 8.008 1.78 2.829 0 5.876-.438 7.992-1.78v2.372c0 1.753-5.131 2.613-7.992 2.613z"
+                  d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
                 />
               </svg>
-              Data Management
+              User Management
+
               <span class="ml-auto">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -378,7 +381,7 @@
                     </li>
                   </router-link>
                 </li>
-								<li>
+                <li>
                   <router-link
                     v-slot="{ isExactActive, href, navigate }"
                     to="/books"
@@ -412,6 +415,7 @@
                     </li>
                   </router-link>
                 </li>
+
                 <li class="px-8 hover:bg-gray-700">
                   <a href="#" class="py-3 flex items-center">
                     <svg
@@ -429,6 +433,163 @@
             </DisclosurePanel>
           </Disclosure>
         </li>
+
+        <!-- Book Manage -->
+        <li>
+          <Disclosure v-slot="{ open }" :default-open="isBookManagementActive">
+            <DisclosureButton
+              class="px-4 py-3 flex items-center w-full hover:bg-gray-700"
+              :class="open ? 'bg-gray-700' : ''"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 mr-2 fill-current"
+                viewBox="0 0 24 24"
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+              >
+                <path
+                  d="M22 24h-17c-1.657 0-3-1.343-3-3v-18c0-1.657 1.343-3 3-3h17v24zm-2-4h-14.505c-1.375 0-1.375 2 0 2h14.505v-2zm0-18h-15v16h15v-16zm-3 3v3h-9v-3h9z"
+                />
+              </svg>
+              Book Management
+              <span class="ml-auto">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  :class="open ? 'transform rotate-90' : ''"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </span>
+            </DisclosureButton>
+            <DisclosurePanel>
+              <ul>
+                <li>
+                  <Disclosure v-slot="{ open }" :default-open="isBookActive">
+                    <DisclosureButton
+                      class="pl-8 pr-4 py-3 flex items-center w-full hover:bg-gray-700"
+                      :class="open ? 'bg-gray-700' : ''"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-5 w-5"
+                        fill="currentColor"
+                        viewBox="0 0 16 16"
+                      >
+                        <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
+                      </svg>
+                      Users
+                      <span class="ml-auto">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="h-5 w-5"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          :class="open ? 'transform rotate-90' : ''"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M9 5l7 7-7 7"
+                          />
+                        </svg>
+                      </span>
+                    </DisclosureButton>
+                    <DisclosurePanel>
+                      <ul>
+                        <router-link
+                          v-slot="{ isExactActive, href, navigate }"
+                          to="/"
+                          custom
+                        >
+                          <li
+                            class="pl-12"
+                            :class="[
+                              isExactActive
+                                ? 'bg-gray-500 text-gray-800'
+                                : 'hover:bg-gray-700',
+                            ]"
+                          >
+                            <a
+                              class="py-3 flex items-center"
+                              :href="href"
+                              @click="navigate"
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="h-5 w-5"
+                                fill="currentColor"
+                                viewBox="0 0 16 16"
+                              >
+                                <path
+                                  d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"
+                                />
+                              </svg>
+                              User List
+                            </a>
+                          </li>
+                        </router-link>
+                        <li class="pl-12 hover:bg-gray-700">
+                          <a href="#" class="py-3 flex items-center">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="h-5 w-5"
+                              fill="currentColor"
+                              viewBox="0 0 16 16"
+                            >
+                              <path
+                                d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"
+                              />
+                            </svg>
+                            User Detail
+                          </a>
+                        </li>
+                      </ul>
+                    </DisclosurePanel>
+                  </Disclosure>
+                </li>
+                <li class="px-8 hover:bg-gray-700">
+                  <a href="#" class="py-3 flex items-center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-5 w-5"
+                      fill="currentColor"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
+                    </svg>
+                    Roles
+                  </a>
+                </li>
+                <li class="px-8 hover:bg-gray-700">
+                  <a href="#" class="py-3 flex items-center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-5 w-5"
+                      fill="currentColor"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
+                    </svg>
+                    Permissions
+                  </a>
+                </li>
+              </ul>
+            </DisclosurePanel>
+          </Disclosure>
+        </li>
+
         <li class="px-4 hover:bg-gray-700">
           <a href="#" class="py-3 flex items-center">
             <svg
@@ -458,7 +619,467 @@
         <li
           class="px-4 py-2 mt-2 text-xs uppercase tracking-wider text-gray-500 font-bold"
         >
-          Apps
+          order section
+        </li>
+        <!-- Order Manage -->
+        <li>
+          <Disclosure v-slot="{ open }" :default-open="isBookManagementActive">
+            <DisclosureButton
+              class="px-4 py-3 flex items-center w-full hover:bg-gray-700"
+              :class="open ? 'bg-gray-700' : ''"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 mr-2 fill-current"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M21.698 10.658l2.302 1.342-12.002 7-11.998-7 2.301-1.342 9.697 5.658 9.7-5.658zm-9.7 10.657l-9.697-5.658-2.301 1.343 11.998 7 12.002-7-2.302-1.342-9.7 5.657zm0-19l8.032 4.685-8.032 4.685-8.029-4.685 8.029-4.685zm0-2.315l-11.998 7 11.998 7 12.002-7-12.002-7z"
+                />
+              </svg>
+              Order Management
+              <span class="ml-auto">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  :class="open ? 'transform rotate-90' : ''"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </span>
+            </DisclosureButton>
+            <DisclosurePanel>
+              <ul>
+                <li>
+                  <Disclosure v-slot="{ open }" :default-open="isBookActive">
+                    <DisclosureButton
+                      class="pl-8 pr-4 py-3 flex items-center w-full hover:bg-gray-700"
+                      :class="open ? 'bg-gray-700' : ''"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-5 w-5"
+                        fill="currentColor"
+                        viewBox="0 0 16 16"
+                      >
+                        <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
+                      </svg>
+                      Users
+                      <span class="ml-auto">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="h-5 w-5"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          :class="open ? 'transform rotate-90' : ''"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M9 5l7 7-7 7"
+                          />
+                        </svg>
+                      </span>
+                    </DisclosureButton>
+                    <DisclosurePanel>
+                      <ul>
+                        <router-link
+                          v-slot="{ isExactActive, href, navigate }"
+                          to="/"
+                          custom
+                        >
+                          <li
+                            class="pl-12"
+                            :class="[
+                              isExactActive
+                                ? 'bg-gray-500 text-gray-800'
+                                : 'hover:bg-gray-700',
+                            ]"
+                          >
+                            <a
+                              class="py-3 flex items-center"
+                              :href="href"
+                              @click="navigate"
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="h-5 w-5"
+                                fill="currentColor"
+                                viewBox="0 0 16 16"
+                              >
+                                <path
+                                  d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"
+                                />
+                              </svg>
+                              User List
+                            </a>
+                          </li>
+                        </router-link>
+                        <li class="pl-12 hover:bg-gray-700">
+                          <a href="#" class="py-3 flex items-center">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="h-5 w-5"
+                              fill="currentColor"
+                              viewBox="0 0 16 16"
+                            >
+                              <path
+                                d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"
+                              />
+                            </svg>
+                            User Detail
+                          </a>
+                        </li>
+                      </ul>
+                    </DisclosurePanel>
+                  </Disclosure>
+                </li>
+                <li class="px-8 hover:bg-gray-700">
+                  <a href="#" class="py-3 flex items-center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-5 w-5"
+                      fill="currentColor"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
+                    </svg>
+                    Roles
+                  </a>
+                </li>
+                <li class="px-8 hover:bg-gray-700">
+                  <a href="#" class="py-3 flex items-center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-5 w-5"
+                      fill="currentColor"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
+                    </svg>
+                    Permissions
+                  </a>
+                </li>
+              </ul>
+            </DisclosurePanel>
+          </Disclosure>
+        </li>
+        <!-- Invoice Manage -->
+        <li>
+          <Disclosure v-slot="{ open }" :default-open="isBookManagementActive">
+            <DisclosureButton
+              class="px-4 py-3 flex items-center w-full hover:bg-gray-700"
+              :class="open ? 'bg-gray-700' : ''"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 mr-2 fill-current"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M11.362 2c4.156 0 2.638 6 2.638 6s6-1.65 6 2.457v11.543h-16v-20h7.362zm.827-2h-10.189v24h20v-14.386c0-2.391-6.648-9.614-9.811-9.614zm4.811 13h-10v-1h10v1zm0 2h-10v1h10v-1zm0 3h-10v1h10v-1z"
+                />
+              </svg>
+              Invoice Management
+              <span class="ml-auto">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  :class="open ? 'transform rotate-90' : ''"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </span>
+            </DisclosureButton>
+            <DisclosurePanel>
+              <ul>
+                <li>
+                  <Disclosure v-slot="{ open }" :default-open="isBookActive">
+                    <DisclosureButton
+                      class="pl-8 pr-4 py-3 flex items-center w-full hover:bg-gray-700"
+                      :class="open ? 'bg-gray-700' : ''"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-5 w-5"
+                        fill="currentColor"
+                        viewBox="0 0 16 16"
+                      >
+                        <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
+                      </svg>
+                      Users
+                      <span class="ml-auto">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="h-5 w-5"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          :class="open ? 'transform rotate-90' : ''"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M9 5l7 7-7 7"
+                          />
+                        </svg>
+                      </span>
+                    </DisclosureButton>
+                    <DisclosurePanel>
+                      <ul>
+                        <router-link
+                          v-slot="{ isExactActive, href, navigate }"
+                          to="/"
+                          custom
+                        >
+                          <li
+                            class="pl-12"
+                            :class="[
+                              isExactActive
+                                ? 'bg-gray-500 text-gray-800'
+                                : 'hover:bg-gray-700',
+                            ]"
+                          >
+                            <a
+                              class="py-3 flex items-center"
+                              :href="href"
+                              @click="navigate"
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="h-5 w-5"
+                                fill="currentColor"
+                                viewBox="0 0 16 16"
+                              >
+                                <path
+                                  d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"
+                                />
+                              </svg>
+                              User List
+                            </a>
+                          </li>
+                        </router-link>
+                        <li class="pl-12 hover:bg-gray-700">
+                          <a href="#" class="py-3 flex items-center">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="h-5 w-5"
+                              fill="currentColor"
+                              viewBox="0 0 16 16"
+                            >
+                              <path
+                                d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"
+                              />
+                            </svg>
+                            User Detail
+                          </a>
+                        </li>
+                      </ul>
+                    </DisclosurePanel>
+                  </Disclosure>
+                </li>
+                <li class="px-8 hover:bg-gray-700">
+                  <a href="#" class="py-3 flex items-center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-5 w-5"
+                      fill="currentColor"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
+                    </svg>
+                    Roles
+                  </a>
+                </li>
+                <li class="px-8 hover:bg-gray-700">
+                  <a href="#" class="py-3 flex items-center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-5 w-5"
+                      fill="currentColor"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
+                    </svg>
+                    Permissions
+                  </a>
+                </li>
+              </ul>
+            </DisclosurePanel>
+          </Disclosure>
+        </li>
+
+        <!-- Payment Manage -->
+        <li>
+          <Disclosure v-slot="{ open }" :default-open="isBookManagementActive">
+            <DisclosureButton
+              class="px-4 py-3 flex items-center w-full hover:bg-gray-700"
+              :class="open ? 'bg-gray-700' : ''"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 mr-2 fill-current"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12.164 7.165c-1.15.191-1.702 1.233-1.231 2.328.498 1.155 1.921 1.895 3.094 1.603 1.039-.257 1.519-1.252 1.069-2.295-.471-1.095-1.784-1.827-2.932-1.636zm1.484 2.998l.104.229-.219.045-.097-.219c-.226.041-.482.035-.719-.027l-.065-.387c.195.03.438.058.623.02l.125-.041c.221-.109.152-.387-.176-.453-.245-.054-.893-.014-1.135-.552-.136-.304-.035-.621.356-.766l-.108-.239.217-.045.104.229c.159-.026.345-.036.563-.017l.087.383c-.17-.021-.353-.041-.512-.008l-.06.016c-.309.082-.21.375.064.446.453.105.994.139 1.208.612.173.385-.028.648-.36.774zm10.312 1.057l-3.766-8.22c-6.178 4.004-13.007-.318-17.951 4.454l3.765 8.22c5.298-4.492 12.519-.238 17.952-4.454zm-2.803-1.852c-.375.521-.653 1.117-.819 1.741-3.593 1.094-7.891-.201-12.018 1.241-.667-.354-1.503-.576-2.189-.556l-1.135-2.487c.432-.525.772-1.325.918-2.094 3.399-1.226 7.652.155 12.198-1.401.521.346 1.13.597 1.73.721l1.315 2.835zm2.843 5.642c-6.857 3.941-12.399-1.424-19.5 5.99l-4.5-9.97 1.402-1.463 3.807 8.406-.002.007c7.445-5.595 11.195-1.176 18.109-4.563.294.648.565 1.332.684 1.593z"
+                />
+              </svg>
+              Payment Management
+              <span class="ml-auto">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  :class="open ? 'transform rotate-90' : ''"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </span>
+            </DisclosureButton>
+            <DisclosurePanel>
+              <ul>
+                <li>
+                  <Disclosure v-slot="{ open }" :default-open="isBookActive">
+                    <DisclosureButton
+                      class="pl-8 pr-4 py-3 flex items-center w-full hover:bg-gray-700"
+                      :class="open ? 'bg-gray-700' : ''"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-5 w-5"
+                        fill="currentColor"
+                        viewBox="0 0 16 16"
+                      >
+                        <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
+                      </svg>
+                      Users
+                      <span class="ml-auto">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="h-5 w-5"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          :class="open ? 'transform rotate-90' : ''"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M9 5l7 7-7 7"
+                          />
+                        </svg>
+                      </span>
+                    </DisclosureButton>
+                    <DisclosurePanel>
+                      <ul>
+                        <router-link
+                          v-slot="{ isExactActive, href, navigate }"
+                          to="/"
+                          custom
+                        >
+                          <li
+                            class="pl-12"
+                            :class="[
+                              isExactActive
+                                ? 'bg-gray-500 text-gray-800'
+                                : 'hover:bg-gray-700',
+                            ]"
+                          >
+                            <a
+                              class="py-3 flex items-center"
+                              :href="href"
+                              @click="navigate"
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="h-5 w-5"
+                                fill="currentColor"
+                                viewBox="0 0 16 16"
+                              >
+                                <path
+                                  d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"
+                                />
+                              </svg>
+                              User List
+                            </a>
+                          </li>
+                        </router-link>
+                        <li class="pl-12 hover:bg-gray-700">
+                          <a href="#" class="py-3 flex items-center">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="h-5 w-5"
+                              fill="currentColor"
+                              viewBox="0 0 16 16"
+                            >
+                              <path
+                                d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"
+                              />
+                            </svg>
+                            User Detail
+                          </a>
+                        </li>
+                      </ul>
+                    </DisclosurePanel>
+                  </Disclosure>
+                </li>
+                <li class="px-8 hover:bg-gray-700">
+                  <a href="#" class="py-3 flex items-center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-5 w-5"
+                      fill="currentColor"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
+                    </svg>
+                    Roles
+                  </a>
+                </li>
+                <li class="px-8 hover:bg-gray-700">
+                  <a href="#" class="py-3 flex items-center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-5 w-5"
+                      fill="currentColor"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
+                    </svg>
+                    Permissions
+                  </a>
+                </li>
+              </ul>
+            </DisclosurePanel>
+          </Disclosure>
         </li>
 
         <li class="px-4 cursor-pointer hover:bg-gray-700">
@@ -590,6 +1211,18 @@ export default {
     });
 
     const isUserActive = computed(() => {
+      const names = ["user-list", "user-detail"];
+
+      return names.includes(route.name);
+    });
+
+    const isBookManagementActive = computed(() => {
+      const names = ["user-list", "user-detail", "roles", "permissions"];
+
+      return names.includes(route.name);
+    });
+
+    const isBookActive = computed(() => {
       const names = ["user-list", "user-detail"];
 
       return names.includes(route.name);
