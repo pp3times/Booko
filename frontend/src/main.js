@@ -1,12 +1,21 @@
 import { createApp } from 'vue'
+import './tailwind.css'
 import App from './App.vue'
-import router from './router'
-import "./index.css";
-import store from './store';
-// import Axios from 'axios';
-// Axios.defaults.headers.common['Authorization'] = `Bearer ${store.state.token}`;
+import { routes } from './routes/routes.js'
+import { createRouter, createWebHistory } from 'vue-router'
+import store from './store/store.js'
+import Alpine from "alpinejs";
+
+window.Alpine = Alpine;
+
+Alpine.start();
+
 const app = createApp(App)
-app.use(router)
-app.use(store)
+
+const router = createRouter({
+  history: createWebHistory(),
+  routes,
+})
+
+app.use(router).use(store)
 app.mount('#app')
-// createApp(App).use(router).mount('#app')

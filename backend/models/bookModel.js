@@ -3,7 +3,7 @@ import db from "../config/db.js";
 
 // Get All Products
 export const getProducts = (result) => {
-  db.query("SELECT * FROM book", (err, results) => {
+  db.query("SELECT * FROM tb_book", (err, results) => {
     if (err) {
       console.log(err);
       result(err, null);
@@ -12,10 +12,21 @@ export const getProducts = (result) => {
     }
   });
 };
+// Get all Categories
+export const getCategories = (result) => {
+	db.query("SELECT * FROM tb_category", (err, results) => {
+		if (err) {
+			console.log(err);
+			result(err, null);
+		} else {
+			result(null, results);
+		}
+	});
+};
 
 // Get Single Product
 export const getProductById = (id, result) => {
-  db.query("SELECT * FROM book WHERE product_id = ?", [id], (err, results) => {
+  db.query("SELECT * FROM tb_book WHERE book_id = ?", [id], (err, results) => {
     if (err) {
       console.log(err);
       result(err, null);

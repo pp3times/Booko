@@ -5,12 +5,26 @@ import {
   insertProduct,
   updateProductById,
   deleteProductById,
+  getCategories,
 } from "../models/bookModel.js";
 
 // Get All Products
 export const showProducts = (req, res) => {
   getProducts((err, results) => {
     if (err) {
+      console.log(err);
+      res.send(err);
+    } else {
+      res.json(results);
+    }
+  });
+};
+
+// Get All Categories
+export const showCategories = (req, res) => {
+  getCategories((err, results) => {
+    if (err) {
+      console.log(err);
       res.send(err);
     } else {
       res.json(results);
