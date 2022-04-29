@@ -1,10 +1,202 @@
+<script setup>
+import { ref } from "vue";
+import {
+  TransitionRoot,
+  TransitionChild,
+  Dialog,
+  DialogPanel,
+  DialogTitle,
+} from "@headlessui/vue";
+
+const isOpen = ref(false);
+
+function closeModal() {
+  isOpen.value = false;
+}
+function openModal() {
+  isOpen.value = true;
+}
+</script>
+
 <template>
   <div>
+    <TransitionRoot appear :show="isOpen" as="template">
+      <Dialog as="div" @close="closeModal" class="relative z-10">
+        <TransitionChild
+          as="template"
+          enter="duration-300 ease-out"
+          enter-from="opacity-0"
+          enter-to="opacity-100"
+          leave="duration-200 ease-in"
+          leave-from="opacity-100"
+          leave-to="opacity-0"
+        >
+          <div class="fixed inset-0 bg-black bg-opacity-25" />
+        </TransitionChild>
+
+        <div class="fixed inset-0 overflow-y-auto">
+          <div
+            class="flex min-h-full items-center justify-center p-4 text-center"
+          >
+            <TransitionChild
+              as="template"
+              enter="duration-300 ease-out"
+              enter-from="opacity-0 scale-95"
+              enter-to="opacity-100 scale-100"
+              leave="duration-200 ease-in"
+              leave-from="opacity-100 scale-100"
+              leave-to="opacity-0 scale-95"
+            >
+              <DialogPanel
+                class="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all"
+              >
+                <DialogTitle
+                  as="h3"
+                  class="text-lg font-medium leading-6 text-gray-900"
+                >
+                  Add New User
+                </DialogTitle>
+                <div class="mt-2">
+                  <!-- <p class="text-sm text-gray-500">
+                    Your payment has been successfully submitted. We’ve sent you
+                    an email with all of the details of your order.
+                  </p> -->
+                  <form action="" class="space-y-5">
+                    <div>
+                      <label for="firstname" class="text-md font-medium"
+                        >ชื่อจริง
+                        <span class="text-red-500"
+                          >(ไม่ต้องมีคำนำหน้า)</span
+                        ></label
+                      >
+
+                      <div class="relative mt-1">
+                        <input
+                          type="text"
+                          id="firstname"
+                          class="form-input w-full px-4 py-3 text-sm border-gray-200 focus-visible:border-primary-light focus:border-primary-light focus:ring-primary focus:shadow-primary border rounded-lg shadow-sm"
+                          placeholder="กรุณากรอกชื่อจริง"
+                          v-model="firstname"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label for="lastname" class="text-md font-medium"
+                        >นามสกุล</label
+                      >
+
+                      <div class="relative mt-1">
+                        <input
+                          type="text"
+                          id="lastname"
+                          class="form-input w-full px-4 py-3 text-sm border-gray-200 focus-visible:border-primary-light focus:border-primary-light focus:ring-primary focus:shadow-primary border rounded-lg shadow-sm"
+                          placeholder="กรุณากรอกนามสกุล"
+                          v-model="lastname"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label for="email" class="text-md font-medium"
+                        >อีเมลแอดเดรส</label
+                      >
+
+                      <div class="relative mt-1">
+                        <input
+                          type="email"
+                          id="email"
+                          class="form-input w-full pr-12 px-4 py-3 text-sm border-gray-200 focus-visible:border-primary-light focus:border-primary-light focus:ring-primary focus:shadow-primary border rounded-lg shadow-sm"
+                          placeholder="กรุณากรอกอีเมลแอดเดรส"
+                          v-model="mail"
+                        />
+
+                        <span
+                          class="absolute inset-y-0 inline-flex items-center right-4"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="w-5 h-5 text-gray-400"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
+                            />
+                          </svg>
+                        </span>
+                      </div>
+                    </div>
+                    <div>
+                      <label for="email" class="text-md font-medium"
+                        >เบอร์โทรศัพท์มือถือ</label
+                      >
+
+                      <div class="relative mt-1">
+                        <input
+                          type="tel"
+                          id="tel"
+                          class="form-input w-full px-4 py-3 text-sm border-gray-200 focus-visible:border-primary-light focus:border-primary-light focus:ring-primary focus:shadow-primary border rounded-lg shadow-sm"
+                          placeholder="กรุณากรอกเบอร์โทรศััพท์มือถือ"
+                          v-model="phone"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label for="password" class="text-md font-medium"
+                        >รหัสผ่าน</label
+                      >
+
+                      <div class="relative mt-1">
+                        <input
+                          type="password"
+                          id="password"
+                          class="form-input w-full px-4 py-3 text-sm border-gray-200 focus-visible:border-primary-light focus:border-primary-light focus:ring-primary focus:shadow-primary border rounded-lg shadow-sm"
+                          placeholder="Enter password"
+                          v-model="password"
+                        />
+                      </div>
+                    </div>
+                    <!-- <button
+                      @click="signUp"
+                      class="block w-full px-5 py-3 text-md font-medium text-white bg-primary rounded-lg"
+                    >
+                      สมัครสมาชิก
+                    </button> -->
+                    <div class="mt-4 space-x-2 flex justify-end">
+                      <button
+                        type="button"
+                        class="focus:outline-none inline-flex justify-center rounded-md border border-transparent bg-green-100 px-4 py-2 text-sm font-medium text-primary hover:bg-primary-light focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                        @click="closeModal"
+                      >
+                        Create
+                      </button>
+                      <button
+                        type="button"
+                        class="focus:outline-none inline-flex justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 text-sm font-medium text-red-900 hover:bg-red-200 focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
+                        @click="closeModal"
+                      >
+                        Close
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </DialogPanel>
+            </TransitionChild>
+          </div>
+        </div>
+      </Dialog>
+    </TransitionRoot>
     <div class="flex justify-between px-4 mt-4 sm:px-8">
       <h2 class="text-2xl text-gray-600">User List</h2>
 
       <div class="flex items-center space-x-1 text-xs">
-        <router-link to="/" class="font-bold text-indigo-700">Home</router-link>
+        <router-link to="/dashboard" class="font-bold text-indigo-700">Home</router-link>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="h-2 w-2"
@@ -56,6 +248,7 @@
           <div>
             <div>
               <button
+                @click="openModal"
                 class="flex items-center bg-green-500 p-2 text-white rounded text-sm hover:bg-green-600"
               >
                 <svg
@@ -90,7 +283,7 @@
               </th>
               <th class="text-left text-gray-600">USER</th>
               <th class="text-left text-gray-600">ROLE</th>
-              <th class="text-left text-gray-600">STATUS</th>
+              <th class="text-left text-gray-600">ORDER_STATUS</th>
               <th class="text-left text-gray-600">LAST ACTIVITY</th>
               <th class="text-left text-gray-600">JOIN DATE</th>
               <th class="text-right text-gray-600">ACTIONS</th>

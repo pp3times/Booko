@@ -1,10 +1,400 @@
+<script setup>
+import { ref } from "vue";
+import {
+  TransitionRoot,
+  TransitionChild,
+  Dialog,
+  DialogPanel,
+  DialogTitle,
+  Listbox,
+  ListboxLabel,
+  ListboxButton,
+  ListboxOptions,
+  ListboxOption,
+} from "@headlessui/vue";
+import { CheckIcon, SelectorIcon } from "@heroicons/vue/solid";
+const people = [
+  { name: "Wade Cooper" },
+  { name: "Arlene Mccoy" },
+  { name: "Devon Webb" },
+  { name: "Tom Cook" },
+  { name: "Tanya Fox" },
+  { name: "Hellen Schmidt" },
+];
+const selectedPerson = ref(people[0]);
+
+const isOpen = ref(false);
+
+function closeModal() {
+  isOpen.value = false;
+}
+function openModal() {
+  isOpen.value = true;
+}
+</script>
+
 <template>
   <div>
+    <TransitionRoot appear :show="isOpen" as="template">
+      <Dialog as="div" @close="closeModal" class="relative z-10">
+        <TransitionChild
+          as="template"
+          enter="duration-300 ease-out"
+          enter-from="opacity-0"
+          enter-to="opacity-100"
+          leave="duration-200 ease-in"
+          leave-from="opacity-100"
+          leave-to="opacity-0"
+        >
+          <div class="fixed inset-0 bg-black bg-opacity-25" />
+        </TransitionChild>
+
+        <div class="fixed inset-0 overflow-y-auto">
+          <div
+            class="flex min-h-full items-center justify-center p-4 text-center"
+          >
+            <TransitionChild
+              as="template"
+              enter="duration-300 ease-out"
+              enter-from="opacity-0 scale-95"
+              enter-to="opacity-100 scale-100"
+              leave="duration-200 ease-in"
+              leave-from="opacity-100 scale-100"
+              leave-to="opacity-0 scale-95"
+            >
+              <DialogPanel
+                class="w-full max-w-xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all"
+              >
+                <DialogTitle
+                  as="h3"
+                  class="text-lg font-medium leading-6 text-gray-900"
+                >
+                  Add New Book
+                </DialogTitle>
+                <div class="mt-2">
+                  <!-- <p class="text-sm text-gray-500">
+                    Your payment has been successfully submitted. We’ve sent you
+                    an email with all of the details of your order.
+                  </p> -->
+                  <form action="" class="space-y-5">
+                    <div>
+                      <label for="bookname" class="text-md font-medium"
+                        >ชื่อหนังสือ</label
+                      >
+
+                      <div class="relative mt-1">
+                        <input
+                          type="text"
+                          id="bookname"
+                          class="form-input w-full px-4 py-3 text-sm border-gray-200 focus-visible:border-primary-light focus:border-primary-light focus:ring-primary focus:shadow-primary border rounded-lg shadow-sm"
+                          placeholder="กรุณากรอกชื่อหนังสือ"
+                          v-model="bookname"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label for="description" class="text-md font-medium"
+                        >รายละเอียดหนังสือ</label
+                      >
+
+                      <div class="relative mt-1">
+                        <input
+                          type="text"
+                          id="description"
+                          class="form-input w-full px-4 py-3 text-sm border-gray-200 focus-visible:border-primary-light focus:border-primary-light focus:ring-primary focus:shadow-primary border rounded-lg shadow-sm"
+                          placeholder="กรุณากรอกนามสกุล"
+                          v-model="description"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="flex space-x-4">
+                      <div class="w-1/3">
+                        <label for="bookpage" class="text-md font-medium"
+                          >จำนวนหน้า</label
+                        >
+
+                        <div class="relative mt-1">
+                          <input
+                            type="number"
+                            id="bookpage"
+                            class="form-input w-full px-4 pr-16 py-3 text-sm border-gray-200 focus-visible:border-primary-light focus:border-primary-light focus:ring-primary focus:shadow-primary border rounded-lg shadow-sm"
+                            placeholder="XXX"
+                            v-model="page"
+                          />
+                          <span
+                            class="absolute inset-y-0 inline-flex items-center right-4"
+                          >
+                            หน้า
+                          </span>
+                        </div>
+                      </div>
+                      <div class="w-1/3">
+                        <label for="price" class="text-md font-medium"
+                          >ราคาหนังสือ</label
+                        >
+
+                        <div class="relative mt-1">
+                          <input
+                            type="number"
+                            id="price"
+                            class="form-input w-full pr-16 px-4 py-3 text-sm border-gray-200 focus-visible:border-primary-light focus:border-primary-light focus:ring-primary focus:shadow-primary border rounded-lg shadow-sm"
+                            placeholder="XXX"
+                            v-model="price"
+                          />
+                          <span
+                            class="absolute inset-y-0 inline-flex items-center right-4"
+                          >
+                            บาท
+                          </span>
+                        </div>
+                      </div>
+                      <div class="w-1/3">
+                        <label for="price" class="text-md font-medium"
+                          >สต็อกสินค้า</label
+                        >
+
+                        <div class="relative mt-1">
+                          <input
+                            type="number"
+                            id="stock"
+                            class="form-input w-full px-4 pr-16 py-3 text-sm border-gray-200 focus-visible:border-primary-light focus:border-primary-light focus:ring-primary focus:shadow-primary border rounded-lg shadow-sm"
+                            placeholder="XX"
+                            v-model="stock"
+                          />
+                          <span
+                            class="absolute inset-y-0 inline-flex items-center right-4"
+                          >
+                            เล่ม
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <label for="author" class="text-md font-medium"
+                        >ผู้แต่ง</label
+                      >
+
+                      <div class="relative mt-1">
+                        <input
+                          type="text"
+                          id="author"
+                          class="form-input w-full px-4 py-3 text-sm border-gray-200 focus-visible:border-primary-light focus:border-primary-light focus:ring-primary focus:shadow-primary border rounded-lg shadow-sm"
+                          placeholder="กรุณากรอกชื่อผู้แต่ง"
+                          v-model="author"
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <label for="publisher" class="text-md font-medium"
+                        >ชื่อสำนักพิมพ์</label
+                      >
+
+                      <div class="relative mt-1">
+                        <input
+                          type="text"
+                          id="publisher"
+                          class="form-input w-full px-4 py-3 text-sm border-gray-200 focus-visible:border-primary-light focus:border-primary-light focus:ring-primary focus:shadow-primary border rounded-lg shadow-sm"
+                          placeholder="กรุณากรอกชื่อสำนักพิมพ์"
+                          v-model="publisher"
+                        />
+                      </div>
+                    </div>
+                    <div class="flex space-x-4">
+                      <div class="w-1/2">
+                        <label for="category" class="text-md font-medium"
+                          >หมวดหมู่หนังสือ</label
+                        >
+
+                        <div class="relative mt-1">
+                          <!-- <input
+                            type="number"
+                            id="category"
+                            class="form-input w-full px-4 py-3 text-sm border-gray-200 focus-visible:border-primary-light focus:border-primary-light focus:ring-primary focus:shadow-primary border rounded-lg shadow-sm"
+                            placeholder="XXX"
+                            v-model="category"
+                          /> -->
+                          <div class="w-full">
+                            <Listbox v-model="selectedPerson">
+                              <div class="relative mt-1">
+                                <ListboxButton
+                                  class="z-[1000] relative w-full cursor-default rounded-lg bg-white py-3 pl-3 pr-10 text-left border-gray-200 focus-visible:border-primary-light focus:border-primary-light focus:ring-primary focus:shadow-primary border sm:text-sm"
+                                >
+                                  <span class="block truncate">{{
+                                    selectedPerson.name
+                                  }}</span>
+                                  <span
+                                    class="pointer-events-none absolute z-[1000] inset-y-0 right-0 flex items-center pr-2"
+                                  >
+                                    <SelectorIcon
+                                      class="h-5 w-5 text-gray-400"
+                                      aria-hidden="true"
+                                    />
+                                  </span>
+                                </ListboxButton>
+
+                                <transition
+                                  leave-active-class="transition duration-100 ease-in"
+                                  leave-from-class="opacity-100"
+                                  leave-to-class="opacity-0"
+                                >
+                                  <ListboxOptions
+                                    class="focus:outline-none absolute z-[1000] mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 sm:text-sm"
+                                  >
+                                    <ListboxOption
+                                      v-slot="{ active, selected }"
+                                      v-for="person in people"
+                                      :key="person.name"
+                                      :value="person"
+                                      as="template"
+                                    >
+                                      <li
+                                        :class="[
+                                          active
+                                            ? 'bg-amber-100 text-amber-900'
+                                            : 'text-gray-900',
+                                          'relative cursor-default select-none py-2 pl-10 pr-4',
+                                        ]"
+                                      >
+                                        <span
+                                          :class="[
+                                            selected
+                                              ? 'font-medium'
+                                              : 'font-normal',
+                                            'block truncate',
+                                          ]"
+                                          >{{ person.name }}</span
+                                        >
+                                        <span
+                                          v-if="selected"
+                                          class="absolute z-[1000] inset-y-0 left-0 flex items-center pl-3 text-amber-600"
+                                        >
+                                          <CheckIcon
+                                            class="h-5 w-5"
+                                            aria-hidden="true"
+                                          />
+                                        </span>
+                                      </li>
+                                    </ListboxOption>
+                                  </ListboxOptions>
+                                </transition>
+                              </div>
+                            </Listbox>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="w-1/2">
+                        <label for="isbn" class="text-md font-medium"
+                          >ISBN</label
+                        >
+
+                        <div class="relative mt-1">
+                          <input
+                            type="number"
+                            id="isbn"
+                            class="form-input w-full px-4 py-3 text-sm border-gray-200 focus-visible:border-primary-light focus:border-primary-light focus:ring-primary focus:shadow-primary border rounded-lg shadow-sm"
+                            placeholder="XXXXXXXXXXXXX"
+                            v-model="isbn"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <label for="email" class="text-md font-medium"
+                        >รูปปกหนังสือ</label
+                      >
+
+                      <div class="relative mt-1">
+                        <div
+                          class="relative h-40 rounded-lg border-dashed border-2 border-gray-200 bg-white flex justify-center items-center hover:cursor-pointer"
+                        >
+                          <div>
+                            <input
+                              type="file"
+                              class="h-full w-full opacity-1"
+                              name=""
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <!-- 
+                      <div class="relative mt-1">
+                        <div
+                          class="relative h-40 rounded-lg border-dashed border-2 border-gray-200 bg-white flex justify-center items-center hover:cursor-pointer"
+                        >
+                          <div class="absolute z-10">
+                            <div class="flex flex-col items-center">
+                              <i
+                                class="fa fa-cloud-upload fa-3x text-gray-200"
+                              ></i>
+                              <span class="block text-gray-400 font-normal"
+                                >Attach you files here</span
+                              >
+                              <span class="block text-gray-400 font-normal"
+                                >or</span
+                              >
+                              <span class="block text-blue-400 font-normal"
+                                >Browse files</span
+                              >
+                            </div>
+                          </div>
+                          <input
+                            type="file"
+                            class="h-full w-full opacity-0"
+                            name=""
+                          />
+                        </div>
+                        <div
+                          class="flex justify-between items-center text-gray-400 mt-2"
+                        >
+                          <span
+                            >Accepted file type: .jpg, .png, .jpeg only</span
+                          >
+                          <span class="flex items-center"
+                            ><i class="fa fa-lock mr-1"></i> secure</span
+                          >
+                        </div>
+                      </div> -->
+                    </div>
+
+                    <!-- <button
+                      @click="signUp"
+                      class="block w-full px-5 py-3 text-md font-medium text-white bg-primary rounded-lg"
+                    >
+                      สมัครสมาชิก
+                    </button> -->
+                    <div class="mt-4 space-x-2 flex justify-end">
+                      <button
+                        type="button"
+                        class="focus:outline-none inline-flex justify-center rounded-md border border-transparent bg-green-100 px-4 py-2 text-sm font-medium text-primary hover:bg-primary-light focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                        @click="closeModal"
+                      >
+                        Create
+                      </button>
+                      <button
+                        type="button"
+                        class="focus:outline-none inline-flex justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 text-sm font-medium text-red-900 hover:bg-red-200 focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
+                        @click="closeModal"
+                      >
+                        Close
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </DialogPanel>
+            </TransitionChild>
+          </div>
+        </div>
+      </Dialog>
+    </TransitionRoot>
     <div class="flex justify-between px-4 mt-4 sm:px-8">
       <h2 class="text-2xl text-gray-600">Book List</h2>
 
       <div class="flex items-center space-x-1 text-xs">
-        <router-link to="/" class="font-bold text-indigo-700">Home</router-link>
+        <router-link to="/dashboard" class="font-bold text-indigo-700"
+          >Home</router-link
+        >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="h-2 w-2"
@@ -19,7 +409,7 @@
             d="M9 5l7 7-7 7"
           />
         </svg>
-        <span class="text-gray-600">Users</span>
+        <span class="text-gray-600">Books</span>
       </div>
     </div>
 
@@ -56,6 +446,7 @@
           <div>
             <div>
               <button
+                @click="openModal"
                 class="flex items-center bg-green-500 p-2 text-white rounded text-sm hover:bg-green-600"
               >
                 <svg
@@ -90,7 +481,7 @@
               </th>
               <th class="text-left text-gray-600">USER</th>
               <th class="text-left text-gray-600">ROLE</th>
-              <th class="text-left text-gray-600">STATUS</th>
+              <th class="text-left text-gray-600">ORDER_STATUS</th>
               <th class="text-left text-gray-600">LAST ACTIVITY</th>
               <th class="text-left text-gray-600">JOIN DATE</th>
               <th class="text-right text-gray-600">ACTIONS</th>
