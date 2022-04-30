@@ -48,15 +48,15 @@ function openModal() {
               leave-to="opacity-0 scale-95"
             >
               <DialogPanel
-                class="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all"
+                class="w-full max-w-lg transform overflow-hidden rounded-2xl bg-white px-8 py-8 text-left align-middle shadow-xl transition-all"
               >
                 <DialogTitle
                   as="h3"
-                  class="text-lg font-medium leading-6 text-gray-900"
+                  class="text-xl font-bold leading-6 text-primary"
                 >
                   Add New User
                 </DialogTitle>
-                <div class="mt-2">
+                <div class="mt-5">
                   <!-- <p class="text-sm text-gray-500">
                     Your payment has been successfully submitted. We’ve sent you
                     an email with all of the details of your order.
@@ -162,13 +162,36 @@ function openModal() {
                         />
                       </div>
                     </div>
+
+                    <div>
+                      <label for="address" class="text-md font-medium"
+                        >ที่อยู่ในการจัดส่งปัจจุบัน</label
+                      >
+
+                      <div class="relative mt-1">
+                        <!-- <input
+                          type="text"
+                          id="address"
+                          class="form-input w-full px-4 py-3 text-sm border-gray-200 focus-visible:border-primary-light focus:border-primary-light focus:ring-primary focus:shadow-primary border rounded-lg shadow-sm"
+                          placeholder="Enter address"
+                          v-model="address"
+                        /> -->
+                        <select
+                          class="form-select w-full px-4 py-3 text-sm border-gray-200 focus-visible:border-primary-light focus:border-primary-light focus:ring-primary focus:shadow-primary border rounded-lg shadow-sm"
+                        >
+                          <option>เลือกที่อยู่</option>
+                          <option>เลือกที่อยู่</option>
+                          <option>เลือกที่อยู่</option>
+                        </select>
+                      </div>
+                    </div>
                     <!-- <button
                       @click="signUp"
                       class="block w-full px-5 py-3 text-md font-medium text-white bg-primary rounded-lg"
                     >
                       สมัครสมาชิก
                     </button> -->
-                    <div class="mt-4 space-x-2 flex justify-end">
+                    <div class="mt-5 space-x-2 flex justify-end">
                       <button
                         type="button"
                         class="focus:outline-none inline-flex justify-center rounded-md border border-transparent bg-green-100 px-4 py-2 text-sm font-medium text-primary hover:bg-primary-light focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
@@ -196,7 +219,9 @@ function openModal() {
       <h2 class="text-2xl text-gray-600">User List</h2>
 
       <div class="flex items-center space-x-1 text-xs">
-        <router-link to="/dashboard" class="font-bold text-indigo-700">Home</router-link>
+        <router-link to="/dashboard" class="font-bold text-indigo-700"
+          >Home</router-link
+        >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="h-2 w-2"
@@ -282,7 +307,6 @@ function openModal() {
                 />
               </th>
               <th class="text-left text-gray-600">USER</th>
-              <th class="text-left text-gray-600">ROLE</th>
               <th class="text-left text-gray-600">ORDER_STATUS</th>
               <th class="text-left text-gray-600">LAST ACTIVITY</th>
               <th class="text-left text-gray-600">JOIN DATE</th>
@@ -315,7 +339,6 @@ function openModal() {
                   </div>
                 </div>
               </td>
-              <td>{{ user.role }}</td>
               <td>
                 <span
                   v-if="user.isActive"
@@ -394,6 +417,7 @@ function openModal() {
                         </MenuItem>
                         <MenuItem v-slot="{ active }">
                           <button
+                            @click="deleteUser(user.id)"
                             :class="[
                               active
                                 ? 'bg-red-400 text-white'
@@ -546,6 +570,7 @@ function openModal() {
 import userList from "@/data/users/userList.json";
 import { Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/vue";
 import { ref } from "vue";
+import Swal from "sweetalert2";
 
 export default {
   components: {
@@ -562,6 +587,51 @@ export default {
       userList,
       selectAll,
     };
+  },
+
+  methods: {
+    deleteUser(id) {
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then((result) => {
+        if (result.value) {
+          Swal.fire("Deleted!", "Your file has been deleted.", "success");
+        }
+      });
+    },
+    // selectAllUsers() {
+    // 	this.selectAll.value = !this.selectAll.value;
+    // 	this.userList.forEach(user => {
+    // 		user.selected = this.selectAll.value;
+    // 	});
+    // },
+    // selectUser(user) {
+    // 	user.selected = !user.selected;
+    // },
+    // deleteSelectedUsers() {
+    // 	const selectedUsers = this.userList.filter(user => user.selected);
+    // 	if (selectedUsers.length > 0) {
+    // 		Swal.fire({
+    // 			title: 'Are you sure?',
+    // 			text: "You won't be able to revert this!",
+    // 			icon: 'warning',
+    // 			showCancelButton: true,
+    // 			confirmButtonColor: '#3085d6',
+    // 			cancelButtonColor: '#d33',
+    // 			confirmButtonText: 'Yes, delete it!'
+    // 		}).then((result) => {
+    // 			if (result.value) {
+    // 				Swal.fire('Deleted!', 'Your file has been deleted.', 'success')
+    // 			}
+    // 		})
+    // 	}
+    // },
   },
 };
 </script>

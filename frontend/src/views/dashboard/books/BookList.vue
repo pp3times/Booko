@@ -208,80 +208,13 @@ function openModal() {
                         >
 
                         <div class="relative mt-1">
-                          <!-- <input
-                            type="number"
-                            id="category"
-                            class="form-input w-full px-4 py-3 text-sm border-gray-200 focus-visible:border-primary-light focus:border-primary-light focus:ring-primary focus:shadow-primary border rounded-lg shadow-sm"
-                            placeholder="XXX"
-                            v-model="category"
-                          /> -->
-                          <div class="w-full">
-                            <Listbox v-model="selectedPerson">
-                              <div class="relative mt-1">
-                                <ListboxButton
-                                  class="z-[1000] relative w-full cursor-default rounded-lg bg-white py-3 pl-3 pr-10 text-left border-gray-200 focus-visible:border-primary-light focus:border-primary-light focus:ring-primary focus:shadow-primary border sm:text-sm"
-                                >
-                                  <span class="block truncate">{{
-                                    selectedPerson.name
-                                  }}</span>
-                                  <span
-                                    class="pointer-events-none absolute z-[1000] inset-y-0 right-0 flex items-center pr-2"
-                                  >
-                                    <SelectorIcon
-                                      class="h-5 w-5 text-gray-400"
-                                      aria-hidden="true"
-                                    />
-                                  </span>
-                                </ListboxButton>
-
-                                <transition
-                                  leave-active-class="transition duration-100 ease-in"
-                                  leave-from-class="opacity-100"
-                                  leave-to-class="opacity-0"
-                                >
-                                  <ListboxOptions
-                                    class="focus:outline-none absolute z-[1000] mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 sm:text-sm"
-                                  >
-                                    <ListboxOption
-                                      v-slot="{ active, selected }"
-                                      v-for="person in people"
-                                      :key="person.name"
-                                      :value="person"
-                                      as="template"
-                                    >
-                                      <li
-                                        :class="[
-                                          active
-                                            ? 'bg-amber-100 text-amber-900'
-                                            : 'text-gray-900',
-                                          'relative cursor-default select-none py-2 pl-10 pr-4',
-                                        ]"
-                                      >
-                                        <span
-                                          :class="[
-                                            selected
-                                              ? 'font-medium'
-                                              : 'font-normal',
-                                            'block truncate',
-                                          ]"
-                                          >{{ person.name }}</span
-                                        >
-                                        <span
-                                          v-if="selected"
-                                          class="absolute z-[1000] inset-y-0 left-0 flex items-center pl-3 text-amber-600"
-                                        >
-                                          <CheckIcon
-                                            class="h-5 w-5"
-                                            aria-hidden="true"
-                                          />
-                                        </span>
-                                      </li>
-                                    </ListboxOption>
-                                  </ListboxOptions>
-                                </transition>
-                              </div>
-                            </Listbox>
-                          </div>
+                          <select
+                            class="form-select w-full px-4 py-3 text-sm border-gray-200 focus-visible:border-primary-light focus:border-primary-light focus:ring-primary focus:shadow-primary border rounded-lg shadow-sm"
+                          >
+                            <option>เลือกหมวดหมู่</option>
+                            <option>หมวดหมู่ 1</option>
+                            <option>หมวดหมู่ 2</option>
+                          </select>
                         </div>
                       </div>
                       <div class="w-1/2">
@@ -479,16 +412,16 @@ function openModal() {
                   class="h-5 w-5 text-blue-500 border-gray-300 rounded cursor-pointer focus:ring-0"
                 />
               </th>
-              <th class="text-left text-gray-600">USER</th>
-              <th class="text-left text-gray-600">ROLE</th>
-              <th class="text-left text-gray-600">ORDER_STATUS</th>
-              <th class="text-left text-gray-600">LAST ACTIVITY</th>
-              <th class="text-left text-gray-600">JOIN DATE</th>
-              <th class="text-right text-gray-600">ACTIONS</th>
+              <th class="text-left text-gray-600">ข้อมูลหนังสือ</th>
+              <th class="text-left text-gray-600">ราคาหนังสือ (บาท)</th>
+              <th class="text-left text-gray-600">สต็อกสินค้า</th>
+              <th class="text-left text-gray-600">ขายครั้งล่าสุด</th>
+              <th class="text-left text-gray-600">เพิ่มหนังสือเมื่อ</th>
+              <th class="text-right text-gray-600">จัดการ</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-200">
-            <tr v-for="user in userList" :key="user.id">
+            <tr v-for="(book, index) in books" :key="index">
               <td class="p-2">
                 <input
                   type="checkbox"
@@ -498,36 +431,36 @@ function openModal() {
               </td>
               <td class="flex items-center py-4">
                 <img
-                  class="inline-block h-12 w-12 rounded-full ring-2 ring-white"
-                  :src="user.avatar"
+                  class="inline-block h-28 ring-2 ring-white"
+                  :src="book.img"
                   alt=""
                 />
-                <div class="px-4">
+                <div class="px-4 w-60">
                   <div>
-                    <a href="#" class="text-gray-600 font-bolder">{{
-                      user.name
-                    }}</a>
+                    <a href="#" class="text-gray-600 font-bolder">
+                      {{ book.name }}
+                    </a>
                   </div>
                   <div class="font-bold text-sm">
-                    {{ user.email }}
+                    แต่งโดย : {{ book.writer }}
                   </div>
                 </div>
               </td>
-              <td>{{ user.role }}</td>
+              <td>350</td>
               <td>
                 <span
-                  v-if="user.isActive"
+                  v-if="book.stock >= 10"
                   class="px-2 py-1 rounded text-xs text-white bg-green-500"
-                  >Active</span
+                  >{{ book.stock }} เล่ม</span
                 >
                 <span
                   v-else
                   class="px-2 py-1 rounded text-xs text-white bg-red-500"
-                  >Suspended</span
+                  >{{ book.stock }} เล่ม</span
                 >
               </td>
-              <td>{{ user.lastActivity }}</td>
-              <td>{{ user.joinDate }}</td>
+              <td>ซื้อล่าสุด</td>
+              <td>วันที่เพิ่ม</td>
               <td class="text-right">
                 <Menu as="div" class="relative inline-block text-left">
                   <div>
@@ -742,6 +675,7 @@ function openModal() {
 
 <script>
 import userList from "@/data/users/userList.json";
+import books from "@/data/book/book.json";
 import { Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/vue";
 import { ref } from "vue";
 
@@ -757,6 +691,7 @@ export default {
     const selectAll = ref(false);
 
     return {
+      books,
       userList,
       selectAll,
     };
