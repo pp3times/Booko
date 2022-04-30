@@ -121,25 +121,16 @@
           </div>
 
           <div class="text-sm">
-            <a
-              href="#"
-              class="font-medium text-indigo-600 hover:text-indigo-500"
-            >
-              Forgot your password?
+            <a href="#" class="font-medium text-green-600 hover:text-green-500">
+              Forgot your password?	
             </a>
           </div>
         </div>
 
         <div>
-          <!-- <button
-            type="submit"
-            class="group relative w-full flex justify-center py-4 px-6 border border-transparent font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-          >
-            Sign in
-          </button> -->
-					<router-link
-						to="/dashboard"
-            class="group relative w-full flex justify-center py-4 px-6 border border-transparent font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          <router-link
+            to="/dashboard"
+            class="group relative w-full flex justify-center py-4 px-6 border border-transparent font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
           >
             Sign in
           </router-link>
@@ -148,7 +139,7 @@
 
       <div class="mt-2 text-sm text-gray-600">
         Not registered yet?
-        <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500"
+        <a href="#" class="font-medium text-green-600 hover:text-green-500"
           >Create an account</a
         >
       </div>
