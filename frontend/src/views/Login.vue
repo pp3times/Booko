@@ -73,6 +73,7 @@
             class="w-full py-4 text-sm text-gray-900 rounded-md pl-10 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10"
             placeholder="Email address"
             required=""
+            v-model="mail"
           />
         </div>
 
@@ -101,6 +102,7 @@
             required=""
             class="w-full py-4 text-sm text-gray-900 rounded-md pl-10 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10"
             placeholder="Password"
+            v-model="password"
           />
         </div>
 
@@ -129,20 +131,21 @@
             </a>
           </div>
         </div>
-
+        <span>{{ msg }}</span>
         <div>
-          <!-- <button
+          <button
+            @click="login"
             type="submit"
             class="group relative w-full flex justify-center py-4 px-6 border border-transparent font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
             Sign in
-          </button> -->
-					<router-link
-						to="/dashboard"
+          </button>
+          <!-- <router-link
+            to="/dashboard"
             class="group relative w-full flex justify-center py-4 px-6 border border-transparent font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
             Sign in
-          </router-link>
+          </router-link> -->
         </div>
       </form>
 
@@ -157,5 +160,41 @@
 </template>
 
 <script>
-export default {};
+import AuthService from "@/services/AuthService.js";
+// import Navbar from '@/components/Navbar.vue'
+import store from "../store/store";
+export default {
+  data() {
+    return {
+      mail: "",
+      password: "",
+      msg: "",
+    };
+  },
+  components: {
+    // Navbar,
+  },
+  methods: {
+    async login() {
+      try {
+        const loginCredentials = {
+          mail: this.mail,
+          password: this.password,
+        };
+        const response = await AuthService.admin(loginCredentials);
+        this.msg = response.msg;
+
+        const token = response.token;
+        const user = response.user;
+        console.log(response);
+        console.log(store);
+        this.$store.dispatch("admin", { token, user });
+
+        this.$router.push("/dashboard");
+      } catch (error) {
+        this.msg = error.response.data.msg;
+      }
+    },
+  },
+};
 </script>

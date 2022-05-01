@@ -36,6 +36,11 @@ export const routes = [
     name: "search",
     component: () => import("../views/Search.vue"),
   },
+	{
+		path: "/test",
+		name: "test",
+		component: () => import("../views/asd/Login.vue"),
+	},
   // {
   //   path: "/admin",
   //   name: "admin",
