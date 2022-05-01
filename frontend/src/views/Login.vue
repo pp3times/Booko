@@ -123,11 +123,8 @@
           </div>
 
           <div class="text-sm">
-            <a
-              href="#"
-              class="font-medium text-indigo-600 hover:text-indigo-500"
-            >
-              Forgot your password?
+            <a href="#" class="font-medium text-green-600 hover:text-green-500">
+              Forgot your password?	
             </a>
           </div>
         </div>
@@ -151,7 +148,7 @@
 
       <div class="mt-2 text-sm text-gray-600">
         Not registered yet?
-        <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500"
+        <a href="#" class="font-medium text-green-600 hover:text-green-500"
           >Create an account</a
         >
       </div>

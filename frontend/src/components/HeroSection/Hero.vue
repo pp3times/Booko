@@ -1,5 +1,4 @@
-<script setup>
-</script>
+<script setup></script>
 <template>
   <div
     class="h-[83vh] bg-[#f3f3f3] flex justify-between items-center md:items-stretch md:flex-row flex-col"
