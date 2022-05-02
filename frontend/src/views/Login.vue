@@ -124,7 +124,7 @@
 
           <div class="text-sm">
             <a href="#" class="font-medium text-green-600 hover:text-green-500">
-              Forgot your password?	
+              Forgot your password?
             </a>
           </div>
         </div>
