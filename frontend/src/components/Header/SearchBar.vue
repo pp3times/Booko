@@ -64,18 +64,11 @@ export default {
   data() {
     return {
       search: "",
-			keyword: "",
     };
   },
   methods: {
     enableSave() {
       this.$emit("change-hidden", !this.isShow);
-    },
-  },
-  // send search value to parent
-  watch: {
-    search: function (val) {
-      this.$emit("search", val);
     },
   },
 };
