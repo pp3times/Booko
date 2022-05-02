@@ -39,7 +39,7 @@
           v-model="search"
         />
 
-        <router-link to="/search">
+        <router-link :to="`/search/${this.search}`">
           <button
             type="button"
             class="m-2 rounded px-4 py-2 text-white"
@@ -64,11 +64,18 @@ export default {
   data() {
     return {
       search: "",
+			keyword: "",
     };
   },
   methods: {
     enableSave() {
       this.$emit("change-hidden", !this.isShow);
+    },
+  },
+  // send search value to parent
+  watch: {
+    search: function (val) {
+      this.$emit("search", val);
     },
   },
 };
