@@ -6,10 +6,11 @@
       </h2>
 
       <div>
-        <button
+        <router-link
+          to="/"
           class="w-full flex justify-center py-3 px-4 border border-gray-300 font-medium rounded-md text-gray-900 bg-white focus:outline-none"
         >
-          <svg
+          <!-- <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 48 48"
             class="h-6 w-6 mr-2"
@@ -33,9 +34,9 @@
               ></path>
               <path fill="none" d="M0 0h48v48H0z"></path>
             </g>
-          </svg>
-          Sign in with Google
-        </button>
+          </svg> -->
+          ← Back to home
+        </router-link>
       </div>
 
       <div class="flex items-center justify-center space-x-2 my-4">
@@ -73,6 +74,7 @@
             class="w-full py-4 text-sm text-gray-900 rounded-md pl-10 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10"
             placeholder="Email address"
             required=""
+            v-model="mail"
           />
         </div>
 
@@ -101,6 +103,7 @@
             required=""
             class="w-full py-4 text-sm text-gray-900 rounded-md pl-10 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10"
             placeholder="Password"
+            v-model="password"
           />
         </div>
 
@@ -110,7 +113,7 @@
               id="remember-me"
               name="remember-me"
               type="checkbox"
-              class="h-4 w-4 text-indigo-600 focus:ring-0 border-gray-300 rounded cursor-pointer"
+              class="h-4 w-4 text-green-600 focus:ring-0 border-gray-300 rounded cursor-pointer"
             />
             <label
               for="remember-me"
@@ -122,18 +125,25 @@
 
           <div class="text-sm">
             <a href="#" class="font-medium text-green-600 hover:text-green-500">
-              Forgot your password?	
+              Forgot your password?
             </a>
           </div>
         </div>
-
+        <span>{{ msg }}</span>
         <div>
-          <router-link
-            to="/dashboard"
+          <button
+            @click="login"
+            type="submit"
             class="group relative w-full flex justify-center py-4 px-6 border border-transparent font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
           >
             Sign in
-          </router-link>
+          </button>
+          <!-- <router-link
+            to="/dashboard"
+            class="group relative w-full flex justify-center py-4 px-6 border border-transparent font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          >
+            Sign in
+          </router-link> -->
         </div>
       </form>
 
@@ -148,5 +158,41 @@
 </template>
 
 <script>
-export default {};
+import AuthService from "@/services/AuthService.js";
+// import Navbar from '@/components/Navbar.vue'
+import store from "../store/store";
+export default {
+  data() {
+    return {
+      mail: "",
+      password: "",
+      msg: "",
+    };
+  },
+  components: {
+    // Navbar,
+  },
+  methods: {
+    async login() {
+      try {
+        const loginCredentials = {
+          mail: this.mail,
+          password: this.password,
+        };
+        const response = await AuthService.admin(loginCredentials);
+        this.msg = response.msg;
+
+        const token = response.token;
+        const user = response.user;
+        console.log(response);
+        console.log(store);
+        this.$store.dispatch("admin", { token, user });
+
+        this.$router.push("/dashboard");
+      } catch (error) {
+        this.msg = error.response.data.msg;
+      }
+    },
+  },
+};
 </script>

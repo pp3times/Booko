@@ -125,18 +125,39 @@
                   </router-link>
                 </li>
 
-                <li class="px-8 hover:bg-gray-700">
-                  <a href="#" class="py-3 flex items-center">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="h-5 w-5"
-                      fill="currentColor"
-                      viewBox="0 0 16 16"
+                <li>
+                  <router-link
+                    v-slot="{ isExactActive, href, navigate }"
+                    to="/admins"
+                    custom
+                  >
+                    <li
+                      class="pl-8"
+                      :class="[
+                        isExactActive
+                          ? 'bg-gray-500 text-gray-800'
+                          : 'hover:bg-gray-700',
+                      ]"
                     >
-                      <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
-                    </svg>
-                    Permissions
-                  </a>
+                      <a
+                        class="py-3 flex items-center"
+                        :href="href"
+                        @click="navigate"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="h-5 w-5"
+                          fill="currentColor"
+                          viewBox="0 0 16 16"
+                        >
+                          <path
+                            d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"
+                          />
+                        </svg>
+                        Admin List
+                      </a>
+                    </li>
+                  </router-link>
                 </li>
               </ul>
             </DisclosurePanel>
@@ -182,92 +203,6 @@
             </DisclosureButton>
             <DisclosurePanel>
               <ul>
-                <!-- <li>
-                  <Disclosure v-slot="{ open }" :default-open="isBookActive">
-                    <DisclosureButton
-                      class="pl-8 pr-4 py-3 flex items-center w-full hover:bg-gray-700"
-                      :class="open ? 'bg-gray-700' : ''"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="h-5 w-5"
-                        fill="currentColor"
-                        viewBox="0 0 16 16"
-                      >
-                        <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
-                      </svg>
-                      Books
-                      <span class="ml-auto">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          class="h-5 w-5"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                          :class="open ? 'transform rotate-90' : ''"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M9 5l7 7-7 7"
-                          />
-                        </svg>
-                      </span>
-                    </DisclosureButton>
-                    <DisclosurePanel>
-                      <ul>
-                        <router-link
-                          v-slot="{ isExactActive, href, navigate }"
-                          to="/"
-                          custom
-                        >
-                          <li
-                            class="pl-12"
-                            :class="[
-                              isExactActive
-                                ? 'bg-gray-500 text-gray-800'
-                                : 'hover:bg-gray-700',
-                            ]"
-                          >
-                            <a
-                              class="py-3 flex items-center"
-                              :href="href"
-                              @click="navigate"
-                            >
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                class="h-5 w-5"
-                                fill="currentColor"
-                                viewBox="0 0 16 16"
-                              >
-                                <path
-                                  d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"
-                                />
-                              </svg>
-                              Book List
-                            </a>
-                          </li>
-                        </router-link>
-                        <li class="pl-12 hover:bg-gray-700">
-                          <a href="#" class="py-3 flex items-center">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              class="h-5 w-5"
-                              fill="currentColor"
-                              viewBox="0 0 16 16"
-                            >
-                              <path
-                                d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"
-                              />
-                            </svg>
-                            Book Detail
-                          </a>
-                        </li>
-                      </ul>
-                    </DisclosurePanel>
-                  </Disclosure>
-                </li> -->
                 <li>
                   <router-link
                     v-slot="{ isExactActive, href, navigate }"
@@ -302,18 +237,39 @@
                     </li>
                   </router-link>
                 </li>
-                <li class="px-8 hover:bg-gray-700">
-                  <a href="#" class="py-3 flex items-center">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="h-5 w-5"
-                      fill="currentColor"
-                      viewBox="0 0 16 16"
+                <li>
+                  <router-link
+                    v-slot="{ isExactActive, href, navigate }"
+                    to="/category"
+                    custom
+                  >
+                    <li
+                      class="pl-8"
+                      :class="[
+                        isExactActive
+                          ? 'bg-gray-500 text-gray-800'
+                          : 'hover:bg-gray-700',
+                      ]"
                     >
-                      <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
-                    </svg>
-                    Roles
-                  </a>
+                      <a
+                        class="py-3 flex items-center"
+                        :href="href"
+                        @click="navigate"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="h-5 w-5"
+                          fill="currentColor"
+                          viewBox="0 0 16 16"
+                        >
+                          <path
+                            d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"
+                          />
+                        </svg>
+                        Categories List
+                      </a>
+                    </li>
+                  </router-link>
                 </li>
                 <li class="px-8 hover:bg-gray-700">
                   <a href="#" class="py-3 flex items-center">

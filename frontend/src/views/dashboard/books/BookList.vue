@@ -825,6 +825,7 @@ function openEdit() {
                           <select
                             v-model="selected_category"
                             name="selected_category"
+<<<<<<< HEAD
                             class="
                               form-select
                               w-full
@@ -840,6 +841,9 @@ function openEdit() {
                               rounded-lg
                               shadow-sm
                             "
+=======
+                            class="form-select w-full px-4 py-3 text-sm border-gray-200 focus-visible:border-primary-light focus:border-primary-light focus:ring-primary focus:shadow-primary border rounded-lg shadow-sm"
+>>>>>>> a916899bcc18a51b601e5035b9b797b63d7e81c9
                           >
                             <option disabled v-bind:value="0">
                               เลือกหมวดหมู่
@@ -971,6 +975,7 @@ function openEdit() {
                       </button> -->
                       <input
                         type="submit"
+<<<<<<< HEAD
                         class="
                           focus:outline-none
                           inline-flex
@@ -988,6 +993,9 @@ function openEdit() {
                           focus-visible:ring-primary
                           focus-visible:ring-offset-2
                         "
+=======
+                        class="focus:outline-none inline-flex justify-center rounded-md border border-transparent bg-green-100 px-4 py-2 text-sm font-medium text-primary hover:bg-primary-light focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+>>>>>>> a916899bcc18a51b601e5035b9b797b63d7e81c9
                         @click="closeModal"
                         value="Upload"
                       />
@@ -1592,7 +1600,11 @@ export default {
       author: null,
       publisher: null,
       selected_category: 0,
+<<<<<<< HEAD
       isbn: "",
+=======
+      isbn: null,
+>>>>>>> a916899bcc18a51b601e5035b9b797b63d7e81c9
       all_book: [],
       selected_category: 0,
       imagefile: null,
@@ -1630,6 +1642,11 @@ export default {
       try {
         const response = await axios.get("http://localhost:4000/api/books");
         this.all_book = response.data;
+        // foreach change book_createAt format to date format and change book_updateAt format to date format
+        this.all_book.forEach(function (book) {
+          book.book_createAt = new Date(book.book_createAt).toDateString();
+          book.book_updateAt = new Date(book.book_updateAt).toDateString();
+        });
       } catch (err) {
         console.log(err);
       }
@@ -1644,6 +1661,7 @@ export default {
         console.log(err);
       }
     },
+<<<<<<< HEAD
     deleteUser(id) {
       Swal.fire({
         title: "Are you sure?",
@@ -1663,6 +1681,8 @@ export default {
         }
       });
     },
+=======
+>>>>>>> a916899bcc18a51b601e5035b9b797b63d7e81c9
   },
 };
 </script>

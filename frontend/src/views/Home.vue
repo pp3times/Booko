@@ -8,6 +8,7 @@ import Header from "@/components/Header/Header.vue";
     <Hero />
     <Bookcase />
     <Footer />
+		
   </div>
 </template>
 

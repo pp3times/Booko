@@ -297,7 +297,7 @@ router.post("/admin", (req, res, next) => {
           }
 
           if (bResult) {
-						console.log(result[0]);
+            console.log(result[0]);
             const token = jwt.sign(
               {
                 mail: result[0].admin_email,

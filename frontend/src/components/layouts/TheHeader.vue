@@ -29,11 +29,12 @@
       <MenuButton
         class="flex items-center space-x-2 px-2 py-3 text-sm hover:bg-gray-200 focus:outline-none"
       >
-        <img
+        <!-- <img
           class="h-8 w-8 rounded-full"
           src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
           alt=""
-        />
+        /> -->
+        <BaseAvatar name="Jeremy" class="h-8 w-8 rounded-full" color="red" />
         <span>John Doe</span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -101,13 +102,23 @@
 
 <script>
 import { Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/vue";
+// import Avatar from "vue-avatar";
+import Avatar from "vue-boring-avatars";
+import BaseAvatar from "../BaseAvatar.vue";
 
 export default {
+  data() {
+    return {
+      colors: ["#92A1C6", "#146A7C", "#F0AB3D", "#C271B4", "#C20D90"],
+    };
+  },
   components: {
     Menu,
     MenuButton,
     MenuItems,
     MenuItem,
+    Avatar,
+    BaseAvatar,
   },
 };
 </script>
