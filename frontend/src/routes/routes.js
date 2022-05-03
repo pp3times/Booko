@@ -74,6 +74,11 @@ export const routes = [
 				path: "/books",
 				name: "book-list",
 				component: () => import("../views/dashboard/books/BookList.vue"),
+			},
+      {
+				path: "/books/:page",
+				name: "book-page",
+				component: () => import("../views/dashboard/books/BookList.vue"),
 			}
     ],
   },
@@ -83,4 +88,7 @@ export const routes = [
     component: () => import("../views/Login.vue"),
   },
   { path: "/:path(.*)", component: NotFound },
+  {
+    path: "/"
+  }
 ];
