@@ -110,7 +110,7 @@ router.post("/books", upload.single('myImage'), (req, res) => {
       console.log("No file upload");
   } else {
       console.log(req.file.filename)
-      var imgsrc = '/images/' + req.file.filename
+      var imgsrc = 'http://localhost:4000/images/' + req.file.filename
       var insertData = "INSERT INTO tb_book(book_name, book_description, book_page, book_price, book_stock, book_coversrc, book_author, book_publisher, category_id, book_isbn, book_createAt, book_editAt) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)"
       db.query(insertData, [req.body.bookname, req.body.description, req.body.page, req.body.price, req.body.stock, imgsrc, req.body.author, req.body.publisher, req.body.selected_category, req.body.isbn], (err, result) => {
           if (err) throw err
