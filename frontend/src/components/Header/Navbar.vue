@@ -53,7 +53,7 @@
           <router-link
             to="/sign"
             v-if="!this.$store.getters.isLoggedIn"
-            class="text-primary bg-white shadow-md hover:text-primary hover:shadow-gray-200/95 hover:shadow-md hover:bg-white transition duration-300 px-6 py-3 rounded"
+            class="text-primary bg-white shadow-md hover:text-primary hover:shadow-primary-dark/80 hover:shadow-md hover:bg-white transition duration-300 px-6 py-3 rounded"
             >เข้าสู่ระบบ</router-link
           >
           <div

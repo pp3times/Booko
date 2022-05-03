@@ -2,7 +2,7 @@
   <div>
     <Header />
     <div class="min-h-[85vh] container px-6 py-8 mx-auto">
-      <h1 class="text-4xl">ผลการค้นหาสำหรับ ''</h1>
+      <h1 class="text-4xl">ผลการค้นหาสำหรับ '{{ keyword }}'</h1>
     </div>
     <Footer />
   </div>
@@ -14,11 +14,11 @@ export default {
   components: { Footer },
   data() {
     return {
-			search: "",
-		};
+      keyword: "",
+    };
   },
   mounted() {
-    this.getSearchQuery(this.$route.params.query);
+    this.keyword = this.$route.params.keyword;
   },
   methods: {
     enableSave() {
@@ -33,6 +33,12 @@ export default {
         .catch((err) => {
           console.log(err);
         });
+    },
+  },
+  // get search value from parent
+  watch: {
+    search: function (val) {
+      this.$emit("search", val);
     },
   },
 };

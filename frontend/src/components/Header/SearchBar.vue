@@ -39,7 +39,7 @@
           v-model="search"
         />
 
-        <router-link to="/search">
+        <router-link :to="`/search/${this.search}`">
           <button
             type="button"
             class="m-2 rounded px-4 py-2 text-white"

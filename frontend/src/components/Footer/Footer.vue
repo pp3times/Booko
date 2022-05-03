@@ -59,7 +59,7 @@
         <p class="text-xs text-gray-500 flex">
           &copy; {{ date }} Booko Teams. All rights reserved.
           <router-link
-            to="/login"
+            to="/dashboard"
             class="text-center ml-2 underline hover:text-primary transition-all duration-200 ease-in-out"
             >เข้าสู่ระบบหลังบ้าน
           </router-link>

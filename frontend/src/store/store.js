@@ -5,7 +5,9 @@ import createPersistedState from 'vuex-persistedstate';
 const getDefaultState = () => {
   return {
     token: '',
-    user: {}
+    user: {},
+		admin: {},
+		admintoken: '',
   };
 };
 
@@ -23,13 +25,16 @@ export default new createStore({
     getAdmin: (state) => {
       return state.admin;
     },
-		isAdminLoggedIn: (state) => {
-			return state.admin.token;
-		}
+    isAdminLoggedIn: (state) => {
+      return state.admintoken;
+    },
   },
   mutations: {
     SET_TOKEN: (state, token) => {
       state.token = token;
+    },
+    SET_ADMINTOKEN: (state, token) => {
+      state.admintoken = token;
     },
     SET_USER: (state, user) => {
       state.user = user;
@@ -49,9 +54,9 @@ export default new createStore({
       // set auth header
       Axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     },
-    admin: ({ commit }, { token, admin }) => {
-      commit("SET_TOKEN", token);
-      commit("SET_ADMIN", admin);
+    admin: ({ commit }, { token, user }) => {
+      commit("SET_ADMINTOKEN", token);
+      commit("SET_ADMIN", user);
 
       // set auth header
       Axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
