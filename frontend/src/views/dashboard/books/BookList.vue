@@ -560,6 +560,7 @@ function openModal() {
                                 : 'text-gray-900',
                               'group flex rounded-md items-center w-full px-2 py-2 text-sm',
                             ]"
+                            @click="deleteUser(book.book_id)"
                           >
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -711,6 +712,7 @@ import books from "@/data/book/book.json";
 import { Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/vue";
 import { ref } from "vue";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 export default {
   components: {
@@ -786,6 +788,25 @@ export default {
       } catch (err) {
         console.log(err);
       }
+    },
+    deleteUser(id) {
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then((result) => {
+        if (result.value) {
+          Swal.fire("Deleted!", "Your file has been deleted.", "success");
+          axios.delete(`http://localhost:4000/api/books/${id}`);
+          const newBook = this.all_book.filter(function(item) {
+        return item.book_id !== id})
+        this.all_book = newBook;
+        }
+      });
     },
   },
 };
