@@ -65,6 +65,11 @@ export const routes = [
         name: "user-list",
         component: () => import("../views/dashboard/users/UserList.vue"),
       },
+			{
+				path: "/admins",
+				name: "admin-list",
+				component: () => import("../views/dashboard/users/AdminList.vue"),
+			},
       {
         path: "/card",
         name: "card",
@@ -74,6 +79,11 @@ export const routes = [
 				path: "/books",
 				name: "book-list",
 				component: () => import("../views/dashboard/books/BookList.vue"),
+			},
+			{
+				path: "/category",
+				name: "category",
+				component: () => import("../views/dashboard/books/CategoryList.vue"),
 			}
     ],
   },

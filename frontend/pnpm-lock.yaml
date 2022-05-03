@@ -21,6 +21,7 @@ specifiers:
   unplugin-vue-components: ^0.19.3
   vite: ^2.9.6
   vue: ^3.2.33
+  vue-boring-avatars: ^1.1.0
   vue-router: ^4.0.14
   vue3-apexcharts: ^1.4.1
   vuex: ^4.0.2
@@ -34,6 +35,7 @@ dependencies:
   prettier: 2.6.2
   sweetalert2: 11.4.10
   vue: 3.2.33
+  vue-boring-avatars: 1.1.0_vue@3.2.33
   vue-router: 4.0.14_vue@3.2.33
   vue3-apexcharts: 1.4.1_apexcharts@3.35.0+vue@3.2.33
   vuex: 4.0.2_vue@3.2.33
@@ -1220,6 +1222,14 @@ packages:
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
+
+  /vue-boring-avatars/1.1.0_vue@3.2.33:
+    resolution: {integrity: sha512-eiq79Dh1E6mhRiSLPPcL2oTyJFHfQow+5p7oUJr9i/DpqyCjEX0ayEvZhie1EDKyDcVfVbmqXXBeXBQOr2UAdw==}
+    peerDependencies:
+      vue: ^3.0.0
+    dependencies:
+      vue: 3.2.33
+    dev: false
 
   /vue-router/4.0.14_vue@3.2.33:
     resolution: {integrity: sha512-wAO6zF9zxA3u+7AkMPqw9LjoUCjSxfFvINQj3E/DceTt6uEz1XZLraDhdg2EYmvVwTBSGlLYsUw8bDmx0754Mw==}
