@@ -76,7 +76,11 @@ function openModal() {
                     Your payment has been successfully submitted. We’ve sent you
                     an email with all of the details of your order.
                   </p> -->
-                  <form action="http://localhost:4000/api/books" method="post" enctype="multipart/form-data">
+                  <form
+                    action="http://localhost:4000/api/books"
+                    method="post"
+                    enctype="multipart/form-data"
+                  >
                     <div>
                       <label for="bookname" class="text-md font-medium"
                         >ชื่อหนังสือ</label
@@ -216,10 +220,20 @@ function openModal() {
 
                         <div class="relative mt-1">
                           <select
-                            v-model="selected_category" name="selected_category" class="form-select w-full px-4 py-3 text-sm border-gray-200 focus-visible:border-primary-light focus:border-primary-light focus:ring-primary focus:shadow-primary border rounded-lg shadow-sm"
+                            v-model="selected_category"
+                            name="selected_category"
+                            class="form-select w-full px-4 py-3 text-sm border-gray-200 focus-visible:border-primary-light focus:border-primary-light focus:ring-primary focus:shadow-primary border rounded-lg shadow-sm"
                           >
-                            <option disabled v-bind:value="0">เลือกหมวดหมู่</option>
-                            <option v-for="category in categories" :key="category.category_id" v-bind:value="category.category_id">{{category.category_name}}</option>
+                            <option disabled v-bind:value="0">
+                              เลือกหมวดหมู่
+                            </option>
+                            <option
+                              v-for="category in categories"
+                              :key="category.category_id"
+                              v-bind:value="category.category_id"
+                            >
+                              {{ category.category_name }}
+                            </option>
                           </select>
                         </div>
                       </div>
@@ -251,11 +265,11 @@ function openModal() {
                         >
                           <div>
                             <input
-                             id="myImage"
+                              id="myImage"
                               type="file"
                               class="h-full w-full opacity-1"
                               name="myImage"
-                              accept='image/*'
+                              accept="image/*"
                             />
                           </div>
                         </div>
@@ -314,8 +328,12 @@ function openModal() {
                       >
                         Create
                       </button> -->
-                      <input type="submit" class="focus:outline-none inline-flex justify-center rounded-md border border-transparent bg-green-100 px-4 py-2 text-sm font-medium text-primary hover:bg-primary-light focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
-                        @click="closeModal" value="Upload">
+                      <input
+                        type="submit"
+                        class="focus:outline-none inline-flex justify-center rounded-md border border-transparent bg-green-100 px-4 py-2 text-sm font-medium text-primary hover:bg-primary-light focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                        @click="closeModal"
+                        value="Upload"
+                      />
                       <button
                         type="button"
                         class="focus:outline-none inline-flex justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 text-sm font-medium text-red-900 hover:bg-red-200 focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
@@ -457,7 +475,7 @@ function openModal() {
                   </div>
                 </div>
               </td>
-              <td>{{book.book_price}}</td>
+              <td>{{ book.book_price }}</td>
               <td>
                 <span
                   v-if="book.book_stock >= 10"
@@ -609,17 +627,17 @@ function openModal() {
                           />
                         </svg>
                         <form action="" method="get"></form>
-                        <vue-router/>
+                        <vue-router />
                       </a>
                       <!-- Current: "z-10 bg-indigo-50 border-indigo-500 text-indigo-600", Default: "bg-white border-gray-300 text-gray-500 hover:bg-gray-50" -->
-                        <a
+                      <a
                         href="?page=1"
                         aria-current="page"
                         class="z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-1 border text-sm font-medium"
                       >
                         1
                       </a>
-                      <router-view/>
+                      <router-view />
                       <a
                         href="?page=2"
                         class="border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-1 border text-sm font-medium"
@@ -702,16 +720,16 @@ export default {
     MenuItem,
   },
   data() {
-    return{
-      bookname : "",
-      description : "",
-      categories : [],
+    return {
+      bookname: "",
+      description: "",
+      categories: [],
       page: null,
       price: null,
-      stock: null, 
-      author: null, 
-      publisher: null, 
-      selected_category: 0, 
+      stock: null,
+      author: null,
+      publisher: null,
+      selected_category: 0,
       isbn: null,
       all_book: [],
       selected_category: 0,
@@ -750,18 +768,25 @@ export default {
       try {
         const response = await axios.get("http://localhost:4000/api/books");
         this.all_book = response.data;
+        // foreach change book_createAt format to date format and change book_updateAt format to date format
+        this.all_book.forEach(function (book) {
+          book.book_createAt = new Date(book.book_createAt).toDateString();
+          book.book_updateAt = new Date(book.book_updateAt).toDateString();
+        });
       } catch (err) {
         console.log(err);
       }
     },
-  async getCategories() {
+    async getCategories() {
       try {
-        const response = await axios.get("http://localhost:4000/api/categories");
+        const response = await axios.get(
+          "http://localhost:4000/api/categories"
+        );
         this.categories = response.data;
       } catch (err) {
         console.log(err);
       }
-    }
+    },
   },
 };
 </script>

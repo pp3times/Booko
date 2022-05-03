@@ -62,7 +62,7 @@ export default {
         console.error("There was an error!", error);
       });
     axios
-      .get("http://localhost:4000/api/products")
+      .get("http://localhost:4000/api/books")
       .then((response) => (this.book = response.data))
       .catch((error) => {
         this.errorMessage = error.message;
@@ -92,7 +92,6 @@ export default {
   box-sizing: border-box;
   z-index: 50;
 }
-
 .cover {
   width: 80%;
   margin: auto;
@@ -109,7 +108,6 @@ export default {
   position: relative;
   z-index: 100;
 }
-
 .side-1 {
   background: linear-gradient(to right, #eee, #ddd);
   right: -20px;
