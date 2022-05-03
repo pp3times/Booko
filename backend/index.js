@@ -5,9 +5,9 @@ const app = express();
 
 app.use(express.json());
 
+app.use(express.static("public"));
+
 app.use(cors());
-
-
 
 app.get("/", (req, res) => {
   res.send("API ใช้งานได้!");

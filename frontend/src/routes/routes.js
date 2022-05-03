@@ -36,11 +36,11 @@ export const routes = [
     name: "search",
     component: () => import("../views/Search.vue"),
   },
-	{
-		path: "/test",
-		name: "test",
-		component: () => import("../views/asd/Login.vue"),
-	},
+  {
+    path: "/test",
+    name: "test",
+    component: () => import("../views/asd/Login.vue"),
+  },
   // {
   //   path: "/admin",
   //   name: "admin",
@@ -65,31 +65,31 @@ export const routes = [
         name: "user-list",
         component: () => import("../views/dashboard/users/UserList.vue"),
       },
-			{
-				path: "/admins",
-				name: "admin-list",
-				component: () => import("../views/dashboard/users/AdminList.vue"),
-			},
+      {
+        path: "/admins",
+        name: "admin-list",
+        component: () => import("../views/dashboard/users/AdminList.vue"),
+      },
       {
         path: "/card",
         name: "card",
         component: () => import("../views/Card.vue"),
       },
-			{
-				path: "/books",
-				name: "book-list",
-				component: () => import("../views/dashboard/books/BookList.vue"),
-			},
-			{
-				path: "/category",
-				name: "category",
-				component: () => import("../views/dashboard/books/CategoryList.vue"),
-			},
       {
-				path: "/books/:page",
-				name: "book-page",
-				component: () => import("../views/dashboard/books/BookList.vue"),
-			}
+        path: "/books",
+        name: "book-list",
+        component: () => import("../views/dashboard/books/BookList.vue"),
+      },
+      {
+        path: "/category",
+        name: "category",
+        component: () => import("../views/dashboard/books/CategoryList.vue"),
+      },
+      {
+        path: "/books/:page",
+        name: "book-page",
+        component: () => import("../views/dashboard/books/BookList.vue"),
+      },
     ],
   },
   {
@@ -99,6 +99,6 @@ export const routes = [
   },
   { path: "/:path(.*)", component: NotFound },
   {
-    path: "/"
-  }
+    path: "/",
+  },
 ];
