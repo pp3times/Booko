@@ -76,7 +76,7 @@ function openModal() {
                     Your payment has been successfully submitted. We’ve sent you
                     an email with all of the details of your order.
                   </p> -->
-                  <form action="" class="space-y-5">
+                  <form action="http://localhost:4000/api/books" method="post" enctype="multipart/form-data">
                     <div>
                       <label for="bookname" class="text-md font-medium"
                         >ชื่อหนังสือ</label
@@ -88,6 +88,7 @@ function openModal() {
                           id="bookname"
                           class="form-input w-full px-4 py-3 text-sm border-gray-200 focus-visible:border-primary-light focus:border-primary-light focus:ring-primary focus:shadow-primary border rounded-lg shadow-sm"
                           placeholder="กรุณากรอกชื่อหนังสือ"
+                          name="bookname"
                           v-model="bookname"
                         />
                       </div>
@@ -104,6 +105,7 @@ function openModal() {
                           id="description"
                           class="form-input w-full px-4 py-3 text-sm border-gray-200 focus-visible:border-primary-light focus:border-primary-light focus:ring-primary focus:shadow-primary border rounded-lg shadow-sm"
                           placeholder="กรุณากรอกนามสกุล"
+                          name="description"
                           v-model="description"
                         />
                       </div>
@@ -122,6 +124,7 @@ function openModal() {
                             class="form-input w-full px-4 pr-16 py-3 text-sm border-gray-200 focus-visible:border-primary-light focus:border-primary-light focus:ring-primary focus:shadow-primary border rounded-lg shadow-sm"
                             placeholder="XXX"
                             v-model="page"
+                            name="page"
                           />
                           <span
                             class="absolute inset-y-0 inline-flex items-center right-4"
@@ -142,6 +145,7 @@ function openModal() {
                             class="form-input w-full pr-16 px-4 py-3 text-sm border-gray-200 focus-visible:border-primary-light focus:border-primary-light focus:ring-primary focus:shadow-primary border rounded-lg shadow-sm"
                             placeholder="XXX"
                             v-model="price"
+                            name="price"
                           />
                           <span
                             class="absolute inset-y-0 inline-flex items-center right-4"
@@ -162,6 +166,7 @@ function openModal() {
                             class="form-input w-full px-4 pr-16 py-3 text-sm border-gray-200 focus-visible:border-primary-light focus:border-primary-light focus:ring-primary focus:shadow-primary border rounded-lg shadow-sm"
                             placeholder="XX"
                             v-model="stock"
+                            name="stock"
                           />
                           <span
                             class="absolute inset-y-0 inline-flex items-center right-4"
@@ -183,6 +188,7 @@ function openModal() {
                           class="form-input w-full px-4 py-3 text-sm border-gray-200 focus-visible:border-primary-light focus:border-primary-light focus:ring-primary focus:shadow-primary border rounded-lg shadow-sm"
                           placeholder="กรุณากรอกชื่อผู้แต่ง"
                           v-model="author"
+                          name="author"
                         />
                       </div>
                     </div>
@@ -198,6 +204,7 @@ function openModal() {
                           class="form-input w-full px-4 py-3 text-sm border-gray-200 focus-visible:border-primary-light focus:border-primary-light focus:ring-primary focus:shadow-primary border rounded-lg shadow-sm"
                           placeholder="กรุณากรอกชื่อสำนักพิมพ์"
                           v-model="publisher"
+                          name="publisher"
                         />
                       </div>
                     </div>
@@ -209,11 +216,10 @@ function openModal() {
 
                         <div class="relative mt-1">
                           <select
-                            class="form-select w-full px-4 py-3 text-sm border-gray-200 focus-visible:border-primary-light focus:border-primary-light focus:ring-primary focus:shadow-primary border rounded-lg shadow-sm"
+                            v-model="selected_category" name="selected_category" class="form-select w-full px-4 py-3 text-sm border-gray-200 focus-visible:border-primary-light focus:border-primary-light focus:ring-primary focus:shadow-primary border rounded-lg shadow-sm"
                           >
-                            <option>เลือกหมวดหมู่</option>
-                            <option>หมวดหมู่ 1</option>
-                            <option>หมวดหมู่ 2</option>
+                            <option disabled v-bind:value="0">เลือกหมวดหมู่</option>
+                            <option v-for="category in categories" :key="category.category_id" v-bind:value="category.category_id">{{category.category_name}}</option>
                           </select>
                         </div>
                       </div>
@@ -229,6 +235,7 @@ function openModal() {
                             class="form-input w-full px-4 py-3 text-sm border-gray-200 focus-visible:border-primary-light focus:border-primary-light focus:ring-primary focus:shadow-primary border rounded-lg shadow-sm"
                             placeholder="XXXXXXXXXXXXX"
                             v-model="isbn"
+                            name="isbn"
                           />
                         </div>
                       </div>
@@ -244,9 +251,11 @@ function openModal() {
                         >
                           <div>
                             <input
+                             id="myImage"
                               type="file"
                               class="h-full w-full opacity-1"
-                              name=""
+                              name="myImage"
+                              accept='image/*'
                             />
                           </div>
                         </div>
@@ -298,13 +307,15 @@ function openModal() {
                       สมัครสมาชิก
                     </button> -->
                     <div class="mt-4 space-x-2 flex justify-end">
-                      <button
+                      <!-- <button
                         type="button"
                         class="focus:outline-none inline-flex justify-center rounded-md border border-transparent bg-green-100 px-4 py-2 text-sm font-medium text-primary hover:bg-primary-light focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
                         @click="closeModal"
                       >
                         Create
-                      </button>
+                      </button> -->
+                      <input type="submit" class="focus:outline-none inline-flex justify-center rounded-md border border-transparent bg-green-100 px-4 py-2 text-sm font-medium text-primary hover:bg-primary-light focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                        @click="closeModal" value="Upload">
                       <button
                         type="button"
                         class="focus:outline-none inline-flex justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 text-sm font-medium text-red-900 hover:bg-red-200 focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
@@ -421,7 +432,7 @@ function openModal() {
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-200">
-            <tr v-for="(book, index) in books" :key="index">
+            <tr v-for="book in all_book" :key="book.book_id">
               <td class="p-2">
                 <input
                   type="checkbox"
@@ -432,35 +443,35 @@ function openModal() {
               <td class="flex items-center py-4">
                 <img
                   class="inline-block h-28 ring-2 ring-white"
-                  :src="book.img"
+                  :src="book.book_coversrc"
                   alt=""
                 />
                 <div class="px-4 w-60">
                   <div>
                     <a href="#" class="text-gray-600 font-bolder">
-                      {{ book.name }}
+                      {{ book.book_name }}
                     </a>
                   </div>
                   <div class="font-bold text-sm">
-                    แต่งโดย : {{ book.writer }}
+                    แต่งโดย : {{ book.book_author }}
                   </div>
                 </div>
               </td>
-              <td>350</td>
+              <td>{{book.book_price}}</td>
               <td>
                 <span
-                  v-if="book.stock >= 10"
+                  v-if="book.book_stock >= 10"
                   class="px-2 py-1 rounded text-xs text-white bg-green-500"
-                  >{{ book.stock }} เล่ม</span
+                  >{{ book.book_stock }} เล่ม</span
                 >
                 <span
                   v-else
                   class="px-2 py-1 rounded text-xs text-white bg-red-500"
-                  >{{ book.stock }} เล่ม</span
+                  >{{ book.book_stock }} เล่ม</span
                 >
               </td>
               <td>ซื้อล่าสุด</td>
-              <td>วันที่เพิ่ม</td>
+              <td>{{ book.book_createAt }}</td>
               <td class="text-right">
                 <Menu as="div" class="relative inline-block text-left">
                   <div>
@@ -597,23 +608,26 @@ function openModal() {
                             d="M15 19l-7-7 7-7"
                           />
                         </svg>
+                        <form action="" method="get"></form>
+                        <vue-router/>
                       </a>
                       <!-- Current: "z-10 bg-indigo-50 border-indigo-500 text-indigo-600", Default: "bg-white border-gray-300 text-gray-500 hover:bg-gray-50" -->
-                      <a
-                        href="#"
+                        <a
+                        href="?page=1"
                         aria-current="page"
                         class="z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-1 border text-sm font-medium"
                       >
                         1
                       </a>
+                      <router-view/>
                       <a
-                        href="#"
+                        href="?page=2"
                         class="border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-1 border text-sm font-medium"
                       >
                         2
                       </a>
                       <a
-                        href="#"
+                        href="?page=2"
                         class="border-gray-300 text-gray-500 hover:bg-gray-50 hidden md:inline-flex relative items-center px-4 py-1 border text-sm font-medium"
                       >
                         3
@@ -678,6 +692,7 @@ import userList from "@/data/users/userList.json";
 import books from "@/data/book/book.json";
 import { Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/vue";
 import { ref } from "vue";
+import axios from "axios";
 
 export default {
   components: {
@@ -686,7 +701,24 @@ export default {
     MenuItems,
     MenuItem,
   },
-
+  data() {
+    return{
+      bookname : "",
+      description : "",
+      categories : [],
+      page: null,
+      price: null,
+      stock: null, 
+      author: null, 
+      publisher: null, 
+      selected_category: 0, 
+      isbn: null,
+      all_book: [],
+      selected_category: 0,
+      imagefile: null,
+      errors: [],
+    };
+  },
   setup() {
     const selectAll = ref(false);
 
@@ -695,6 +727,41 @@ export default {
       userList,
       selectAll,
     };
+  },
+  created() {
+    this.getBooks();
+    this.getCategories();
+  },
+  methods: {
+    async saveBook() {
+      try {
+        await axios.post("http://localhost:4000/api/books", {
+          product_name: this.productName,
+          product_price: this.productPrice,
+        });
+        this.productName = "";
+        this.productPrice = "";
+        this.$router.push("/");
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async getBooks() {
+      try {
+        const response = await axios.get("http://localhost:4000/api/books");
+        this.all_book = response.data;
+      } catch (err) {
+        console.log(err);
+      }
+    },
+  async getCategories() {
+      try {
+        const response = await axios.get("http://localhost:4000/api/categories");
+        this.categories = response.data;
+      } catch (err) {
+        console.log(err);
+      }
+    }
   },
 };
 </script>

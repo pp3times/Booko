@@ -7,19 +7,42 @@ import { v4 as uuid } from "uuid";
 import jwt from "jsonwebtoken";
 // import function from controller
 import {
-  showProducts,
+  showBook,
   showProductById,
   createProduct,
   updateProduct,
   deleteProduct,
   showCategories,
+  createBank,
+  createCategory,
+  showCategoryById,
+  updateCategory,
+  deleteCategory,
+  showBookByCategory,
+  showBookById,
+  updateBook,
+  deleteBook,
 } from "../controllers/Book.js";
 
+import multer from 'multer';
+import path from "path";
+import axios from "axios";
+var storage = multer.diskStorage({
+  destination: function (req, file, callback){
+    callback(null, './public/images')
+  },
+  filename: function (req, file, callback) {
+    callback(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
+  }
+})
+
+
+const upload = multer({storage : storage})
 // init express router
 const router = express.Router();
 
 // Get All Product
-router.get("/products", showProducts);
+router.get("/books", showBook);
 
 // Get All Categories
 router.get("/categories", showCategories);
@@ -35,6 +58,78 @@ router.put("/products/:id", updateProduct);
 
 // Delete Product
 router.delete("/products/:id", deleteProduct);
+
+router.post('/categories', createCategory);
+
+// Get All Category
+router.get('/categories', showCategories);
+ 
+// Get Single Category
+router.get('/categories/:id', showCategoryById);
+
+// Update Category
+router.put('/categories/:id', updateCategory);
+ 
+// Delete Category
+router.delete('/categories/:id', deleteCategory);
+
+// Get Book by Category
+router.get('/categories/:id', showBookByCategory);
+
+// create Book
+// router.post('/books/create', upload.single('myImage'), async function(req, res, next){
+//   console.log(req.body)
+//   const bookname = req.body.bookname
+//   const description = req.body.description
+//   const page = req.body.page
+//   const price = req.body.price
+//   const stock = req.body.stock
+//   const author = req.body.author
+//   const publisher = req.body.publisher
+//   const selected_category = req.body.selected_category
+//   const isbn = req.body.isbn
+//   const file = req.file
+//   // const file_path = req.file.path
+
+//   // const [rows, columns] = await db.query('INSERT INTO tb_book(book_name, book_description, book_page, book_price, book_stock, book_coversrc, book_author, book_publisher, category_id, book_isbn, book_createAt, book_editAt) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP', [bookname, description, page, price, stock, file.path, author, publisher, selected_category, isbn])
+//   await axios.post("http://localhost:4000/api/books/create", {
+//           book_name : bookname,
+//           book_description: description,
+//           book_page : page,
+//           book_price : price,
+//           book_stock : stock,
+//           book_author : author, 
+//           book_publisher : publisher, 
+//           category_id : selected_category ,
+//           book_isbn : isbn
+//         });
+// });
+
+router.post("/books", upload.single('myImage'), (req, res) => {
+  if (!req.file) {
+      console.log("No file upload");
+  } else {
+      console.log(req.file.filename)
+      var imgsrc = '/images/' + req.file.filename
+      var insertData = "INSERT INTO tb_book(book_name, book_description, book_page, book_price, book_stock, book_coversrc, book_author, book_publisher, category_id, book_isbn, book_createAt, book_editAt) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)"
+      db.query(insertData, [req.body.bookname, req.body.description, req.body.page, req.body.price, req.body.stock, imgsrc, req.body.author, req.body.publisher, req.body.selected_category, req.body.isbn], (err, result) => {
+          if (err) throw err
+          console.log("file uploaded")
+      })
+  }
+});
+
+// Get All Book
+router.get('/books', showBook);
+
+// Get Single Book
+router.get('/books/:id', showBookById);
+
+// Update Book
+router.put('/books/:id', updateBook);
+ 
+// Delete Category
+router.delete('/books/:id', deleteBook);
 
 router.post("/sign-up", userMiddleware.validateRegister, (req, res, next) => {
   db.query(
