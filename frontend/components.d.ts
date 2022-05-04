@@ -5,11 +5,13 @@ import '@vue/runtime-core'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    BaseAvatar: typeof import('./src/components/BaseAvatar.vue')['default']
     Book: typeof import('./src/components/Bookcase/Book.vue')['default']
     Bookbox: typeof import('./src/components/Bookcase/Bookbox.vue')['default']
     Bookcase: typeof import('./src/components/Bookcase/Bookcase.vue')['default']
     CardHorizontal: typeof import('./src/components/UI/Card/CardHorizontal.vue')['default']
     CardStacked: typeof import('./src/components/UI/Card/CardStacked.vue')['default']
+    Cart: typeof import('./src/components/Cart.vue')['default']
     Category: typeof import('./src/components/Header/Category.vue')['default']
     Footer: typeof import('./src/components/Footer/Footer.vue')['default']
     Header: typeof import('./src/components/Header/Header.vue')['default']
