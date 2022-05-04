@@ -49,7 +49,7 @@ export default {
     };
   },
   mounted() {
-    this.keyword = this.$route.params.keyword;
+    this.getSearchQuery(this.$route.params.query);
   },
   updated() {
      this.keyword = this.$route.params.keyword;

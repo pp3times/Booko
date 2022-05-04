@@ -5,6 +5,7 @@ import Header from "@/components/Header/Header.vue";
 <template>
   <div class="font-ibm">
     <Header />
+		<!-- <Cart /> -->
     <Hero />
     <Bookcase />
     <Footer />

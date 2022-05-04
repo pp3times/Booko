@@ -24,20 +24,22 @@ import {
   deleteBook,
 } from "../controllers/Book.js";
 
-import multer from 'multer';
+import multer from "multer";
 import path from "path";
 import axios from "axios";
 var storage = multer.diskStorage({
-  destination: function (req, file, callback){
-    callback(null, './public/images')
+  destination: function (req, file, callback) {
+    callback(null, "./public/images");
   },
   filename: function (req, file, callback) {
-    callback(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
-  }
-})
+    callback(
+      null,
+      file.fieldname + "-" + Date.now() + path.extname(file.originalname)
+    );
+  },
+});
 
-
-const upload = multer({storage : storage})
+const upload = multer({ storage: storage });
 // init express router
 const router = express.Router();
 
@@ -59,22 +61,22 @@ router.put("/products/:id", updateProduct);
 // Delete Product
 router.delete("/products/:id", deleteProduct);
 
-router.post('/categories', createCategory);
+router.post("/categories", createCategory);
 
 // Get All Category
-router.get('/categories', showCategories);
- 
+router.get("/categories", showCategories);
+
 // Get Single Category
-router.get('/categories/:id', showCategoryById);
+router.get("/categories/:id", showCategoryById);
 
 // Update Category
-router.put('/categories/:id', updateCategory);
- 
+router.put("/categories/:id", updateCategory);
+
 // Delete Category
-router.delete('/categories/:id', deleteCategory);
+router.delete("/categories/:id", deleteCategory);
 
 // Get Book by Category
-router.get('/categories/:id', showBookByCategory);
+router.get("/categories/:id", showBookByCategory);
 
 // create Book
 // router.post('/books/create', upload.single('myImage'), async function(req, res, next){
@@ -98,38 +100,54 @@ router.get('/categories/:id', showBookByCategory);
 //           book_page : page,
 //           book_price : price,
 //           book_stock : stock,
-//           book_author : author, 
-//           book_publisher : publisher, 
+//           book_author : author,
+//           book_publisher : publisher,
 //           category_id : selected_category ,
 //           book_isbn : isbn
 //         });
 // });
 
-router.post("/books", upload.single('myImage'), (req, res) => {
+router.post("/books", upload.single("myImage"), (req, res) => {
   if (!req.file) {
-      console.log("No file upload");
+    console.log("No file upload");
   } else {
-      console.log(req.file.filename)
-      var imgsrc = '/images/' + req.file.filename
-      var insertData = "INSERT INTO tb_book(book_name, book_description, book_page, book_price, book_stock, book_coversrc, book_author, book_publisher, category_id, book_isbn, book_createAt, book_editAt) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)"
-      db.query(insertData, [req.body.bookname, req.body.description, req.body.page, req.body.price, req.body.stock, imgsrc, req.body.author, req.body.publisher, req.body.selected_category, req.body.isbn], (err, result) => {
-          if (err) throw err
-          console.log("file uploaded")
-      })
+    console.log(req.file.filename);
+    var imgsrc = "http://localhost:4000/images/" + req.file.filename;
+    var insertData =
+      "INSERT INTO tb_book(book_name, book_description, book_page, book_price, book_stock, book_coversrc, book_author, book_publisher, category_id, book_isbn, book_createAt, book_editAt) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";
+    db.query(
+      insertData,
+      [
+        req.body.bookname,
+        req.body.description,
+        req.body.page,
+        req.body.price,
+        req.body.stock,
+        imgsrc,
+        req.body.author,
+        req.body.publisher,
+        req.body.selected_category,
+        req.body.isbn,
+      ],
+      (err, result) => {
+        if (err) throw err;
+        console.log("file uploaded");
+      }
+    );
   }
 });
 
 // Get All Book
-router.get('/books', showBook);
+router.get("/books", showBook);
 
 // Get Single Book
-router.get('/books/:id', showBookById);
+router.get("/books/:id", showBookById);
 
 // Update Book
-router.put('/books/:id', updateBook);
- 
+router.put("/books/:id", updateBook);
+
 // Delete Category
-router.delete('/books/:id', deleteBook);
+router.delete("/books/:id", deleteBook);
 
 router.post("/sign-up", userMiddleware.validateRegister, (req, res, next) => {
   db.query(
@@ -326,5 +344,219 @@ router.post("/admin", (req, res, next) => {
     }
   );
 });
+
+router.get("/bank", (req, res, next) => {
+  db.query(`SELECT * FROM tb_bank`, (err, result) => {
+    if (err) {
+      throw err;
+      return res.status(400).send({
+        msg: err,
+      });
+    }
+    return res.status(200).send({
+      msg: "Get Bank Success!",
+      result,
+    });
+  });
+});
+
+router.get("/address", (req, res, next) => {
+  db.query(`SELECT * FROM tb_address`, (err, result) => {
+    if (err) {
+      throw err;
+      return res.status(400).send({
+        msg: err,
+      });
+    }
+    return res.status(200).send({
+      msg: "Get Address Success!",
+      result,
+    });
+  });
+});
+
+router.post("/address/add", (req, res, next) => {
+  db.query(
+    `INSERT INTO tb_address (address_title, address_number, address_road, address_district, address_subdistrict, address_zipcode, address_phone, customer_id, address_province, address_createAt, address_editAt) VALUES (${db.escape(
+      req.body.address_title
+    )},${db.escape(req.body.address_number)},  ${db.escape(
+      req.body.address_road
+    )}, ${db.escape(req.body.address_district)}, ${db.escape(
+      req.body.address_subdistrict
+    )}, ${db.escape(req.body.address_zipcode)}, ${db.escape(
+      req.body.address_phone
+    )}, ${db.escape(req.body.customer_id)}, ${db.escape(
+      req.body.address_province
+    )}, now(), now());`,
+    (err, result) => {
+      if (err) {
+        throw err;
+        return res.status(400).send({
+          msg: err,
+        });
+      }
+      return res.status(200).send({
+        msg: "Add Address Success!",
+        result,
+      });
+    }
+  );
+});
+
+router.post("/checkout", (req, res, next) => {
+  db.query(
+    `INSERT INTO tb_order (order_customer_id, order_price, order_quantity, order_address_id, order_status, order_createAt) VALUES (${db.escape(
+      req.body.order_customer_id
+    )}, ${db.escape(req.body.order_price)}, ${db.escape(
+      req.body.order_quantity
+    )}, ${db.escape(req.body.order_address_id)}, 'pendingpayment', now());`,
+    (err, result) => {
+      if (err) {
+        throw err;
+        return res.status(400).send({
+          msg: err,
+        });
+      }
+      db.query(
+        `INSERT INTO tb_order_items (order_items_order_id, order_items_book_id, order_items_quantity_per_book, order_items_totalprice_per_book) VALUES (${db.escape(
+          result.insertId
+        )}, ${db.escape(req.body.order_items_book_id)}, ${db.escape(
+          req.body.order_items_quantity_per_book
+        )}, ${db.escape(req.body.order_items_totalprice_per_book)});`,
+        (err, result) => {
+          if (err) {
+            throw err;
+            return res.status(400).send({
+              msg: err,
+            });
+          }
+          db.query(
+            `INSERT INTO tb_invoice (invoice_order_id, invoice_customer_id, invoice_status, invoice_firstname, invoice_lastname, invoice_phone, invoice_address, invoice_bank_id) VALUES (
+			${db.escape(req.body.invoice_order_id)},
+			${db.escape(req.body.invoice_customer_id)},
+			'reserved',
+			${db.escape(req.body.invoice_firstname)},
+			${db.escape(req.body.invoice_lastname)},
+			${db.escape(req.body.invoice_phone)},
+			${db.escape(req.body.invoice_address)},
+			${db.escape(req.body.invoice_bank_id)}
+		);`,
+            (err, result) => {
+              if (err) {
+                throw err;
+                return res.status(400).send({
+                  msg: err,
+                });
+              }
+              return res.status(200).send({
+                msg: "Add Invoice Success!",
+                result,
+              });
+            }
+          );
+        }
+      );
+    }
+  );
+});
+
+// create order
+router.post("/order/add", (req, res, next) => {
+  db.query(
+    `INSERT INTO tb_order (order_customer_id, order_price, order_quantity, order_address_id, order_status, order_createAt) VALUES (${db.escape(
+      req.body.order_customer_id
+    )}, ${db.escape(req.body.order_price)}, ${db.escape(
+      req.body.order_quantity
+    )}, ${db.escape(req.body.order_address_id)}, 'pendingpayment', now());`,
+    (err, result) => {
+      if (err) {
+        throw err;
+        return res.status(400).send({
+          msg: err,
+        });
+      }
+      return res.status(200).send({
+        msg: "Add Order Success!",
+        result,
+      });
+    }
+  );
+});
+
+router.post("/book/update", (req, res, next) => {
+  // update quantity
+  db.query(
+    `UPDATE tb_book SET book_stock = ${db.escape(
+      req.body.book_stock
+    )}, book_editAt= now() WHERE book_id= ${db.escape(req.body.book_id)};`,
+    (err, result) => {
+      if (err) {
+        throw err;
+        return res.status(400).send({
+          msg: err,
+        });
+      }
+      console.log(result);
+      return res.status(200).send({
+        msg: "Update Book Success!",
+        result,
+      });
+    }
+  );
+});
+
+// create order item
+router.post("/orderitem/add", (req, res, next) => {
+  db.query(
+    `INSERT INTO tb_order_items (order_items_order_id, order_items_book_id, order_items_quantity_per_book, order_items_totalprice_per_book) VALUES (${db.escape(
+      req.body.order_items_order_id
+    )}, ${db.escape(req.body.order_items_book_id)}, ${db.escape(
+      req.body.order_items_quantity_per_book
+    )}, ${db.escape(req.body.order_items_totalprice_per_book)});`,
+    (err, result) => {
+      if (err) {
+        throw err;
+        return res.status(400).send({
+          msg: err,
+        });
+      }
+      return res.status(200).send({
+        msg: "Add Order Item Success!",
+        result,
+      });
+    }
+  );
+});
+
+// create invoice
+router.post("/invoice/add", (req, res, next) => {
+  db.query(
+    `INSERT INTO tb_invoice (invoice_order_id, invoice_customer_id, invoice_status, invoice_firstname, invoice_lastname, invoice_phone, invoice_address, invoice_bank_id, invoice_createAt, invoice_lastedit) VALUES (
+			${db.escape(req.body.invoice_order_id)},
+			${db.escape(req.body.invoice_customer_id)},
+			'reserved',
+			${db.escape(req.body.invoice_firstname)},
+			${db.escape(req.body.invoice_lastname)},
+			${db.escape(req.body.invoice_phone)},
+			${db.escape(req.body.invoice_address)},
+			${db.escape(req.body.invoice_bank_id)},
+			now(),
+			now()
+		);`,
+    (err, result) => {
+      if (err) {
+        throw err;
+        return res.status(400).send({
+          msg: err,
+        });
+      }
+      return res.status(200).send({
+        msg: "Add Invoice Success!",
+        result,
+      });
+    }
+  );
+});
+
 // export default router
 export default router;
