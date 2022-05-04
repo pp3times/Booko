@@ -143,9 +143,6 @@ router.get("/books", showBook);
 // Get Single Book
 router.get("/books/:id", showBookById);
 
-// Update Book
-
-router.put("/books/:id", updateBook);
 
 // router.put('/books/:id', upload.single('myImage'), updateBook);
 router.put("/books/:id", upload.single('myImage'), async function (req, res, next) {
@@ -157,7 +154,6 @@ router.put("/books/:id", upload.single('myImage'), async function (req, res, nex
       console.log(req.file.filename)
       console.log('else');
       var imgsrc = 'http://localhost:4000/images/' + req.file.filename
-      var updateData = "UPDATE tb_book SET book_name = ? book_description = ? book_page = ? book_price = ? book_stock = ? book_coversrc = ? book_author = ? book_publisher = ? category_id = ? book_isbn = ? WHERE book_id = ?)"
       db.query("UPDATE tb_book SET book_name = ?, book_description = ?, book_page = ?, book_price = ?, book_stock = ?, book_coversrc = ?, book_author = ?, book_publisher = ?, category_id = ?, book_isbn = ? WHERE book_id = ?", [req.body.book_name, req.body.book_description, req.body.book_page, req.body.book_price, req.body.book_stock, imgsrc, req.body.book_author, req.body.book_publisher, req.body.category_id, req.body.book_isbn, req.params.id], (err, result) => {
           if (err) throw err
           console.log("file uploaded")
