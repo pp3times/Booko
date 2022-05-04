@@ -22,6 +22,11 @@ export const routes = [
     component: userAuth,
   },
   {
+    path: "/payment",
+    name: "payment",
+    component: () => import("../views/Payment.vue"),
+  },
+  {
     path: "/detail/:id",
     name: "detail",
     component: () => import("../views/Detail.vue"),
