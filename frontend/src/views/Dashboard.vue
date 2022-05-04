@@ -3,7 +3,6 @@
     <the-sidebar />
 
     <div class="flex flex-col flex-grow bg-gray-200">
-      <button @click="logout">Logout</button>
       <the-header />
 
       <div class="mb-auto">

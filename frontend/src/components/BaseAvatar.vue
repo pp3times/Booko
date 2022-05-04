@@ -42,6 +42,7 @@ export default {
         sm: `h-8 w-8`,
         md: `h-10 w-10 text-md`,
         lg: `text-lg h-16 w-16 text-xl`,
+				xl: `text-2xl h-28 w-28 text-3xl`,
       };
       return sizeMappings[this.size] || sizeMappings.md;
     },

@@ -34,8 +34,8 @@
           src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
           alt=""
         /> -->
-        <BaseAvatar name="Jeremy" class="h-8 w-8 rounded-full" color="red" />
-        <span>John Doe</span>
+        <BaseAvatar :name="admin.admin_firstname" class="h-8 w-8 rounded-full" color="green" />
+        <span>Welcome Back, {{ admin.admin_firstname}} {{ admin.admin_lastname}}</span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="h-4 w-4 text-gray-600"
@@ -85,13 +85,13 @@
             </MenuItem>
           </div>
           <MenuItem v-slot="{ active }">
-            <router-link
-              :to="{ name: 'login' }"
+            <div
               :class="[
                 active ? 'bg-gray-200' : '',
-                'block px-4 py-2 text-sm text-gray-700',
+                'block px-4 py-2 text-sm text-gray-700 cursor-pointer',
               ]"
-              >Sign out</router-link
+							@click="logout"
+              >Sign out</div
             >
           </MenuItem>
         </MenuItems>
@@ -109,9 +109,26 @@ import BaseAvatar from "../BaseAvatar.vue";
 export default {
   data() {
     return {
-      colors: ["#92A1C6", "#146A7C", "#F0AB3D", "#C271B4", "#C20D90"],
+      colors: [
+        "gray",
+        "yellow",
+        "orange",
+        "red",
+        "green",
+        "teal",
+        "blue",
+        "indigo",
+        "purple",
+        "pink"
+      ],
+			admin: {}
     };
   },
+	computed : {
+		randomColor() {
+			return this.colors[Math.floor(Math.random() * this.colors.length)];
+		}
+	},
   components: {
     Menu,
     MenuButton,
@@ -119,6 +136,18 @@ export default {
     MenuItem,
     Avatar,
     BaseAvatar,
+  },
+	created() {
+    if (!this.$store.getters.isAdminLoggedIn) {
+      this.$router.push("/login");
+    }
+    this.admin = this.$store.getters.getAdmin;
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch("logout");
+      this.$router.push("/login");
+    },
   },
 };
 </script>

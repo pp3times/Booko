@@ -21,7 +21,9 @@
 
             <div class="flex justify-between mt-8">
               <div class="max-w-[40vw] flex space-x-4 items-center">
-                <h1 class="text-5xl font-bold underline text-primary">{{ book.book_name }}</h1>
+                <h1 class="text-5xl font-bold underline text-primary">
+                  {{ book.book_name }}
+                </h1>
                 <div class="flex -ml-0.5">
                   <svg
                     class="w-5 h-5 text-yellow-400"
@@ -307,6 +309,29 @@ export default {
       return Boolean(cartItem);
     },
     addToCart(itemId, quantity) {
+      let timerInterval;
+      Swal.fire({
+        title: "หยิบสินค้าเข้าถุงเรียบร้อยแล้วค่า!",
+        html: "แจ้งเตือนนี้จะถูกปิดในเร็วๆนี้",
+        timer: 2500,
+				icon: 'success',
+        timerProgressBar: true,
+        didOpen: () => {
+          Swal.showLoading();
+          const b = Swal.getHtmlContainer().querySelector("b");
+          timerInterval = setInterval(() => {
+            b.textContent = Swal.getTimerLeft();
+          }, 100);
+        },
+        willClose: () => {
+          clearInterval(timerInterval);
+        },
+      }).then((result) => {
+        /* Read more about handling dismissals below */
+        if (result.dismiss === Swal.DismissReason.timer) {
+          console.log("I was closed by the timer");
+        }
+      });
       const item = this.items.find(({ book_id }) => book_id === itemId);
       if (!localStorage.getItem("cart")) {
         localStorage.setItem("cart", JSON.stringify([]));
