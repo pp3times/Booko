@@ -13,7 +13,7 @@
       "name": "pnpm",
       "message": "booko_frontend@0.0.0 dev: `vite --host`\nExit status 1",
       "code": "ELIFECYCLE",
-      "stack": "pnpm: booko_frontend@0.0.0 dev: `vite --host`\nExit status 1\n    at EventEmitter.<anonymous> (C:\\Users\\Jeremy\\AppData\\Roaming\\npm\\pnpm-global\\5\\node_modules\\.pnpm\\pnpm@6.32.10\\node_modules\\pnpm\\dist\\pnpm.cjs:105830:20)\n    at EventEmitter.emit (node:events:390:28)\n    at ChildProcess.<anonymous> (C:\\Users\\Jeremy\\AppData\\Roaming\\npm\\pnpm-global\\5\\node_modules\\.pnpm\\pnpm@6.32.10\\node_modules\\pnpm\\dist\\pnpm.cjs:92391:18)\n    at ChildProcess.emit (node:events:390:28)\n    at maybeClose (node:internal/child_process:1064:16)\n    at Process.ChildProcess._handle.onexit (node:internal/child_process:301:5)"
+      "stack": "pnpm: booko_frontend@0.0.0 dev: `vite --host`\nExit status 1\n    at EventEmitter.<anonymous> (C:\\Users\\HOME\\AppData\\Roaming\\npm\\node_modules\\pnpm\\dist\\pnpm.cjs:106418:20)\n    at EventEmitter.emit (node:events:390:28)\n    at ChildProcess.<anonymous> (C:\\Users\\HOME\\AppData\\Roaming\\npm\\node_modules\\pnpm\\dist\\pnpm.cjs:92987:18)\n    at ChildProcess.emit (node:events:390:28)\n    at maybeClose (node:internal/child_process:1064:16)\n    at Process.ChildProcess._handle.onexit (node:internal/child_process:301:5)"
     }
   },
   "2 warn pnpm:global": " Local package.json exists, but node_modules missing, did you mean to install?"
