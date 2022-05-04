@@ -41,7 +41,7 @@
 
         <router-link :to="`/search/${this.search}`">
           <button
-            type="button"
+            type="submit"
             class="m-2 rounded px-4 py-2 text-white"
             :class="
               search.length > 0
