@@ -1,5 +1,6 @@
 // import connection
 import db from "../config/db.js";
+import bcrypt from "bcryptjs";
 
 // Get All Products
 export const getBook = (result) => {
@@ -196,3 +197,56 @@ export const getBookByCategory = (id, result) => {
       }
   });   
 }
+
+// Update customer to Database
+export const updateCustomerById = (data, id, res) => {
+  bcrypt.hash(data.customer_password, 10, (err, hash) => {
+    if (err) {
+      return res.status(500).send({
+        msg: err,
+      });
+    } else {
+      // has hashed pw => add to database
+      db.query(
+        `UPDATE tb_customer SET customer_mail = ?, customer_password = ?,customer_firstname = ?,customer_lastname = ?, customer_phone = ?, customer_editAt = CURRENT_TIMESTAMP WHERE customer_id = ?` , [
+          data.customer_mail
+        , hash, 
+          data.customer_firstname
+        , data.customer_lastname, 
+          data.customer_phone
+        , id],
+        (err, result) => {
+          // if (err) {
+          //   throw err;
+          //   return res.status(400).send({
+          //     msg: err,
+          //   });
+          // }
+          // return res.status(201).send({
+          //   msg: "Edit Succesful",
+          // });
+        }
+      );
+    }
+  });
+  // db.query("UPDATE tb_customer SET customer_mail = ?, customer_password = ?,customer_firstname = ?,customer_lastname = ?, customer_phone = ?, customer_editAt = CURRENT_TIMESTAMP WHERE customer_id = ?", [data.customer_mail, data.customer_password, data.customer_firstname, data.customer_lastname, data.customer_phone, id], (err, results) => {             
+  //     if(err) {
+  //         console.log(err);
+  //         result(err, null);
+  //     } else {
+  //         result(null, results);
+  //     }
+  // });   
+}
+
+// Get Single Customer
+export const getCustomerById = (id, result) => {
+  db.query("SELECT * FROM tb_customer WHERE customer_id = ?", [id], (err, results) => {
+    if (err) {
+      console.log(err);
+      result(err, null);
+    } else {
+      result(null, results[0]);
+    }
+  });
+};

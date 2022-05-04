@@ -22,6 +22,8 @@ import {
   showBookById,
   updateBook,
   deleteBook,
+  updateCustomer,
+  showCustomerById
 } from "../controllers/Book.js";
 
 import multer from "multer";
@@ -572,6 +574,12 @@ router.post("/invoice/add", (req, res, next) => {
     }
   );
 });
+
+// Update Product
+router.put("/customer/:id", updateCustomer);
+
+// Get Single Product
+router.get("/customer/:id", showCustomerById);
 
 // export default router
 export default router;

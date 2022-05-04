@@ -9,6 +9,8 @@ app.use(cors());
 
 app.use(express.static("public"));
 
+app.use(express.urlencoded({ extended: true }));
+
 app.get("/", (req, res) => {
   res.send("API ใช้งานได้!");
 });
