@@ -37,10 +37,15 @@ export const routes = [
     component: () => import("../views/Search.vue"),
   },
   {
-    path: "/test",
-    name: "testtest",
-    component: () => import("../views/Test.vue"),
+    path: "/category/:id",
+    name: "categorysearch",
+    component: () => import("../views/Category.vue"),
   },
+	{
+		path: "/test",
+		name: "testtest",
+		component: () => import("../views/Test.vue"),
+	},
   {
     path: "/me",
     name: "profile",
