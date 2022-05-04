@@ -269,37 +269,46 @@ export default {
               invoice_phone: this.phone,
             })
             .then((response) => {
-              // update book quantity
-              for (let j = 0; j < this.cart.length; j++) {
-                axios
-                  .post("http://localhost:4000/api/book/update", {
-                    book_id: this.cart[j].book_id,
-                    book_stock: this.cart[j].book_stock - this.cart[j].quantity,
-                  })
-                  .then((response) => {
-                    // console.log(response);
-                    // clear cart
-                    this.cart = [];
-                    // clear total
-                    this.total = 0;
-                    // clear totalbook
-                    this.totalbook = 0;
-                    // clear address
-                    this.address = "";
-                    // clear bank
-                    this.bank = "";
-                    // clear first_name
-                    this.first_name = "";
-                    // clear last_name
-                    this.last_name = "";
-                    // clear email
-                    this.email = "";
-                    // clear phone
-                    this.phone = "";
-                  });
-              }
+              console.log(response);
             });
         });
+      for (const x of this.cart) {
+        axios.post("http://localhost:4000/api/book/update", {
+          book_id: x.book_id,
+          book_stock: x.book_stock - x.quantity,
+        });
+      }
+      localStorage.removeItem("cart");
+
+      // for (let j = 0; j < this.cart.length; j++) {
+      // 	this.cart[j].quantity = 0;
+      //   axios
+      //     .post("http://localhost:4000/api/book/update", {
+      //       book_id: this.cart[j].book_id,
+      //       book_stock: this.cart[j].book_stock - this.cart[j].quantity,
+      //     })
+      //     .then((response) => {
+      //       // console.log(response);
+      //       // clear cart
+      //       this.cart = [];
+      //       // clear total
+      //       this.total = 0;
+      //       // clear totalbook
+      //       this.totalbook = 0;
+      //       // clear address
+      //       this.address = "";
+      //       // clear bank
+      //       this.bank = "";
+      //       // clear first_name
+      //       this.first_name = "";
+      //       // clear last_name
+      //       this.last_name = "";
+      //       // clear email
+      //       this.email = "";
+      //       // clear phone
+      //       this.phone = "";
+      //     });
+      // }
       const Toast = Swal.mixin({
         toast: true,
         position: "top-end",

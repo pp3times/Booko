@@ -486,7 +486,7 @@ router.post("/order/add", (req, res, next) => {
 router.post("/book/update", (req, res, next) => {
   // update quantity
   db.query(
-    `UPDATE tb_book SET book_stock= book_stock - ${db.escape(
+    `UPDATE tb_book SET book_stock = ${db.escape(
       req.body.book_stock
     )}, book_editAt= now() WHERE book_id= ${db.escape(req.body.book_id)};`,
     (err, result) => {
