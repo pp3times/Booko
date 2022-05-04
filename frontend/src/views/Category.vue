@@ -2,7 +2,7 @@
   <div>
     <Header />
     <div class="container mx-auto min-h-[85vh] px-6 py-8">
-      <h1 class="text-4xl">ผลการค้นหาสำหรับ '{{ keyword }}'</h1>
+      <h1 class="text-4xl">ผลการค้นหาสำหรับ '{{category[id-1].category_name }}'</h1>
       <div class="my-10 bg-white">
         <div>
           <div
@@ -43,16 +43,17 @@ export default {
 
   data() {
     return {
-      keyword: "",
+      id: "",
       book: [],
       data: [],
+      category: [],
     };
   },
   mounted() {
-    this.getSearchQuery(this.$route.params.query);
+    this.id = this.$route.params.id;
   },
   updated() {
-     this.keyword = this.$route.params.keyword;
+    this.id = this.$route.params.id;
   },
 
   methods: {
@@ -77,15 +78,21 @@ export default {
     bookSearch() {
       // var data = this.book;
       // console.log(data)
-      if (this.keyword) {
+      if (this.id) {
         return this.book.filter((item) => {
-          return item.book_name.indexOf(this.keyword) > -1;
+          return item.category_id == this.id;
         });
       }
     },
   },
   created() {
-
+    axios
+      .get("http://localhost:4000/api/categories")
+      .then((response) => (this.category = response.data))
+      .catch((error) => {
+        this.errorMessage = error.message;
+        console.error("There was an error!", error);
+      });
     axios
       .get("http://localhost:4000/api/books")
       .then((response) => (this.book = response.data))
