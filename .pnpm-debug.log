@@ -2,22 +2,13 @@
   "0 debug pnpm:scope": {
     "selected": 1
   },
-  "1 info pnpm": {
-    "err": {
-      "name": "Error",
-      "message": "not found: dev",
-      "code": "ENOENT",
-      "stack": "Error: not found: dev\n    at getNotFoundError (C:\\Users\\Jeremy\\AppData\\Roaming\\npm\\pnpm-global\\5\\node_modules\\.pnpm\\pnpm@6.32.10\\node_modules\\pnpm\\dist\\pnpm.cjs:41689:51)\n    at Function.whichSync [as sync] (C:\\Users\\Jeremy\\AppData\\Roaming\\npm\\pnpm-global\\5\\node_modules\\.pnpm\\pnpm@6.32.10\\node_modules\\pnpm\\dist\\pnpm.cjs:41766:13)\n    at getCommandAbsolutePathSync (C:\\Users\\Jeremy\\AppData\\Roaming\\npm\\pnpm-global\\5\\node_modules\\.pnpm\\pnpm@6.32.10\\node_modules\\pnpm\\dist\\pnpm.cjs:43331:44)\n    at default_1 (C:\\Users\\Jeremy\\AppData\\Roaming\\npm\\pnpm-global\\5\\node_modules\\.pnpm\\pnpm@6.32.10\\node_modules\\pnpm\\dist\\pnpm.cjs:43340:32)\n    at C:\\Users\\Jeremy\\AppData\\Roaming\\npm\\pnpm-global\\5\\node_modules\\.pnpm\\pnpm@6.32.10\\node_modules\\pnpm\\dist\\pnpm.cjs:178603:39"
-    }
-  },
-  "2 error pnpm": {
-    "code": "ERR_PNPM_RECURSIVE_EXEC_FIRST_FAIL",
-    "prefix": "C:\\Users\\Jeremy",
+  "1 error pnpm": {
+    "code": "ERR_PNPM_NO_IMPORTER_MANIFEST_FOUND",
     "err": {
       "name": "pnpm",
-      "message": "not found: dev",
-      "code": "ERR_PNPM_RECURSIVE_EXEC_FIRST_FAIL",
-      "stack": "Error: not found: dev\n    at getNotFoundError (C:\\Users\\Jeremy\\AppData\\Roaming\\npm\\pnpm-global\\5\\node_modules\\.pnpm\\pnpm@6.32.10\\node_modules\\pnpm\\dist\\pnpm.cjs:41689:51)\n    at Function.whichSync [as sync] (C:\\Users\\Jeremy\\AppData\\Roaming\\npm\\pnpm-global\\5\\node_modules\\.pnpm\\pnpm@6.32.10\\node_modules\\pnpm\\dist\\pnpm.cjs:41766:13)\n    at getCommandAbsolutePathSync (C:\\Users\\Jeremy\\AppData\\Roaming\\npm\\pnpm-global\\5\\node_modules\\.pnpm\\pnpm@6.32.10\\node_modules\\pnpm\\dist\\pnpm.cjs:43331:44)\n    at default_1 (C:\\Users\\Jeremy\\AppData\\Roaming\\npm\\pnpm-global\\5\\node_modules\\.pnpm\\pnpm@6.32.10\\node_modules\\pnpm\\dist\\pnpm.cjs:43340:32)\n    at C:\\Users\\Jeremy\\AppData\\Roaming\\npm\\pnpm-global\\5\\node_modules\\.pnpm\\pnpm@6.32.10\\node_modules\\pnpm\\dist\\pnpm.cjs:178603:39"
+      "message": "No package.json (or package.yaml, or package.json5) was found in \"C:\\work\\real_new_booko\\Booko\".",
+      "code": "ERR_PNPM_NO_IMPORTER_MANIFEST_FOUND",
+      "stack": "pnpm: No package.json (or package.yaml, or package.json5) was found in \"C:\\work\\real_new_booko\\Booko\".\n    at readProjectManifest (C:\\Users\\puriw\\AppData\\Roaming\\npm\\node_modules\\pnpm\\dist\\pnpm.cjs:19655:13)\n    at async Object.readProjectManifestOnly (C:\\Users\\puriw\\AppData\\Roaming\\npm\\node_modules\\pnpm\\dist\\pnpm.cjs:19659:28)\n    at async readProjectManifestOnly (C:\\Users\\puriw\\AppData\\Roaming\\npm\\node_modules\\pnpm\\dist\\pnpm.cjs:43649:24)\n    at async Object.handler (C:\\Users\\puriw\\AppData\\Roaming\\npm\\node_modules\\pnpm\\dist\\pnpm.cjs:170931:24)\n    at async C:\\Users\\puriw\\AppData\\Roaming\\npm\\node_modules\\pnpm\\dist\\pnpm.cjs:175391:21\n    at async run (C:\\Users\\puriw\\AppData\\Roaming\\npm\\node_modules\\pnpm\\dist\\pnpm.cjs:175365:34)\n    at async runPnpm (C:\\Users\\puriw\\AppData\\Roaming\\npm\\node_modules\\pnpm\\dist\\pnpm.cjs:175583:5)\n    at async C:\\Users\\puriw\\AppData\\Roaming\\npm\\node_modules\\pnpm\\dist\\pnpm.cjs:175575:7"
     }
   }
 }

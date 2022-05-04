@@ -35,6 +35,463 @@ function openModal() {
 
 <template>
   <div>
+    <!-- Edit Book -->
+    <TransitionRoot appear :show="editIsOpen" as="template">
+      <Dialog as="div" @close="closeEdit" class="relative z-10">
+        <TransitionChild
+          as="template"
+          enter="duration-300 ease-out"
+          enter-from="opacity-0"
+          enter-to="opacity-100"
+          leave="duration-200 ease-in"
+          leave-from="opacity-100"
+          leave-to="opacity-0"
+        >
+          <div class="fixed inset-0 bg-black bg-opacity-25" />
+        </TransitionChild>
+
+        <div class="fixed inset-0 overflow-y-auto">
+          <div
+            class="flex min-h-full items-center justify-center p-4 text-center"
+          >
+            <TransitionChild
+              as="template"
+              enter="duration-300 ease-out"
+              enter-from="opacity-0 scale-95"
+              enter-to="opacity-100 scale-100"
+              leave="duration-200 ease-in"
+              leave-from="opacity-100 scale-100"
+              leave-to="opacity-0 scale-95"
+            >
+              <DialogPanel
+                class="
+                  w-full
+                  max-w-xl
+                  transform
+                  overflow-hidden
+                  rounded-2xl
+                  bg-white
+                  p-6
+                  text-left
+                  align-middle
+                  shadow-xl
+                  transition-all
+                "
+              >
+                <DialogTitle
+                  as="h3"
+                  class="text-lg font-medium leading-6 text-gray-900"
+                >
+                  Edit Book
+                </DialogTitle>
+                <div class="mt-2">
+                  <!-- <p class="text-sm text-gray-500">
+                    Your payment has been successfully submitted. We’ve sent you
+                    an email with all of the details of your order.
+                  </p> -->
+                  <div>
+                    <label for="bookname" class="text-md font-medium"
+                      >ชื่อหนังสือ</label
+                    >
+
+                    <div class="relative mt-1">
+                      <input
+                        type="text"
+                        id="bookname"
+                        class="
+                          form-input
+                          w-full
+                          px-4
+                          py-3
+                          text-sm
+                          border-gray-200
+                          focus-visible:border-primary-light
+                          focus:border-primary-light
+                          focus:ring-primary
+                          focus:shadow-primary
+                          border
+                          rounded-lg
+                          shadow-sm
+                        "
+                        placeholder="กรุณากรอกชื่อหนังสือ"
+                        name="bookname"
+                        v-model="edit_name"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label for="description" class="text-md font-medium"
+                      >รายละเอียดหนังสือ</label
+                    >
+
+                    <div class="relative mt-1">
+                      <input
+                        type="text"
+                        id="description"
+                        class="
+                          form-input
+                          w-full
+                          px-4
+                          py-3
+                          text-sm
+                          border-gray-200
+                          focus-visible:border-primary-light
+                          focus:border-primary-light
+                          focus:ring-primary
+                          focus:shadow-primary
+                          border
+                          rounded-lg
+                          shadow-sm
+                        "
+                        placeholder="กรุณากรอกนามสกุล"
+                        name="description"
+                        v-model="edit_description"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="flex space-x-4">
+                    <div class="w-1/3">
+                      <label for="bookpage" class="text-md font-medium"
+                        >จำนวนหน้า</label
+                      >
+
+                      <div class="relative mt-1">
+                        <input
+                          type="number"
+                          id="bookpage"
+                          class="
+                            form-input
+                            w-full
+                            px-4
+                            pr-16
+                            py-3
+                            text-sm
+                            border-gray-200
+                            focus-visible:border-primary-light
+                            focus:border-primary-light
+                            focus:ring-primary
+                            focus:shadow-primary
+                            border
+                            rounded-lg
+                            shadow-sm
+                          "
+                          placeholder="XXX"
+                          v-model="edit_page"
+                          name="page"
+                        />
+                        <span
+                          class="
+                            absolute
+                            inset-y-0
+                            inline-flex
+                            items-center
+                            right-4
+                          "
+                        >
+                          หน้า
+                        </span>
+                      </div>
+                    </div>
+                    <div class="w-1/3">
+                      <label for="price" class="text-md font-medium"
+                        >ราคาหนังสือ</label
+                      >
+
+                      <div class="relative mt-1">
+                        <input
+                          type="number"
+                          id="price"
+                          class="
+                            form-input
+                            w-full
+                            pr-16
+                            px-4
+                            py-3
+                            text-sm
+                            border-gray-200
+                            focus-visible:border-primary-light
+                            focus:border-primary-light
+                            focus:ring-primary
+                            focus:shadow-primary
+                            border
+                            rounded-lg
+                            shadow-sm
+                          "
+                          placeholder="XXX"
+                          v-model="edit_price"
+                          name="price"
+                        />
+                        <span
+                          class="
+                            absolute
+                            inset-y-0
+                            inline-flex
+                            items-center
+                            right-4
+                          "
+                        >
+                          บาท
+                        </span>
+                      </div>
+                    </div>
+                    <div class="w-1/3">
+                      <label for="price" class="text-md font-medium"
+                        >สต็อกสินค้า</label
+                      >
+
+                      <div class="relative mt-1">
+                        <input
+                          type="number"
+                          id="stock"
+                          class="
+                            form-input
+                            w-full
+                            px-4
+                            pr-16
+                            py-3
+                            text-sm
+                            border-gray-200
+                            focus-visible:border-primary-light
+                            focus:border-primary-light
+                            focus:ring-primary
+                            focus:shadow-primary
+                            border
+                            rounded-lg
+                            shadow-sm
+                          "
+                          placeholder="XX"
+                          v-model="edit_stock"
+                          name="stock"
+                        />
+                        <span
+                          class="
+                            absolute
+                            inset-y-0
+                            inline-flex
+                            items-center
+                            right-4
+                          "
+                        >
+                          เล่ม
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <label for="author" class="text-md font-medium"
+                      >ผู้แต่ง</label
+                    >
+
+                    <div class="relative mt-1">
+                      <input
+                        type="text"
+                        id="author"
+                        class="
+                          form-input
+                          w-full
+                          px-4
+                          py-3
+                          text-sm
+                          border-gray-200
+                          focus-visible:border-primary-light
+                          focus:border-primary-light
+                          focus:ring-primary
+                          focus:shadow-primary
+                          border
+                          rounded-lg
+                          shadow-sm
+                        "
+                        placeholder="กรุณากรอกชื่อผู้แต่ง"
+                        v-model="edit_author"
+                        name="author"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label for="publisher" class="text-md font-medium"
+                      >ชื่อสำนักพิมพ์</label
+                    >
+
+                    <div class="relative mt-1">
+                      <input
+                        type="text"
+                        id="publisher"
+                        class="
+                          form-input
+                          w-full
+                          px-4
+                          py-3
+                          text-sm
+                          border-gray-200
+                          focus-visible:border-primary-light
+                          focus:border-primary-light
+                          focus:ring-primary
+                          focus:shadow-primary
+                          border
+                          rounded-lg
+                          shadow-sm
+                        "
+                        placeholder="กรุณากรอกชื่อสำนักพิมพ์"
+                        v-model="edit_publisher"
+                        name="publisher"
+                      />
+                    </div>
+                  </div>
+                  <div class="flex space-x-4">
+                    <div class="w-1/2">
+                      <label for="category" class="text-md font-medium"
+                        >หมวดหมู่หนังสือ</label
+                      >
+
+                      <div class="relative mt-1">
+                        <select
+                          v-model="edit_category"
+                          name="selected_category"
+                          class="
+                            form-select
+                            w-full
+                            px-4
+                            py-3
+                            text-sm
+                            border-gray-200
+                            focus-visible:border-primary-light
+                            focus:border-primary-light
+                            focus:ring-primary
+                            focus:shadow-primary
+                            border
+                            rounded-lg
+                            shadow-sm
+                          "
+                        >
+                          <option disabled v-bind:value="0">
+                            เลือกหมวดหมู่
+                          </option>
+                          <option
+                            v-for="category in categories"
+                            :key="category.category_id"
+                            v-bind:value="category.category_id"
+                          >
+                            {{ category.category_name }}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="w-1/2">
+                      <label for="isbn" class="text-md font-medium">ISBN</label>
+
+                      <div class="relative mt-1">
+                        <input
+                          type="number"
+                          id="isbn"
+                          class="
+                            form-input
+                            w-full
+                            px-4
+                            py-3
+                            text-sm
+                            border-gray-200
+                            focus-visible:border-primary-light
+                            focus:border-primary-light
+                            focus:ring-primary
+                            focus:shadow-primary
+                            border
+                            rounded-lg
+                            shadow-sm
+                          "
+                          placeholder="XXXXXXXXXXXXX"
+                          v-model="edit_isbn"
+                          name="isbn"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <label for="email" class="text-md font-medium"
+                      >รูปปกหนังสือ</label
+                    >
+
+                    <div class="relative mt-1">
+                      <div
+                        class="
+                          relative
+                          h-40
+                          rounded-lg
+                          border-dashed border-2 border-gray-200
+                          bg-white
+                          flex
+                          justify-center
+                          items-center
+                          hover:cursor-pointer
+                        "
+                      >
+                        <div>
+                          <input
+                            type="file"
+                            class="h-full w-full opacity-1"
+                            multiple
+                            accept="image/png, image/jpeg, image/webp"
+                            @change="selectImages"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mt-4 space-x-2 flex justify-end">
+                    <input
+                      type="submit"
+                      class="
+                        focus:outline-none
+                        inline-flex
+                        justify-center
+                        rounded-md
+                        border border-transparent
+                        bg-green-100
+                        px-4
+                        py-2
+                        text-sm
+                        font-medium
+                        text-primary
+                        hover:bg-primary-light
+                        focus-visible:ring-2
+                        focus-visible:ring-primary
+                        focus-visible:ring-offset-2
+                      "
+                      @click="updateBook(edit_id)"
+                      value="Edit"
+                    />
+                    <button
+                      type="button"
+                      class="
+                        focus:outline-none
+                        inline-flex
+                        justify-center
+                        rounded-md
+                        border border-transparent
+                        bg-red-100
+                        px-4
+                        py-2
+                        text-sm
+                        font-medium
+                        text-red-900
+                        hover:bg-red-200
+                        focus-visible:ring-2
+                        focus-visible:ring-red-500
+                        focus-visible:ring-offset-2
+                      "
+                      @click="closeEdit"
+                    >
+                      Close
+                    </button>
+                  </div>
+                </div>
+              </DialogPanel>
+            </TransitionChild>
+          </div>
+        </div>
+      </Dialog>
+    </TransitionRoot>
     <TransitionRoot appear :show="isOpen" as="template">
       <Dialog as="div" @close="closeModal" class="relative z-10">
         <TransitionChild
@@ -63,7 +520,19 @@ function openModal() {
               leave-to="opacity-0 scale-95"
             >
               <DialogPanel
-                class="w-full max-w-xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all"
+                class="
+                  w-full
+                  max-w-xl
+                  transform
+                  overflow-hidden
+                  rounded-2xl
+                  bg-white
+                  p-6
+                  text-left
+                  align-middle
+                  shadow-xl
+                  transition-all
+                "
               >
                 <DialogTitle
                   as="h3"
@@ -90,7 +559,21 @@ function openModal() {
                         <input
                           type="text"
                           id="bookname"
-                          class="form-input w-full px-4 py-3 text-sm border-gray-200 focus-visible:border-primary-light focus:border-primary-light focus:ring-primary focus:shadow-primary border rounded-lg shadow-sm"
+                          class="
+                            form-input
+                            w-full
+                            px-4
+                            py-3
+                            text-sm
+                            border-gray-200
+                            focus-visible:border-primary-light
+                            focus:border-primary-light
+                            focus:ring-primary
+                            focus:shadow-primary
+                            border
+                            rounded-lg
+                            shadow-sm
+                          "
                           placeholder="กรุณากรอกชื่อหนังสือ"
                           name="bookname"
                           v-model="bookname"
@@ -107,7 +590,21 @@ function openModal() {
                         <input
                           type="text"
                           id="description"
-                          class="form-input w-full px-4 py-3 text-sm border-gray-200 focus-visible:border-primary-light focus:border-primary-light focus:ring-primary focus:shadow-primary border rounded-lg shadow-sm"
+                          class="
+                            form-input
+                            w-full
+                            px-4
+                            py-3
+                            text-sm
+                            border-gray-200
+                            focus-visible:border-primary-light
+                            focus:border-primary-light
+                            focus:ring-primary
+                            focus:shadow-primary
+                            border
+                            rounded-lg
+                            shadow-sm
+                          "
                           placeholder="กรุณากรอกนามสกุล"
                           name="description"
                           v-model="description"
@@ -125,13 +622,34 @@ function openModal() {
                           <input
                             type="number"
                             id="bookpage"
-                            class="form-input w-full px-4 pr-16 py-3 text-sm border-gray-200 focus-visible:border-primary-light focus:border-primary-light focus:ring-primary focus:shadow-primary border rounded-lg shadow-sm"
+                            class="
+                              form-input
+                              w-full
+                              px-4
+                              pr-16
+                              py-3
+                              text-sm
+                              border-gray-200
+                              focus-visible:border-primary-light
+                              focus:border-primary-light
+                              focus:ring-primary
+                              focus:shadow-primary
+                              border
+                              rounded-lg
+                              shadow-sm
+                            "
                             placeholder="XXX"
                             v-model="page"
                             name="page"
                           />
                           <span
-                            class="absolute inset-y-0 inline-flex items-center right-4"
+                            class="
+                              absolute
+                              inset-y-0
+                              inline-flex
+                              items-center
+                              right-4
+                            "
                           >
                             หน้า
                           </span>
@@ -146,13 +664,34 @@ function openModal() {
                           <input
                             type="number"
                             id="price"
-                            class="form-input w-full pr-16 px-4 py-3 text-sm border-gray-200 focus-visible:border-primary-light focus:border-primary-light focus:ring-primary focus:shadow-primary border rounded-lg shadow-sm"
+                            class="
+                              form-input
+                              w-full
+                              pr-16
+                              px-4
+                              py-3
+                              text-sm
+                              border-gray-200
+                              focus-visible:border-primary-light
+                              focus:border-primary-light
+                              focus:ring-primary
+                              focus:shadow-primary
+                              border
+                              rounded-lg
+                              shadow-sm
+                            "
                             placeholder="XXX"
                             v-model="price"
                             name="price"
                           />
                           <span
-                            class="absolute inset-y-0 inline-flex items-center right-4"
+                            class="
+                              absolute
+                              inset-y-0
+                              inline-flex
+                              items-center
+                              right-4
+                            "
                           >
                             บาท
                           </span>
@@ -167,13 +706,34 @@ function openModal() {
                           <input
                             type="number"
                             id="stock"
-                            class="form-input w-full px-4 pr-16 py-3 text-sm border-gray-200 focus-visible:border-primary-light focus:border-primary-light focus:ring-primary focus:shadow-primary border rounded-lg shadow-sm"
+                            class="
+                              form-input
+                              w-full
+                              px-4
+                              pr-16
+                              py-3
+                              text-sm
+                              border-gray-200
+                              focus-visible:border-primary-light
+                              focus:border-primary-light
+                              focus:ring-primary
+                              focus:shadow-primary
+                              border
+                              rounded-lg
+                              shadow-sm
+                            "
                             placeholder="XX"
                             v-model="stock"
                             name="stock"
                           />
                           <span
-                            class="absolute inset-y-0 inline-flex items-center right-4"
+                            class="
+                              absolute
+                              inset-y-0
+                              inline-flex
+                              items-center
+                              right-4
+                            "
                           >
                             เล่ม
                           </span>
@@ -189,7 +749,21 @@ function openModal() {
                         <input
                           type="text"
                           id="author"
-                          class="form-input w-full px-4 py-3 text-sm border-gray-200 focus-visible:border-primary-light focus:border-primary-light focus:ring-primary focus:shadow-primary border rounded-lg shadow-sm"
+                          class="
+                            form-input
+                            w-full
+                            px-4
+                            py-3
+                            text-sm
+                            border-gray-200
+                            focus-visible:border-primary-light
+                            focus:border-primary-light
+                            focus:ring-primary
+                            focus:shadow-primary
+                            border
+                            rounded-lg
+                            shadow-sm
+                          "
                           placeholder="กรุณากรอกชื่อผู้แต่ง"
                           v-model="author"
                           name="author"
@@ -205,7 +779,21 @@ function openModal() {
                         <input
                           type="text"
                           id="publisher"
-                          class="form-input w-full px-4 py-3 text-sm border-gray-200 focus-visible:border-primary-light focus:border-primary-light focus:ring-primary focus:shadow-primary border rounded-lg shadow-sm"
+                          class="
+                            form-input
+                            w-full
+                            px-4
+                            py-3
+                            text-sm
+                            border-gray-200
+                            focus-visible:border-primary-light
+                            focus:border-primary-light
+                            focus:ring-primary
+                            focus:shadow-primary
+                            border
+                            rounded-lg
+                            shadow-sm
+                          "
                           placeholder="กรุณากรอกชื่อสำนักพิมพ์"
                           v-model="publisher"
                           name="publisher"
@@ -222,7 +810,21 @@ function openModal() {
                           <select
                             v-model="selected_category"
                             name="selected_category"
-                            class="form-select w-full px-4 py-3 text-sm border-gray-200 focus-visible:border-primary-light focus:border-primary-light focus:ring-primary focus:shadow-primary border rounded-lg shadow-sm"
+                            class="
+                              form-select
+                              w-full
+                              px-4
+                              py-3
+                              text-sm
+                              border-gray-200
+                              focus-visible:border-primary-light
+                              focus:border-primary-light
+                              focus:ring-primary
+                              focus:shadow-primary
+                              border
+                              rounded-lg
+                              shadow-sm
+                            "
                           >
                             <option disabled v-bind:value="0">
                               เลือกหมวดหมู่
@@ -246,7 +848,21 @@ function openModal() {
                           <input
                             type="number"
                             id="isbn"
-                            class="form-input w-full px-4 py-3 text-sm border-gray-200 focus-visible:border-primary-light focus:border-primary-light focus:ring-primary focus:shadow-primary border rounded-lg shadow-sm"
+                            class="
+                              form-input
+                              w-full
+                              px-4
+                              py-3
+                              text-sm
+                              border-gray-200
+                              focus-visible:border-primary-light
+                              focus:border-primary-light
+                              focus:ring-primary
+                              focus:shadow-primary
+                              border
+                              rounded-lg
+                              shadow-sm
+                            "
                             placeholder="XXXXXXXXXXXXX"
                             v-model="isbn"
                             name="isbn"
@@ -261,7 +877,17 @@ function openModal() {
 
                       <div class="relative mt-1">
                         <div
-                          class="relative h-40 rounded-lg border-dashed border-2 border-gray-200 bg-white flex justify-center items-center hover:cursor-pointer"
+                          class="
+                            relative
+                            h-40
+                            rounded-lg
+                            border-dashed border-2 border-gray-200
+                            bg-white
+                            flex
+                            justify-center
+                            items-center
+                            hover:cursor-pointer
+                          "
                         >
                           <div>
                             <input
@@ -330,13 +956,45 @@ function openModal() {
                       </button> -->
                       <input
                         type="submit"
-                        class="focus:outline-none inline-flex justify-center rounded-md border border-transparent bg-green-100 px-4 py-2 text-sm font-medium text-primary hover:bg-primary-light focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                        class="
+                          focus:outline-none
+                          inline-flex
+                          justify-center
+                          rounded-md
+                          border border-transparent
+                          bg-green-100
+                          px-4
+                          py-2
+                          text-sm
+                          font-medium
+                          text-primary
+                          hover:bg-primary-light
+                          focus-visible:ring-2
+                          focus-visible:ring-primary
+                          focus-visible:ring-offset-2
+                        "
                         @click="closeModal"
                         value="Upload"
                       />
                       <button
                         type="button"
-                        class="focus:outline-none inline-flex justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 text-sm font-medium text-red-900 hover:bg-red-200 focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
+                        class="
+                          focus:outline-none
+                          inline-flex
+                          justify-center
+                          rounded-md
+                          border border-transparent
+                          bg-red-100
+                          px-4
+                          py-2
+                          text-sm
+                          font-medium
+                          text-red-900
+                          hover:bg-red-200
+                          focus-visible:ring-2
+                          focus-visible:ring-red-500
+                          focus-visible:ring-offset-2
+                        "
                         @click="closeModal"
                       >
                         Close
@@ -400,7 +1058,15 @@ function openModal() {
                 id="search"
                 name="search"
                 type="search"
-                class="w-full py-2 text-sm text-gray-900 rounded-md pl-10 border border-gray-300 focus:outline-none focus:ring-gray-500 focus:z-10"
+                class="
+                  w-full
+                  py-2
+                  text-sm text-gray-900
+                  rounded-md
+                  pl-10
+                  border border-gray-300
+                  focus:outline-none focus:ring-gray-500 focus:z-10
+                "
                 placeholder="Search user"
               />
             </div>
@@ -409,7 +1075,16 @@ function openModal() {
             <div>
               <button
                 @click="openModal"
-                class="flex items-center bg-green-500 p-2 text-white rounded text-sm hover:bg-green-600"
+                class="
+                  flex
+                  items-center
+                  bg-green-500
+                  p-2
+                  text-white
+                  rounded
+                  text-sm
+                  hover:bg-green-600
+                "
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -438,7 +1113,15 @@ function openModal() {
                 <input
                   v-model="selectAll"
                   type="checkbox"
-                  class="h-5 w-5 text-blue-500 border-gray-300 rounded cursor-pointer focus:ring-0"
+                  class="
+                    h-5
+                    w-5
+                    text-blue-500
+                    border-gray-300
+                    rounded
+                    cursor-pointer
+                    focus:ring-0
+                  "
                 />
               </th>
               <th class="text-left text-gray-600">ข้อมูลหนังสือ</th>
@@ -454,7 +1137,15 @@ function openModal() {
               <td class="p-2">
                 <input
                   type="checkbox"
-                  class="h-5 w-5 text-blue-500 border-gray-300 rounded cursor-pointer focus:ring-0"
+                  class="
+                    h-5
+                    w-5
+                    text-blue-500
+                    border-gray-300
+                    rounded
+                    cursor-pointer
+                    focus:ring-0
+                  "
                   :checked="selectAll"
                 />
               </td>
@@ -494,12 +1185,35 @@ function openModal() {
                 <Menu as="div" class="relative inline-block text-left">
                   <div>
                     <MenuButton
-                      class="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-white rounded-md bg-gray-500 hover:bg-gray-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+                      class="
+                        inline-flex
+                        justify-center
+                        w-full
+                        px-4
+                        py-2
+                        text-sm
+                        font-medium
+                        text-white
+                        rounded-md
+                        bg-gray-500
+                        hover:bg-gray-600
+                        focus:outline-none
+                        focus-visible:ring-2
+                        focus-visible:ring-white
+                        focus-visible:ring-opacity-75
+                      "
                     >
                       Actions
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        class="w-5 h-5 ml-2 -mr-1 text-violet-200 hover:text-violet-100"
+                        class="
+                          w-5
+                          h-5
+                          ml-2
+                          -mr-1
+                          text-violet-200
+                          hover:text-violet-100
+                        "
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -523,7 +1237,20 @@ function openModal() {
                     leave-to-class="transform scale-95 opacity-0"
                   >
                     <MenuItems
-                      class="absolute right-0 w-32 mt-1 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 z-50 focus:outline-none"
+                      class="
+                        absolute
+                        right-0
+                        w-32
+                        mt-1
+                        origin-top-right
+                        bg-white
+                        divide-y divide-gray-100
+                        rounded-md
+                        shadow-lg
+                        ring-1 ring-black ring-opacity-5
+                        z-50
+                        focus:outline-none
+                      "
                     >
                       <div class="px-1 py-1">
                         <MenuItem v-slot="{ active }">
@@ -534,6 +1261,7 @@ function openModal() {
                                 : 'text-gray-900',
                               'group flex rounded-md items-center w-full px-2 py-2 text-sm',
                             ]"
+                            @click="openEdit(book.book_id)"
                           >
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -590,7 +1318,10 @@ function openModal() {
             <tr>
               <td colspan="7" class="py-2">
                 <div
-                  class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between"
+                  class="
+                    hidden
+                    sm:flex-1 sm:flex sm:items-center sm:justify-between
+                  "
                 >
                   <div>
                     <p class="text-sm text-gray-500">
@@ -605,12 +1336,30 @@ function openModal() {
                   </div>
                   <div>
                     <nav
-                      class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px"
+                      class="
+                        relative
+                        z-0
+                        inline-flex
+                        rounded-md
+                        shadow-sm
+                        -space-x-px
+                      "
                       aria-label="Pagination"
                     >
                       <a
                         href="#"
-                        class="relative inline-flex items-center px-2 rounded-l-md border border-gray-300 text-sm font-medium text-gray-500 hover:bg-gray-50"
+                        class="
+                          relative
+                          inline-flex
+                          items-center
+                          px-2
+                          rounded-l-md
+                          border border-gray-300
+                          text-sm
+                          font-medium
+                          text-gray-500
+                          hover:bg-gray-50
+                        "
                       >
                         <span class="sr-only">Previous</span>
                         <svg
@@ -634,49 +1383,146 @@ function openModal() {
                       <a
                         href="?page=1"
                         aria-current="page"
-                        class="z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-1 border text-sm font-medium"
+                        class="
+                          z-10
+                          bg-indigo-50
+                          border-indigo-500
+                          text-indigo-600
+                          relative
+                          inline-flex
+                          items-center
+                          px-4
+                          py-1
+                          border
+                          text-sm
+                          font-medium
+                        "
                       >
                         1
                       </a>
                       <router-view />
                       <a
                         href="?page=2"
-                        class="border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-1 border text-sm font-medium"
+                        class="
+                          border-gray-300
+                          text-gray-500
+                          hover:bg-gray-50
+                          relative
+                          inline-flex
+                          items-center
+                          px-4
+                          py-1
+                          border
+                          text-sm
+                          font-medium
+                        "
                       >
                         2
                       </a>
                       <a
                         href="?page=2"
-                        class="border-gray-300 text-gray-500 hover:bg-gray-50 hidden md:inline-flex relative items-center px-4 py-1 border text-sm font-medium"
+                        class="
+                          border-gray-300
+                          text-gray-500
+                          hover:bg-gray-50
+                          hidden
+                          md:inline-flex
+                          relative
+                          items-center
+                          px-4
+                          py-1
+                          border
+                          text-sm
+                          font-medium
+                        "
                       >
                         3
                       </a>
                       <span
-                        class="relative inline-flex items-center px-4 py-1 border border-gray-300 text-sm font-medium text-gray-700"
+                        class="
+                          relative
+                          inline-flex
+                          items-center
+                          px-4
+                          py-1
+                          border border-gray-300
+                          text-sm
+                          font-medium
+                          text-gray-700
+                        "
                       >
                         ...
                       </span>
                       <a
                         href="#"
-                        class="border-gray-300 text-gray-500 hover:bg-gray-50 hidden md:inline-flex relative items-center px-4 py-1 border text-sm font-medium"
+                        class="
+                          border-gray-300
+                          text-gray-500
+                          hover:bg-gray-50
+                          hidden
+                          md:inline-flex
+                          relative
+                          items-center
+                          px-4
+                          py-1
+                          border
+                          text-sm
+                          font-medium
+                        "
                       >
                         8
                       </a>
                       <a
                         href="#"
-                        class="border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-1 border text-sm font-medium"
+                        class="
+                          border-gray-300
+                          text-gray-500
+                          hover:bg-gray-50
+                          relative
+                          inline-flex
+                          items-center
+                          px-4
+                          py-1
+                          border
+                          text-sm
+                          font-medium
+                        "
                       >
                         9
                       </a>
                       <a
                         href="#"
-                        class="border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-1 border text-sm font-medium"
+                        class="
+                          border-gray-300
+                          text-gray-500
+                          hover:bg-gray-50
+                          relative
+                          inline-flex
+                          items-center
+                          px-4
+                          py-1
+                          border
+                          text-sm
+                          font-medium
+                        "
                       >
                         10
                       </a>
                       <a
                         href="#"
-                        class="relative inline-flex items-center px-2 py-1 rounded-r-md border border-gray-300 text-sm font-medium text-gray-500 hover:bg-gray-50"
+                        class="
+                          relative
+                          inline-flex
+                          items-center
+                          px-2
+                          py-1
+                          rounded-r-md
+                          border border-gray-300
+                          text-sm
+                          font-medium
+                          text-gray-500
+                          hover:bg-gray-50
+                        "
                       >
                         <span class="sr-only">Next</span>
                         <svg
@@ -737,6 +1583,18 @@ export default {
       selected_category: 0,
       imagefile: null,
       errors: [],
+      editIsOpen: false,
+      edit_image: null,
+      edit_name: "",
+      edit_description: "",
+      edit_page: null,
+      edit_price: null,
+      edit_stock: null,
+      edit_author: null,
+      edit_publisher: null,
+      edit_category: 0,
+      edit_isbn: null,
+      edit_id: null,
     };
   },
   setup() {
@@ -789,6 +1647,9 @@ export default {
         console.log(err);
       }
     },
+    selectImages(event) {
+      this.edit_image = event.target.files;
+    },
     deleteUser(id) {
       Swal.fire({
         title: "Are you sure?",
@@ -802,11 +1663,59 @@ export default {
         if (result.value) {
           Swal.fire("Deleted!", "Your file has been deleted.", "success");
           axios.delete(`http://localhost:4000/api/books/${id}`);
-          const newBook = this.all_book.filter(function(item) {
-        return item.book_id !== id})
-        this.all_book = newBook;
+          const newBook = this.all_book.filter(function (item) {
+            return item.book_id !== id;
+          });
+          this.all_book = newBook;
         }
       });
+    },
+    openEdit(id) {
+      this.getBookById(id);
+      this.editIsOpen = true;
+    },
+    closeEdit() {
+      this.editIsOpen = false;
+    },
+    updateBook(book_id) {
+      let form_Data = new FormData();
+      form_Data.append("book_name", this.edit_name);
+      form_Data.append("book_description", this.edit_description);
+      form_Data.append("book_page", this.edit_page);
+      form_Data.append("book_price", this.ediit_price);
+      form_Data.append("book_stock", this.edit_stock);
+      form_Data.append("myImage", this.edit_image);
+      form_Data.append("book_author", this.edit_author);
+      form_Data.append("book_publisher", this.edit_publisher);
+      form_Data.append("category_id", this.edit_category);
+      form_Data.append("book_isbn", this.edit_isbn);
+
+      axios
+        .put("http://localhost:4000/api/books/" + book_id, form_Data)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((e) => console.log(e));
+    },
+    async getBookById(id) {
+      try {
+        const response = await axios.get(
+          `http://localhost:4000/api/books/` + id
+        );
+        this.edit_id = response.data.book_id;
+        this.edit_name = response.data.book_name;
+        this.edit_description = response.data.book_description;
+        this.edit_page = response.data.book_page;
+        this.edit_price = response.data.book_price;
+        this.edit_stock = response.data.book_stock;
+        this.edit_image = response.data.book_coversrc;
+        this.edit_author = response.data.book_author;
+        this.edit_publisher = response.data.book_publisher;
+        this.edit_category = response.data.category_id;
+        this.edit_isbn = response.data.book_isbn;
+      } catch (err) {
+        console.log(err);
+      }
     },
   },
 };
