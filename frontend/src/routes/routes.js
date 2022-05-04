@@ -22,11 +22,6 @@ export const routes = [
     component: userAuth,
   },
   {
-    path: "/cart",
-    name: "cart",
-    component: () => import("../views/Cart.vue"),
-  },
-  {
     path: "/detail/:id",
     name: "detail",
     component: () => import("../views/Detail.vue"),
@@ -36,10 +31,25 @@ export const routes = [
     name: "search",
     component: () => import("../views/Search.vue"),
   },
+	{
+		path: "/test",
+		name: "testtest",
+		component: () => import("../views/Test.vue"),
+	},
+  {
+    path: "/me",
+    name: "profile",
+    component: () => import("../views/Profile.vue"),
+  },
   {
     path: "/test",
     name: "test",
     component: () => import("../views/asd/Login.vue"),
+  },
+  {
+    path: "/checkout",
+    name: "checkout",
+    component: () => import("../views/Checkout.vue"),
   },
   // {
   //   path: "/admin",
