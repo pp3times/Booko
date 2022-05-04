@@ -144,7 +144,7 @@ const solutions = [
                   >
                     <span
                       >ยินดีต้อนรับคุณ,
-                      {{ this.$store.getters.getUser.customer_firstname }}</span
+                      {{ this.user_name }}</span
                     >
                     <ChevronDownIcon
                       :class="open ? '' : 'text-opacity-70'"
@@ -471,7 +471,19 @@ export default {
     return {
       state: false,
       products: products,
+      user_name: "",
     };
+  },
+  updated(){
+    this.user_name = this.$store.getters.getUser.customer_firstname;
+    const response = axios.get(
+          "http://localhost:4000/api/customer/"+this.$store.getters.getUser.customer_id
+        );
+    console.log(response)
+    this.user_name = response.customer_firstname;
+  },
+  mounted(){
+    this.user_name = this.$store.getters.getUser.customer_firstname;
   },
   methods: {
     logout() {

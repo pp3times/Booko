@@ -15,6 +15,8 @@ import {
   deleteBookById,
   updateBookById,
   getBookByCategory,
+  updateCustomerById,
+  getCustomerById
 } from "../models/bookModel.js";
 
 // Get All Products
@@ -199,3 +201,28 @@ export const showBookByCategory = (req, res) => {
       }
   });
 }
+
+// Update Customer by Id
+export const updateCustomer = (req, res) => {
+  const data = req.body;
+  const id = req.params.id;
+  updateCustomerById(data, id, res,(err, results) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.json(results);
+      location.reload();
+    }
+  });
+};
+
+// Get Single Customer
+export const showCustomerById = (req, res) => {
+  getCustomerById(req.params.id, (err, results) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.json(results);
+    }
+  });
+};
