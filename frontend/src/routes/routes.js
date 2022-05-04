@@ -22,11 +22,6 @@ export const routes = [
     component: userAuth,
   },
   {
-    path: "/cart",
-    name: "cart",
-    component: () => import("../views/Cart.vue"),
-  },
-  {
     path: "/detail/:id",
     name: "detail",
     component: () => import("../views/Detail.vue"),
@@ -38,9 +33,24 @@ export const routes = [
   },
 	{
 		path: "/test",
-		name: "test",
-		component: () => import("../views/asd/Login.vue"),
+		name: "testtest",
+		component: () => import("../views/Test.vue"),
 	},
+  {
+    path: "/me",
+    name: "profile",
+    component: () => import("../views/Profile.vue"),
+  },
+  {
+    path: "/test",
+    name: "test",
+    component: () => import("../views/asd/Login.vue"),
+  },
+  {
+    path: "/checkout",
+    name: "checkout",
+    component: () => import("../views/Checkout.vue"),
+  },
   // {
   //   path: "/admin",
   //   name: "admin",
@@ -65,31 +75,31 @@ export const routes = [
         name: "user-list",
         component: () => import("../views/dashboard/users/UserList.vue"),
       },
-			{
-				path: "/admins",
-				name: "admin-list",
-				component: () => import("../views/dashboard/users/AdminList.vue"),
-			},
+      {
+        path: "/admins",
+        name: "admin-list",
+        component: () => import("../views/dashboard/users/AdminList.vue"),
+      },
       {
         path: "/card",
         name: "card",
         component: () => import("../views/Card.vue"),
       },
-			{
-				path: "/books",
-				name: "book-list",
-				component: () => import("../views/dashboard/books/BookList.vue"),
-			},
-			{
-				path: "/category",
-				name: "category",
-				component: () => import("../views/dashboard/books/CategoryList.vue"),
-			},
       {
-				path: "/books/:page",
-				name: "book-page",
-				component: () => import("../views/dashboard/books/BookList.vue"),
-			}
+        path: "/books",
+        name: "book-list",
+        component: () => import("../views/dashboard/books/BookList.vue"),
+      },
+      {
+        path: "/category",
+        name: "category",
+        component: () => import("../views/dashboard/books/CategoryList.vue"),
+      },
+      {
+        path: "/books/:page",
+        name: "book-page",
+        component: () => import("../views/dashboard/books/BookList.vue"),
+      },
     ],
   },
   {
@@ -99,6 +109,6 @@ export const routes = [
   },
   { path: "/:path(.*)", component: NotFound },
   {
-    path: "/"
-  }
+    path: "/",
+  },
 ];

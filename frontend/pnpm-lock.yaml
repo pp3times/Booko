@@ -1,4 +1,4 @@
-lockfileVersion: 5.4
+lockfileVersion: 5.3
 
 specifiers:
   '@headlessui/vue': ^1.6.0
@@ -39,7 +39,7 @@ dependencies:
   vue: 3.2.33
   vue-boring-avatars: 1.1.0_vue@3.2.33
   vue-router: 4.0.14_vue@3.2.33
-  vue3-apexcharts: 1.4.1_c4h247nzg7vh5gje2cvfp5l3pq
+  vue3-apexcharts: 1.4.1_apexcharts@3.35.0+vue@3.2.33
   vuex: 4.0.2_vue@3.2.33
   vuex-persistedstate: 4.1.0_vuex@4.0.2
 
@@ -1398,7 +1398,7 @@ packages:
       '@vue/shared': 3.2.33
     dev: false
 
-  /vue3-apexcharts/1.4.1_c4h247nzg7vh5gje2cvfp5l3pq:
+  /vue3-apexcharts/1.4.1_apexcharts@3.35.0+vue@3.2.33:
     resolution: {integrity: sha512-96qP8JDqB9vwU7bkG5nVU+E0UGQn7yYQVqUUCLQMYWDuQyu2vE77H/UFZ1yI+hwzlSTBKT9BqnNG8JsFegB3eg==}
     peerDependencies:
       apexcharts: '> 3.0.0'
