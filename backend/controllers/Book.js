@@ -16,7 +16,20 @@ import {
   updateBookById,
   getBookByCategory,
   updateCustomerById,
-  getCustomerById
+  getCustomerById,
+  getOrder,
+  getCustomer,
+  updateOrderCheckById,
+  getBank,
+  getBankById,
+  updateBankById,
+  deleteBankById,
+  getPayment,
+  getPaymentById,
+  updatePaymentStatusById,
+  deletePaymentById,
+  updateInvoiceById,
+  updateOrderById
 } from "../models/bookModel.js";
 
 // Get All Products
@@ -219,6 +232,165 @@ export const updateCustomer = (req, res) => {
 // Get Single Customer
 export const showCustomerById = (req, res) => {
   getCustomerById(req.params.id, (err, results) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.json(results);
+    }
+  });
+};
+
+// Get All Order
+export const showOrder = (req, res) => {
+  getOrder((err, results) => {
+    if (err) {
+      console.log(err);
+      res.send(err);
+    } else {
+      res.json(results);
+    }
+  });
+};
+
+// Get All Customer
+export const showCustomer = (req, res) => {
+  getCustomer((err, results) => {
+    if (err) {
+      console.log(err);
+      res.send(err);
+    } else {
+      res.json(results);
+    }
+  });
+};
+
+// Update Order Check
+export const updateOrderCheck = (req, res) => {
+  const data = req.body;
+  const id = req.params.id;
+  updateOrderCheckById(data, id, (err, results) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.json(results);
+    }
+  });
+};
+
+// Get All Bank
+export const showBank = (req, res) => {
+  getBank((err, results) => {
+    if (err) {
+      console.log(err);
+      res.send(err);
+    } else {
+      res.json(results);
+    }
+  });
+};
+
+// Get Single Bank
+export const showBankById = (req, res) => {
+  getBankById(req.params.id, (err, results) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.json(results);
+    }
+  });
+};
+
+// Update Bank
+export const updateBank = (req, res) => {
+  const data = req.body;
+  const id = req.params.id;
+  updateBankById(data, id, (err, results) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.json(results);
+    }
+  });
+};
+
+// Delete Bank
+export const deleteBank = (req, res) => {
+  const id = req.params.id;
+  deleteBankById(id, (err, results) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.json(results);
+    }
+  });
+};
+
+// Get All Payment
+export const showPayment = (req, res) => {
+  getPayment((err, results) => {
+    if (err) {
+      console.log(err);
+      res.send(err);
+    } else {
+      res.json(results);
+    }
+  });
+};
+
+// Get Single Payment
+export const showPaymentById = (req, res) => {
+  getPaymentById(req.params.id, (err, results) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.json(results);
+    }
+  });
+};
+
+// Update Payment Status
+export const updatePaymentStatus = (req, res) => {
+  const data = req.body;
+  const id = req.params.id;
+  updatePaymentStatusById(data, id, (err, results) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.json(results);
+    }
+  });
+};
+
+// Delete Payment
+export const deletePayment = (req, res) => {
+  const id = req.params.id;
+  deletePaymentById(id, (err, results) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.json(results);
+    }
+  });
+};
+
+// Update Invoice
+export const updateInvoice = (req, res) => {
+  const data = req.body;
+  const id = req.params.id;
+  updateInvoiceById(data, id, (err, results) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.json(results);
+    }
+  });
+};
+
+// Update Order
+export const updateOrder = (req, res) => {
+  const data = req.body;
+  const id = req.params.id;
+  updateOrderById(data, id, (err, results) => {
     if (err) {
       res.send(err);
     } else {

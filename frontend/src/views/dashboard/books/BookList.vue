@@ -429,8 +429,9 @@ function openModal() {
                         <div>
                           <input
                             type="file"
+                            id="fileimage"
+                            name="fileimage"
                             class="h-full w-full opacity-1"
-                            multiple
                             accept="image/png, image/jpeg, image/webp"
                             @change="selectImages"
                           />
@@ -492,8 +493,8 @@ function openModal() {
         </div>
       </Dialog>
     </TransitionRoot>
-    <TransitionRoot appear :show="isOpen" as="template">
-      <Dialog as="div" @close="closeModal" class="relative z-10">
+    <TransitionRoot appear :show="create_modal" as="template">
+      <Dialog as="div" @close="closeCreateModal()" class="relative z-10">
         <TransitionChild
           as="template"
           enter="duration-300 ease-out"
@@ -549,6 +550,7 @@ function openModal() {
                     action="http://localhost:4000/api/books"
                     method="post"
                     enctype="multipart/form-data"
+                    @submit="checkForm"
                   >
                     <div>
                       <label for="bookname" class="text-md font-medium"
@@ -578,6 +580,7 @@ function openModal() {
                           name="bookname"
                           v-model="bookname"
                         />
+                
                       </div>
                     </div>
 
@@ -605,7 +608,7 @@ function openModal() {
                             rounded-lg
                             shadow-sm
                           "
-                          placeholder="กรุณากรอกนามสกุล"
+                          placeholder="กรุณากรอกคำอธิบายหนังสือ"
                           name="description"
                           v-model="description"
                         />
@@ -639,8 +642,8 @@ function openModal() {
                               shadow-sm
                             "
                             placeholder="XXX"
-                            v-model="page"
                             name="page"
+                            v-model="page"
                           />
                           <span
                             class="
@@ -681,8 +684,8 @@ function openModal() {
                               shadow-sm
                             "
                             placeholder="XXX"
-                            v-model="price"
                             name="price"
+                            v-model="price"
                           />
                           <span
                             class="
@@ -723,8 +726,8 @@ function openModal() {
                               shadow-sm
                             "
                             placeholder="XX"
-                            v-model="stock"
                             name="stock"
+                            v-model="stock"
                           />
                           <span
                             class="
@@ -765,8 +768,8 @@ function openModal() {
                             shadow-sm
                           "
                           placeholder="กรุณากรอกชื่อผู้แต่ง"
-                          v-model="author"
                           name="author"
+                          v-model="author"
                         />
                       </div>
                     </div>
@@ -795,8 +798,8 @@ function openModal() {
                             shadow-sm
                           "
                           placeholder="กรุณากรอกชื่อสำนักพิมพ์"
-                          v-model="publisher"
                           name="publisher"
+                          v-model="publisher"
                         />
                       </div>
                     </div>
@@ -864,8 +867,8 @@ function openModal() {
                               shadow-sm
                             "
                             placeholder="XXXXXXXXXXXXX"
-                            v-model="isbn"
                             name="isbn"
+                            v-model="isbn"
                           />
                         </div>
                       </div>
@@ -939,6 +942,12 @@ function openModal() {
                         </div>
                       </div> -->
                     </div>
+                    <p v-if="errors.length" class="mt-4 text-red-500">
+    <b>Please correct the following error(s):</b>
+    <ul>
+      <li v-for="error in errors" :key="error">{{ error }}</li>
+    </ul>
+  </p>
 
                     <!-- <button
                       @click="signUp"
@@ -973,7 +982,6 @@ function openModal() {
                           focus-visible:ring-primary
                           focus-visible:ring-offset-2
                         "
-                        @click="closeModal"
                         value="Upload"
                       />
                       <button
@@ -995,12 +1003,12 @@ function openModal() {
                           focus-visible:ring-red-500
                           focus-visible:ring-offset-2
                         "
-                        @click="closeModal"
+                        @click="closeCreateModal()"
                       >
                         Close
                       </button>
                     </div>
-                  </form>
+                  </Form>
                 </div>
               </DialogPanel>
             </TransitionChild>
@@ -1035,46 +1043,11 @@ function openModal() {
 
     <div class="p-4 mt-8 sm:px-8 sm:py-4">
       <div class="p-4 bg-white rounded">
-        <div class="flex justify-between">
-          <div>
-            <div class="relative text-gray-400">
-              <span class="absolute inset-y-0 left-0 flex items-center pl-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                  />
-                </svg>
-              </span>
-              <input
-                id="search"
-                name="search"
-                type="search"
-                class="
-                  w-full
-                  py-2
-                  text-sm text-gray-900
-                  rounded-md
-                  pl-10
-                  border border-gray-300
-                  focus:outline-none focus:ring-gray-500 focus:z-10
-                "
-                placeholder="Search user"
-              />
-            </div>
-          </div>
+        <div class="flex justify-end">
           <div>
             <div>
               <button
-                @click="openModal"
+                @click="openCreateModal"
                 class="
                   flex
                   items-center
@@ -1314,238 +1287,7 @@ function openModal() {
               </td>
             </tr>
           </tbody>
-          <tfoot>
-            <tr>
-              <td colspan="7" class="py-2">
-                <div
-                  class="
-                    hidden
-                    sm:flex-1 sm:flex sm:items-center sm:justify-between
-                  "
-                >
-                  <div>
-                    <p class="text-sm text-gray-500">
-                      Showing
-                      <span class="font-medium">1</span>
-                      to
-                      <span class="font-medium">5</span>
-                      of
-                      <span class="font-medium">42</span>
-                      results
-                    </p>
-                  </div>
-                  <div>
-                    <nav
-                      class="
-                        relative
-                        z-0
-                        inline-flex
-                        rounded-md
-                        shadow-sm
-                        -space-x-px
-                      "
-                      aria-label="Pagination"
-                    >
-                      <a
-                        href="#"
-                        class="
-                          relative
-                          inline-flex
-                          items-center
-                          px-2
-                          rounded-l-md
-                          border border-gray-300
-                          text-sm
-                          font-medium
-                          text-gray-500
-                          hover:bg-gray-50
-                        "
-                      >
-                        <span class="sr-only">Previous</span>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          class="h-6 w-6"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M15 19l-7-7 7-7"
-                          />
-                        </svg>
-                        <form action="" method="get"></form>
-                        <vue-router />
-                      </a>
-                      <!-- Current: "z-10 bg-indigo-50 border-indigo-500 text-indigo-600", Default: "bg-white border-gray-300 text-gray-500 hover:bg-gray-50" -->
-                      <a
-                        href="?page=1"
-                        aria-current="page"
-                        class="
-                          z-10
-                          bg-indigo-50
-                          border-indigo-500
-                          text-indigo-600
-                          relative
-                          inline-flex
-                          items-center
-                          px-4
-                          py-1
-                          border
-                          text-sm
-                          font-medium
-                        "
-                      >
-                        1
-                      </a>
-                      <router-view />
-                      <a
-                        href="?page=2"
-                        class="
-                          border-gray-300
-                          text-gray-500
-                          hover:bg-gray-50
-                          relative
-                          inline-flex
-                          items-center
-                          px-4
-                          py-1
-                          border
-                          text-sm
-                          font-medium
-                        "
-                      >
-                        2
-                      </a>
-                      <a
-                        href="?page=2"
-                        class="
-                          border-gray-300
-                          text-gray-500
-                          hover:bg-gray-50
-                          hidden
-                          md:inline-flex
-                          relative
-                          items-center
-                          px-4
-                          py-1
-                          border
-                          text-sm
-                          font-medium
-                        "
-                      >
-                        3
-                      </a>
-                      <span
-                        class="
-                          relative
-                          inline-flex
-                          items-center
-                          px-4
-                          py-1
-                          border border-gray-300
-                          text-sm
-                          font-medium
-                          text-gray-700
-                        "
-                      >
-                        ...
-                      </span>
-                      <a
-                        href="#"
-                        class="
-                          border-gray-300
-                          text-gray-500
-                          hover:bg-gray-50
-                          hidden
-                          md:inline-flex
-                          relative
-                          items-center
-                          px-4
-                          py-1
-                          border
-                          text-sm
-                          font-medium
-                        "
-                      >
-                        8
-                      </a>
-                      <a
-                        href="#"
-                        class="
-                          border-gray-300
-                          text-gray-500
-                          hover:bg-gray-50
-                          relative
-                          inline-flex
-                          items-center
-                          px-4
-                          py-1
-                          border
-                          text-sm
-                          font-medium
-                        "
-                      >
-                        9
-                      </a>
-                      <a
-                        href="#"
-                        class="
-                          border-gray-300
-                          text-gray-500
-                          hover:bg-gray-50
-                          relative
-                          inline-flex
-                          items-center
-                          px-4
-                          py-1
-                          border
-                          text-sm
-                          font-medium
-                        "
-                      >
-                        10
-                      </a>
-                      <a
-                        href="#"
-                        class="
-                          relative
-                          inline-flex
-                          items-center
-                          px-2
-                          py-1
-                          rounded-r-md
-                          border border-gray-300
-                          text-sm
-                          font-medium
-                          text-gray-500
-                          hover:bg-gray-50
-                        "
-                      >
-                        <span class="sr-only">Next</span>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          class="h-6 w-6"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M9 5l7 7-7 7"
-                          />
-                        </svg>
-                      </a>
-                    </nav>
-                  </div>
-                </div>
-              </td>
-            </tr>
-          </tfoot>
+          <tfoot></tfoot>
         </table>
       </div>
     </div>
@@ -1559,6 +1301,7 @@ import { Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/vue";
 import { ref } from "vue";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { Form, Field, ErrorMessage } from "vee-validate";
 
 export default {
   components: {
@@ -1566,6 +1309,9 @@ export default {
     MenuButton,
     MenuItems,
     MenuItem,
+    Form,
+    Field,
+    ErrorMessage,
   },
   data() {
     return {
@@ -1595,6 +1341,7 @@ export default {
       edit_category: 0,
       edit_isbn: null,
       edit_id: null,
+      create_modal: false,
     };
   },
   setup() {
@@ -1624,6 +1371,49 @@ export default {
         console.log(err);
       }
     },
+    checkForm: function (e) {
+      if (this.bookname && this.description && this.page && this.price && this.stock && this.author && this.publisher && this.selected_category != 0 && this.isbn) {
+        return true;
+      }
+
+      this.errors = [];
+
+      if (!this.bookname) {
+        this.errors.push('Book name required.');
+      }
+      if (!this.description) {
+        this.errors.push('Book description required.');
+      }
+      if (!this.page) {
+        this.errors.push('Book page required.');
+      }
+      if (!this.price) {
+        this.errors.push('Book price required.');
+      }
+      if (!this.stock) {
+        this.errors.push('Book stock required.');
+      }
+      if (!this.author) {
+        this.errors.push('Book author required.');
+      }
+      if (!this.publisher) {
+        this.errors.push('Book publisher required.');
+      }
+      if (!this.selected_category != 0) {
+        this.errors.push('Please select category.');
+      }
+      if (!this.isbn) {
+        this.errors.push('Book isbn required.');
+      }
+
+      e.preventDefault();
+  },
+    closeCreateModal() {
+      this.create_modal = false;
+    },
+    openCreateModal() {
+      this.create_modal = true;
+    },
     async getBooks() {
       try {
         const response = await axios.get("http://localhost:4000/api/books");
@@ -1648,7 +1438,7 @@ export default {
       }
     },
     selectImages(event) {
-      this.edit_image = event.target.files;
+      this.edit_image = event.target.files[0];
     },
     deleteUser(id) {
       Swal.fire({
@@ -1678,24 +1468,51 @@ export default {
       this.editIsOpen = false;
     },
     updateBook(book_id) {
-      let form_Data = new FormData();
-      form_Data.append("book_name", this.edit_name);
-      form_Data.append("book_description", this.edit_description);
-      form_Data.append("book_page", this.edit_page);
-      form_Data.append("book_price", this.ediit_price);
-      form_Data.append("book_stock", this.edit_stock);
-      form_Data.append("myImage", this.edit_image);
-      form_Data.append("book_author", this.edit_author);
-      form_Data.append("book_publisher", this.edit_publisher);
-      form_Data.append("category_id", this.edit_category);
-      form_Data.append("book_isbn", this.edit_isbn);
-
-      axios
-        .put("http://localhost:4000/api/books/" + book_id, form_Data)
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((e) => console.log(e));
+      var formData = new FormData();
+      var imagefile = document.querySelector("#fileimage");
+      formData.append("myImage", imagefile.files[0]);
+      formData.append("book_name", this.edit_name);
+      formData.append("book_description", this.edit_description);
+      formData.append("book_page", this.edit_page);
+      formData.append("book_price", this.ediit_price);
+      formData.append("book_stock", this.edit_stock);
+      formData.append("book_author", this.edit_author);
+      formData.append("book_publisher", this.edit_publisher);
+      formData.append("category_id", this.edit_category);
+      formData.append("book_isbn", this.edit_isbn);
+      console.log("here");
+      console.log(formData);
+      axios.put("http://localhost:4000/api/books/" + book_id, {
+        myImage: formData.get("myImage"),
+        book_name: this.edit_name,
+        book_description: this.edit_description,
+        book_page: this.edit_page,
+        book_price: this.ediit_price,
+        book_stock: this.edit_stock,
+        book_author: this.edit_author,
+        book_publisher: this.edit_publisher,
+        category_id: this.edit_category,
+        book_isbn: this.edit_isbn,
+      });
+      // let form_Data = new FormData();
+      // form_Data.append("book_name", this.edit_name);
+      // form_Data.append("book_description", this.edit_description);
+      // form_Data.append("book_page", this.edit_page);
+      // form_Data.append("book_price", this.ediit_price);
+      // form_Data.append("book_stock", this.edit_stock);
+      // this.edit_image.forEach((image) => {
+      //   form_Data.append("myImage", image);
+      // });
+      // form_Data.append("book_author", this.edit_author);
+      // form_Data.append("book_publisher", this.edit_publisher);
+      // form_Data.append("category_id", this.edit_category);
+      // form_Data.append("book_isbn", this.edit_isbn);
+      // axios
+      //   .put("http://localhost:4000/api/books/" + book_id, form_Data)
+      //   .then((res) => {
+      //     console.log(res);
+      //   })
+      //   .catch((e) => console.log(e));
     },
     async getBookById(id) {
       try {
