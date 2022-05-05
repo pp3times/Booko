@@ -46,6 +46,11 @@ export const routes = [
     name: "profile",
     component: () => import("../views/Profile.vue"),
   },
+	{
+		path: "/payment",
+		name: "payment",
+		component: () => import("../views/Payment.vue"),
+	},
   {
     path: "/test",
     name: "test",

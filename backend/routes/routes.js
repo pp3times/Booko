@@ -143,24 +143,43 @@ router.get("/books", showBook);
 // Get Single Book
 router.get("/books/:id", showBookById);
 
-
 // router.put('/books/:id', upload.single('myImage'), updateBook);
-router.put("/books/:id", upload.single('myImage'), async function (req, res, next) {
-  console.log(req.body.book_name);
-  if (!req.file) {
+router.put(
+  "/books/:id",
+  upload.single("myImage"),
+  async function (req, res, next) {
+    console.log(req.body.book_name);
+    if (!req.file) {
       console.log(req.body);
       console.log("No file upload");
-  } else {
-      console.log(req.file.filename)
-      console.log('else');
-      var imgsrc = 'http://localhost:4000/images/' + req.file.filename
-      db.query("UPDATE tb_book SET book_name = ?, book_description = ?, book_page = ?, book_price = ?, book_stock = ?, book_coversrc = ?, book_author = ?, book_publisher = ?, category_id = ?, book_isbn = ? WHERE book_id = ?", [req.body.book_name, req.body.book_description, req.body.book_page, req.body.book_price, req.body.book_stock, imgsrc, req.body.book_author, req.body.book_publisher, req.body.category_id, req.body.book_isbn, req.params.id], (err, result) => {
-          if (err) throw err
-          console.log("file uploaded")
-      })
+    } else {
+      console.log(req.file.filename);
+      console.log("else");
+      var imgsrc = "http://localhost:4000/images/" + req.file.filename;
+      db.query(
+        "UPDATE tb_book SET book_name = ?, book_description = ?, book_page = ?, book_price = ?, book_stock = ?, book_coversrc = ?, book_author = ?, book_publisher = ?, category_id = ?, book_isbn = ? WHERE book_id = ?",
+        [
+          req.body.book_name,
+          req.body.book_description,
+          req.body.book_page,
+          req.body.book_price,
+          req.body.book_stock,
+          imgsrc,
+          req.body.book_author,
+          req.body.book_publisher,
+          req.body.category_id,
+          req.body.book_isbn,
+          req.params.id,
+        ],
+        (err, result) => {
+          if (err) throw err;
+          console.log("file uploaded");
+        }
+      );
+    }
   }
-});
- 
+);
+
 // Delete Category
 router.delete("/books/:id", deleteBook);
 
