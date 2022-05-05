@@ -8,14 +8,28 @@
         class="w-full bg-white lg:w-full xl:w-2/3 lg:mt-20 lg:mb-20 lg:shadow-xl xl:mt-02 xl:mb-20 xl:shadow-xl print:transform print:scale-90"
       >
         <header
-          class="flex flex-col items-center px-8 pt-20 text-lg text-center bg-white border-t-8 border-primary md:block lg:block xl:block print:block md:items-start lg:items-start xl:items-start print:items-start md:text-left lg:text-left xl:text-left print:text-left print:pt-8 print:px-2 md:relative lg:relative xl:relative print:relative"
+          class="flex flex-col items-center px-8 pt-20 text-lg text-center bg-white border-t-8 md:block lg:block xl:block print:block md:items-start lg:items-start xl:items-start print:items-start md:text-left lg:text-left xl:text-left print:text-left print:pt-8 print:px-2 md:relative lg:relative xl:relative print:relative"
+          :class="{
+            'border-primary': data.invoice_status === 'paid',
+            'border-red-500': data.invoice_status === 'reserved',
+            'border-yellow-500': data.invoice_status === 'waiting',
+            'border-blue-500': data.invoice_status === 'delivered',
+            'border-slate-500': data.invoice_status === 'cancel',
+          }"
         >
           <!-- <img
             class="w-3/6 h-auto md:w-1/4 lg:ml-12 xl:ml-12 print:px-0 print:py-0"
             src="https://via.placeholder.com/200x100.png"
           /> -->
           <div
-            class="w-3/6 h-auto md:w-1/4 lg:ml-12 xl:ml-12 print:px-0 print:py-0 text-primary text-5xl font-bold"
+            class="w-3/6 h-auto md:w-1/4 lg:ml-12 xl:ml-12 print:px-0 print:py-0 text-5xl font-bold"
+            :class="{
+              'text-primary': data.invoice_status === 'paid',
+              'text-red-500': data.invoice_status === 'reserved',
+              'text-yellow-500': data.invoice_status === 'waiting',
+              'text-blue-500': data.invoice_status === 'delivered',
+              'text-slate-500': data.invoice_status === 'cancel',
+            }"
           >
             Booko
           </div>
@@ -23,7 +37,16 @@
             class="flex flex-row mt-12 mb-2 ml-0 text-2xl font-bold md:text-3xl lg:text-4xl xl:text-4xl print:text-2xl lg:ml-12 xl:ml-12"
           >
             INVOICE
-            <div class="text-primary">
+            <div
+              class="text-primary"
+              :class="{
+                'text-primary': data.invoice_status === 'paid',
+                'text-red-500': data.invoice_status === 'reserved',
+                'text-yellow-500': data.invoice_status === 'waiting',
+                'text-blue-500': data.invoice_status === 'delivered',
+                'text-slate-500': data.invoice_status === 'cancel',
+              }"
+            >
               <span class="mr-4 text-sm"> </span> #
             </div>
             <span id="invoice_id" class="text-gray-500">
@@ -33,13 +56,20 @@
           </div>
           <div class="flex flex-col lg:ml-12 xl:ml-12 print:text-sm">
             <!-- <span>Issue date: 2020.09.06</span> -->
-            <span>Paid date: 2020.09.07</span>
-            <span>Due date: 2020.10.06</span>
+            <span v-if="data.invoice_status === 'paid' || data.invoice_status === 'paid'">Paid date: 2020.09.07</span>
+            <span>Due date: {{ datetimenow }}</span>
           </div>
           <div
             class="px-8 py-2 mt-16 text-3xl font-bold text-primary border-4 border-gray-200 border-dashed md:absolute md:right-0 md:top-0 md:mr-12 lg:absolute lg:right-0 lg:top-0 xl:absolute xl:right-0 xl:top-0 print:absolute print:right-0 print:top-0 lg:mr-20 xl:mr-20 print:mr-2 print:mt-8"
+            :class="{
+              'text-primary': data.invoice_status === 'paid',
+              'text-red-500': data.invoice_status === 'reserved',
+              'text-yellow-500': data.invoice_status === 'waiting',
+              'text-blue-500': data.invoice_status === 'delivered',
+              'text-slate-500': data.invoice_status === 'cancel',
+            }"
           >
-            PAID
+            {{ data.invoice_status }}
           </div>
           <contract
             class="flex flex-col m-12 text-center lg:m-12 md:flex-none md:text-left md:relative md:m-0 md:mt-16 lg:flex-none lg:text-left lg:relative xl:flex-none xl:text-left xl:relative print:flex-none print:text-left print:relative print:m-0 print:mt-6 print:text-sm"
@@ -50,8 +80,8 @@
             >
             <from class="flex flex-col">
               <span id="company-name" class="font-medium"
-                >{{ user.customer_firstname }}
-                {{ user.customer_lastname }}</span
+                >{{ data.invoice_firstname }}
+                {{ data.invoice_lastname }}</span
               >
               <span id="company-country"
                 ><span class="flag-icon flag-icon-us"></span>
@@ -72,7 +102,7 @@
               <span id="company-phone">{{
                 filterAddress[0].address_phone
               }}</span>
-              <span id="company-mail">{{ this.user.customer_mail }}</span>
+              <span id="company-mail">{{ user.customer_mail }}</span>
             </from>
             <span
               class="mt-12 font-extrabold md:hidden lg:hidden xl:hidden print:hidden"
@@ -183,18 +213,18 @@
             </table>
           </div>
         </content>
-        <payment-history>
+        <payment-history v-if="data.invoice_status === 'paid'">
           <div class="mt-20 mb-20 print:mb-2 print:mt-2">
             <h2 class="text-xl font-semibold text-center print:text-sm">
-              Payment History
+              ประวัติการชำระเงิน
             </h2>
             <div class="flex flex-col items-center text-center print:text-sm">
               <p class="font-medium">
-                2020/09/06 06:43PM CET
-                <span class="font-light"
-                  ><i class="lab la-cc-mastercard la-lg"></i> Credit Card
-                  Payment: $685.66 (Mastercard XXXX-XXXX-XXXX-0122)</span
-                >
+                2022/09/06 06:43PM
+                <span class="font-light">
+                  จำนวนเงิน <span class="font-extrabold">1,000</span> บาท
+                  เข้าบัญชีธนาคารกสิกรไทย
+                </span>
               </p>
             </div>
           </div>
@@ -204,7 +234,7 @@
         >
           <span
             class="w-64 text-4xl text-center text-black border-b-2 border-black border-dotted opacity-75 sign print:text-lg"
-            >{{ user.customer_firstname }}</span
+            >{{ data.invoice_firstname }}</span
           >
           <span class="text-center mt-3">ผู้ซื้อ</span>
         </div>
@@ -289,15 +319,21 @@ export default {
                             return item2.order_items_quantity_per_book;
                           }
                         })[0].order_items_quantity_per_book,
-                        book_totalprice: new Intl.NumberFormat("th-TH", {
-                          maximumSignificantDigits: 3,
-                        }).format(
+                        // book_totalprice: new Intl.NumberFormat("th-TH", {
+                        //   maximumSignificantDigits: 3,
+                        // }).format(
+                        //   this.order_items.filter((item2) => {
+                        //     if (item2.order_items_book_id === item.book_id) {
+                        //       return item2.order_items_quantity_per_book;
+                        //     }
+                        //   })[0].order_items_quantity_per_book * item.book_price
+                        // ),
+                        book_totalprice:
                           this.order_items.filter((item2) => {
                             if (item2.order_items_book_id === item.book_id) {
                               return item2.order_items_quantity_per_book;
                             }
-                          })[0].order_items_quantity_per_book * item.book_price
-                        ),
+                          })[0].order_items_quantity_per_book * item.book_price,
                       });
                     });
                     this.order_items.forEach((item2) => {
@@ -388,23 +424,34 @@ export default {
         second: "numeric",
       }).format(new Date());
     },
+    datetimenow() {
+      return new Intl.DateTimeFormat("th-TH", {
+        year: "numeric",
+        month: "numeric",
+        day: "2-digit",
+      }).format(new Date());
+    },
     totalprice() {
       let total = 0;
       this.invoice_items.forEach((item) => {
-        total += parseFloat(item.book_totalprice.replace(",", ""));
+        // total += parseFloat(item.book_totalprice.replace(",", ""));
+        total += parseFloat(item.book_totalprice);
       });
-      return new Intl.NumberFormat("th-TH", {
-        maximumSignificantDigits: 3,
-      }).format(total);
+      // return new Intl.NumberFormat("th-TH", {
+      //   maximumSignificantDigits: 3,
+      // }).format(total);
+      return total;
     },
     totalpricetax() {
       let total = 0;
       this.invoice_items.forEach((item) => {
-        total += parseFloat(item.book_totalprice.replace(",", ""));
+        // total += parseFloat(item.book_totalprice.replace(",", ""));
+        total += parseFloat(item.book_totalprice);
       });
-      return new Intl.NumberFormat("th-TH", {
-        maximumSignificantDigits: 3,
-      }).format(total * 1.07);
+      // return new Intl.NumberFormat("th-TH", {
+      //   maximumSignificantDigits: 3,
+      // }).format(total * 1.07);
+      return (total * 1.07).toFixed(2);
     },
     filterAddress() {
       return this.address.filter((address) => {

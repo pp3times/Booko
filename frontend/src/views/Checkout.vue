@@ -171,7 +171,7 @@
 
                 <fieldset class="col-span-6">
                   <legend class="block mb-1 text-sm text-gray-600">
-                    ทีั่อยู่สำหรับจัดส่ง
+                    ที่อยู่สำหรับจัดส่ง
                   </legend>
 
                   <div class="-space-y-px bg-white rounded-lg shadow-sm">
@@ -388,7 +388,7 @@ export default {
       this.cart.forEach((product) => {
         total += product.quantity * product.book_price * (1 + 0.07);
       });
-      return total;
+      return total.toFixed(2);
     },
   },
 };

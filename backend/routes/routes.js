@@ -702,21 +702,18 @@ router.get("/orderitem/:orderId", (req, res, next) => {
 
 // get invoice
 router.get("/invoice", (req, res, next) => {
-	db.query(
-		`SELECT * FROM tb_invoice;`,
-		(err, result) => {
-			if (err) {
-				throw err;
-				return res.status(400).send({
-					msg: err,
-				});
-			}
-			return res.status(200).send({
-				msg: "Get Invoice Success!",
-				result,
-			});
-		}
-	);
+  db.query(`SELECT * FROM tb_invoice;`, (err, result) => {
+    if (err) {
+      throw err;
+      return res.status(400).send({
+        msg: err,
+      });
+    }
+    return res.status(200).send({
+      msg: "Get Invoice Success!",
+      result,
+    });
+  });
 });
 
 // export default router
