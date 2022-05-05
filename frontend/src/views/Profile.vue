@@ -463,7 +463,7 @@ export default {
     async getCustomerById(id) {
       try {
         const response = await axios.get(
-          "http://localhost:4000/api/customer/"+id
+          "http://localhost:4000/api/customer/" + id
         );
         this.edit_id = response.data.customer_id;
         this.edit_mail = response.data.customer_mail;
@@ -520,14 +520,6 @@ export default {
         (address) => address.customer_id === this.user.customer_id
       );
     });
-
-    axios
-      .get(
-        "https://raw.githubusercontent.com/earthchie/jquery.Thailand.js/master/jquery.Thailand.js/database/raw_database/raw_database.json"
-      )
-      .then((res) => {
-        this.address_fetch = res.data;
-      });
   },
 };
 </script>

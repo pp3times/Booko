@@ -19,7 +19,10 @@
 
               <div class="mt-8">
                 <p class="text-2xl font-medium tracking-tight">
-                  ยอดสุทธิ {{ total }} บาท
+                  ยอดสุทธิ {{ totalpricewithvat }} +
+                  <span class="text-gray-500">
+                    VAT 7% จาก ( {{ total }} บาท )</span
+                  >
                 </p>
                 <p class="mt-1 text-sm text-gray-500">
                   จากหนังสือ {{ totalbook }} รายการ ดังนี้
@@ -238,7 +241,7 @@ export default {
       axios
         .post("http://localhost:4000/api/order/add", {
           order_customer_id: this.user.customer_id,
-          order_price: this.total,
+          order_price: this.totalpricewithvat,
           order_quantity: this.totalbook,
           order_address_id: this.address,
         })
@@ -377,6 +380,13 @@ export default {
       let total = 0;
       this.cart.forEach((product) => {
         total += product.quantity;
+      });
+      return total;
+    },
+    totalpricewithvat() {
+      let total = 0;
+      this.cart.forEach((product) => {
+        total += product.quantity * product.book_price * (1 + 0.07);
       });
       return total;
     },
