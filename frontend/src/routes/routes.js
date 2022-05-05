@@ -22,8 +22,8 @@ export const routes = [
     component: userAuth,
   },
   {
-    path: "/payment",
-    name: "payment",
+    path: "/payments",
+    name: "payments",
     component: () => import("../views/Payment.vue"),
   },
   {
