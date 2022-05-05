@@ -148,69 +148,6 @@ function openModal() {
                         />
                       </div>
                     </div>
-
-                    <!-- <div
-                      class="grid grid-cols-1 gap-4 text-center sm:grid-cols-3"
-                    >
-                      <div>
-                        <input
-                          class="sr-only"
-                          id="option1"
-                          type="radio"
-                          tabindex="-1"
-                        />
-                        <label
-                          for="option1"
-                          class="block w-full p-3 border border-gray-200 rounded-lg"
-                          tabindex="0"
-                        >
-                          <span class="text-sm font-medium"> Option 1 </span>
-                        </label>
-                      </div>
-
-                      <div>
-                        <input
-                          class="sr-only"
-                          id="option2"
-                          type="radio"
-                          tabindex="-1"
-                        />
-                        <label
-                          for="option2"
-                          class="block w-full p-3 border border-gray-200 rounded-lg"
-                          tabindex="0"
-                        >
-                          <span class="text-sm font-medium"> Option 2 </span>
-                        </label>
-                      </div>
-
-                      <div>
-                        <input
-                          class="sr-only"
-                          id="option3"
-                          type="radio"
-                          tabindex="-1"
-                        />
-                        <label
-                          for="option3"
-                          class="block w-full p-3 border border-gray-200 rounded-lg"
-                          tabindex="0"
-                        >
-                          <span class="text-sm font-medium"> Option 3 </span>
-                        </label>
-                      </div>
-                    </div> -->
-
-                    <!-- <div>
-                      <label class="sr-only" for="message">Message</label>
-                      <textarea
-                        class="w-full p-3 text-sm border-gray-200 rounded-lg"
-                        placeholder="Message"
-                        rows="8"
-                        id="message"
-                      ></textarea>
-                    </div> -->
-
                     <div class="mt-4 flex items-center justify-end space-x-3">
                       <div
                         @click="closeModal"
@@ -248,13 +185,12 @@ function openModal() {
       class="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8 font-sukhumvit"
     >
       <div class="max-w-lg mx-auto flex flex-col items-center">
-        <BaseAvatar name="Jeremy" size="xl" color="red" />
+        <BaseAvatar
+          :name="this.user.customer_firstname"
+          size="xl"
+          color="red"
+        />
         <h1 class="text-2xl font-bold sm:text-3xl mt-10">แก้ไขข้อมูลส่วนตัว</h1>
-
-        <!-- <p class="mt-4 text-gray-500">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Et libero
-          nulla eaque error neque ipsa culpa autem, at itaque nostrum!
-        </p> -->
       </div>
 
       <form action="" class="max-w-md mx-auto mt-8 mb-0 space-y-4">
@@ -527,7 +463,7 @@ export default {
     async getCustomerById(id) {
       try {
         const response = await axios.get(
-          "http://localhost:4000/api/customer/"+id
+          "http://localhost:4000/api/customer/" + id
         );
         this.edit_id = response.data.customer_id;
         this.edit_mail = response.data.customer_mail;
@@ -584,14 +520,6 @@ export default {
         (address) => address.customer_id === this.user.customer_id
       );
     });
-
-    axios
-      .get(
-        "https://raw.githubusercontent.com/earthchie/jquery.Thailand.js/master/jquery.Thailand.js/database/raw_database/raw_database.json"
-      )
-      .then((res) => {
-        this.address_fetch = res.data;
-      });
   },
 };
 </script>

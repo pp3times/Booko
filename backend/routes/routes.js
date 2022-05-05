@@ -159,24 +159,40 @@ router.get("/books", showBook);
 // Get Single Book
 router.get("/books/:id", showBookById);
 
-
 // router.put('/books/:id', upload.single('myImage'), updateBook);
 router.put("/books/:id", upload.single("myImage"), async function (req, res, next) {
   console.log(req.body.book_name);
   if (!req.file) {
       console.log(req.body);
       console.log("No file upload");
-  } else {
-      console.log(req.file.filename)
-      console.log('else');
-      var imgsrc = 'http://localhost:4000/images/' + req.file.filename
-      db.query("UPDATE tb_book SET book_name = ?, book_description = ?, book_page = ?, book_price = ?, book_stock = ?, book_coversrc = ?, book_author = ?, book_publisher = ?, category_id = ?, book_isbn = ? WHERE book_id = ?", [req.body.book_name, req.body.book_description, req.body.book_page, req.body.book_price, req.body.book_stock, imgsrc, req.body.book_author, req.body.book_publisher, req.body.category_id, req.body.book_isbn, req.params.id], (err, result) => {
-          if (err) throw err
-          console.log("file uploaded")
-      })
+    } else {
+      console.log(req.file.filename);
+      console.log("else");
+      var imgsrc = "http://localhost:4000/images/" + req.file.filename;
+      db.query(
+        "UPDATE tb_book SET book_name = ?, book_description = ?, book_page = ?, book_price = ?, book_stock = ?, book_coversrc = ?, book_author = ?, book_publisher = ?, category_id = ?, book_isbn = ? WHERE book_id = ?",
+        [
+          req.body.book_name,
+          req.body.book_description,
+          req.body.book_page,
+          req.body.book_price,
+          req.body.book_stock,
+          imgsrc,
+          req.body.book_author,
+          req.body.book_publisher,
+          req.body.category_id,
+          req.body.book_isbn,
+          req.params.id,
+        ],
+        (err, result) => {
+          if (err) throw err;
+          console.log("file uploaded");
+        }
+      );
+    }
   }
-});
- 
+);
+
 // Delete Category
 router.delete("/books/:id", deleteBook);
 
@@ -595,6 +611,124 @@ router.put("/customer/:id", updateCustomer);
 // Get Single Product
 router.get("/customer/:id", showCustomerById);
 
+// get invoice by cus id
+router.get("/payment/:cusId", (req, res, next) => {
+  db.query(
+    `SELECT * FROM tb_invoice WHERE invoice_customer_id = ${db.escape(
+      req.params.cusId
+    )};`,
+    (err, result) => {
+      if (err) {
+        throw err;
+        return res.status(400).send({
+          msg: err,
+        });
+      }
+      return res.status(200).send({
+        msg: "Get Invoice Success!",
+        result,
+      });
+    }
+  );
+});
+
+// get invoice by id and get order by invoice_order_id
+router.get("/invoice/:id", (req, res, next) => {
+  db.query(
+    `SELECT * FROM tb_invoice WHERE invoice_id = ${db.escape(req.params.id)};`,
+    (err, result) => {
+      if (err) {
+        throw err;
+        return res.status(400).send({
+          msg: err,
+        });
+      }
+      return res.status(200).send({
+        msg: "Get Invoice Success!",
+        result,
+      });
+    }
+  );
+});
+
+router.get("/address/:cusId", (req, res, next) => {
+  db.query(
+    `SELECT * FROM tb_address WHERE customer_id = ${db.escape(
+      req.params.cusId
+    )};`,
+    (err, result) => {
+      if (err) {
+        throw err;
+        return res.status(400).send({
+          msg: err,
+        });
+      }
+      return res.status(200).send({
+        msg: "Get Address Success!",
+        result,
+      });
+    }
+  );
+});
+
+router.get("/order/:cusId", (req, res, next) => {
+  db.query(
+    `SELECT * FROM tb_order WHERE order_customer_id = ${db.escape(
+      req.params.cusId
+    )};`,
+    (err, result) => {
+      if (err) {
+        throw err;
+        return res.status(400).send({
+          msg: err,
+        });
+      }
+      return res.status(200).send({
+        msg: "Get Order Success!",
+        result,
+      });
+    }
+  );
+});
+
+router.get("/orderitem/:orderId", (req, res, next) => {
+  db.query(
+    `SELECT * FROM tb_order_items WHERE order_items_order_id = ${db.escape(
+      req.params.orderId
+    )};`,
+    (err, result) => {
+      if (err) {
+        throw err;
+        return res.status(400).send({
+          msg: err,
+        });
+      }
+      return res.status(200).send({
+        msg: "Get Order Item Success!",
+        result,
+      });
+    }
+  );
+});
+
+// get invoice
+router.get("/invoice", (req, res, next) => {
+	db.query(
+		`SELECT * FROM tb_invoice;`,
+		(err, result) => {
+			if (err) {
+				throw err;
+				return res.status(400).send({
+					msg: err,
+				});
+			}
+			return res.status(200).send({
+				msg: "Get Invoice Success!",
+				result,
+			});
+		}
+	);
+});
 // Get All Order
 router.get("/order", showOrder);
 

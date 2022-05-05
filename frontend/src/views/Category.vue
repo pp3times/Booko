@@ -2,7 +2,7 @@
   <div>
     <Header />
     <div class="container mx-auto min-h-[85vh] px-6 py-8">
-      <h1 class="text-4xl">ผลการค้นหาสำหรับ '{{category[id-1].category_name }}'</h1>
+      <h1 class="text-4xl">ผลการค้นหาสำหรับ '{{ id }}'</h1>
       <div class="my-10 bg-white">
         <div>
           <div
@@ -93,6 +93,9 @@ export default {
         this.errorMessage = error.message;
         console.error("There was an error!", error);
       });
+
+    this.id = this.category[this.$route.params.id - 1];
+
     axios
       .get("http://localhost:4000/api/books")
       .then((response) => (this.book = response.data))
