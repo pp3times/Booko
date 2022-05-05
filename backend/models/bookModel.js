@@ -250,3 +250,178 @@ export const getCustomerById = (id, result) => {
     }
   });
 };
+
+// Get All order
+export const getOrder = (result) => {
+  db.query("SELECT * FROM tb_order", (err, results) => {             
+      if(err) {
+          console.log(err);
+          result(err, null);
+      } else {
+          result(null, results);
+      }
+  });   
+};
+
+// Get All Products
+export const getCustomer = (result) => {
+  db.query("SELECT * FROM tb_customer", (err, results) => {
+    if (err) {
+      console.log(err);
+      result(err, null);
+    } else {
+      result(null, results);
+    }
+  });
+};
+
+// Update ORderCheck to Database
+export const updateOrderCheckById = (data, id, result) => {
+  db.query(
+    "UPDATE tb_order SET order_check = ? WHERE order_id = ?",
+    [data.order_check, id],
+    (err, results) => {
+      if (err) {
+        console.log(err);
+        result(err, null);
+      } else {
+        result(null, results);
+      }
+    }
+  );
+};
+
+// Get All Bank
+export const getBank = (result) => {
+  db.query("SELECT * FROM tb_bank", (err, results) => {
+    if (err) {
+      console.log(err);
+      result(err, null);
+    } else {
+      result(null, results);
+    }
+  });
+};
+
+// Get Single Bank
+export const getBankById = (id, result) => {
+  db.query("SELECT * FROM tb_bank WHERE bank_id = ?", [id], (err, results) => {
+    if (err) {
+      console.log(err);
+      result(err, null);
+    } else {
+      result(null, results[0]);
+    }
+  });
+};
+
+// Update Bank to Database
+export const updateBankById = (data, id, result) => {
+  db.query(
+    "UPDATE tb_bank SET bank_name = ?, bank_account_name = ?, bank_account_number = ? WHERE bank_id = ?",
+    [data.bank_name, data.bank_account_name, data.bank_account_number, id],
+    (err, results) => {
+      if (err) {
+        console.log(err);
+        result(err, null);
+      } else {
+        result(null, results);
+      }
+    }
+  );
+};
+
+// Delete Product to Database
+export const deleteBankById = (id, result) => {
+  db.query("DELETE FROM tb_bank WHERE bank_id = ?", [id], (err, results) => {
+    if (err) {
+      console.log(err);
+      result(err, null);
+    } else {
+      result(null, results);
+    }
+  });
+};
+
+// Get All Payment
+export const getPayment = (result) => {
+  db.query("SELECT * FROM tb_payment INNER JOIN tb_invoice ON tb_payment.payment_invoice_id = tb_invoice.invoice_id", (err, results) => {
+    if (err) {
+      console.log(err);
+      result(err, null);
+    } else {
+      result(null, results);
+    }
+  });
+};
+// Get Single Payment
+export const getPaymentById = (id, result) => {
+  db.query("SELECT * FROM tb_payment WHERE payment_id = ?", [id], (err, results) => {
+    if (err) {
+      console.log(err);
+      result(err, null);
+    } else {
+      result(null, results[0]);
+    }
+  });
+};
+
+// Update Payment to Database
+export const updatePaymentStatusById = (data, id, result) => {
+  db.query(
+    "UPDATE tb_payment SET payment_status = ? WHERE payment_id = ?",
+    [data.payment_status, id],
+    (err, results) => {
+      if (err) {
+        console.log(err);
+        result(err, null);
+      } else {
+        result(null, results);
+      }
+    }
+  );
+};
+
+// Delete Product to Database
+export const deletePaymentById = (id, result) => {
+  db.query("DELETE FROM tb_payment WHERE payment_id = ?", [id], (err, results) => {
+    if (err) {
+      console.log(err);
+      result(err, null);
+    } else {
+      result(null, results);
+    }
+  });
+};
+
+// Update Order to Database
+export const updateOrderById = (data, id, result) => {
+  db.query(
+    "UPDATE tb_order SET ? WHERE order_id = ?",
+    [data, id],
+    (err, results) => {
+      if (err) {
+        console.log(err);
+        result(err, null);
+      } else {
+        result(null, results);
+      }
+    }
+  );
+};
+
+// Update Order to Database
+export const updateInvoiceById = (data, id, result) => {
+  db.query(
+    "UPDATE tb_invoice SET ? WHERE invoice_id = ?",
+    [data, id],
+    (err, results) => {
+      if (err) {
+        console.log(err);
+        result(err, null);
+      } else {
+        result(null, results);
+      }
+    }
+  );
+};
