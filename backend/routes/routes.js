@@ -22,6 +22,8 @@ import {
   showBookById,
   updateBook,
   deleteBook,
+  updateCustomer,
+  showCustomerById,
 } from "../controllers/Book.js";
 
 import multer from "multer";
@@ -590,6 +592,131 @@ router.post("/invoice/add", (req, res, next) => {
       });
     }
   );
+});
+
+// Update Product
+router.put("/customer/:id", updateCustomer);
+
+// Get Single Product
+router.get("/customer/:id", showCustomerById);
+
+// get invoice by cus id
+router.get("/payment/:cusId", (req, res, next) => {
+  db.query(
+    `SELECT * FROM tb_invoice WHERE invoice_customer_id = ${db.escape(
+      req.params.cusId
+    )};`,
+    (err, result) => {
+      if (err) {
+        throw err;
+        return res.status(400).send({
+          msg: err,
+        });
+      }
+      return res.status(200).send({
+        msg: "Get Invoice Success!",
+        result,
+      });
+    }
+  );
+});
+
+// get invoice by id and get order by invoice_order_id
+router.get("/invoice/:id", (req, res, next) => {
+  db.query(
+    `SELECT * FROM tb_invoice WHERE invoice_id = ${db.escape(req.params.id)};`,
+    (err, result) => {
+      if (err) {
+        throw err;
+        return res.status(400).send({
+          msg: err,
+        });
+      }
+      return res.status(200).send({
+        msg: "Get Invoice Success!",
+        result,
+      });
+    }
+  );
+});
+
+router.get("/address/:cusId", (req, res, next) => {
+  db.query(
+    `SELECT * FROM tb_address WHERE customer_id = ${db.escape(
+      req.params.cusId
+    )};`,
+    (err, result) => {
+      if (err) {
+        throw err;
+        return res.status(400).send({
+          msg: err,
+        });
+      }
+      return res.status(200).send({
+        msg: "Get Address Success!",
+        result,
+      });
+    }
+  );
+});
+
+router.get("/order/:cusId", (req, res, next) => {
+  db.query(
+    `SELECT * FROM tb_order WHERE order_customer_id = ${db.escape(
+      req.params.cusId
+    )};`,
+    (err, result) => {
+      if (err) {
+        throw err;
+        return res.status(400).send({
+          msg: err,
+        });
+      }
+      return res.status(200).send({
+        msg: "Get Order Success!",
+        result,
+      });
+    }
+  );
+});
+
+router.get("/orderitem/:orderId", (req, res, next) => {
+  db.query(
+    `SELECT * FROM tb_order_items WHERE order_items_order_id = ${db.escape(
+      req.params.orderId
+    )};`,
+    (err, result) => {
+      if (err) {
+        throw err;
+        return res.status(400).send({
+          msg: err,
+        });
+      }
+      return res.status(200).send({
+        msg: "Get Order Item Success!",
+        result,
+      });
+    }
+  );
+});
+
+// get invoice
+router.get("/invoice", (req, res, next) => {
+	db.query(
+		`SELECT * FROM tb_invoice;`,
+		(err, result) => {
+			if (err) {
+				throw err;
+				return res.status(400).send({
+					msg: err,
+				});
+			}
+			return res.status(200).send({
+				msg: "Get Invoice Success!",
+				result,
+			});
+		}
+	);
 });
 
 // export default router

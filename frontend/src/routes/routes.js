@@ -22,6 +22,11 @@ export const routes = [
     component: userAuth,
   },
   {
+    path: "/payment",
+    name: "payment",
+    component: () => import("../views/Payment.vue"),
+  },
+  {
     path: "/detail/:id",
     name: "detail",
     component: () => import("../views/Detail.vue"),
@@ -36,11 +41,16 @@ export const routes = [
     name: "categorysearch",
     component: () => import("../views/Category.vue"),
   },
-	{
-		path: "/test",
-		name: "testtest",
-		component: () => import("../views/Test.vue"),
-	},
+  {
+    path: "/test",
+    name: "testtest",
+    component: () => import("../views/Test.vue"),
+  },
+  {
+    path: "/invoice/:id",
+    name: "invoice",
+    component: () => import("../views/Invoice.vue"),
+  },
   {
     path: "/me",
     name: "profile",
