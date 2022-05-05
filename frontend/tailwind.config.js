@@ -14,8 +14,8 @@ module.exports = {
       fontFamily: {
         sans: ['"Inter var"', ...defaultTheme.fontFamily.sans],
         ibm: ["IBM Plex Sans Thai", "sans-serif"],
-				inter: ["Inter", "sans-serif"],
-				sukhumvit: ["Sukhumvit Set", "sans-serif"],
+        inter: ["Inter", "sans-serif"],
+        sukhumvit: ["Sukhumvit Set", "sans-serif"],
         // sukhumvit: ["Sukhumvit Set", "sans-serif"],
       },
     },
@@ -28,5 +28,6 @@ module.exports = {
     require("@tailwindcss/typography"),
     require("@tailwindcss/line-clamp"),
     require("@tailwindcss/aspect-ratio"),
+    require("tailwind-scrollbar"),
   ],
 };

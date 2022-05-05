@@ -1,73 +1,6 @@
 <script setup>
 import { Popover, PopoverButton, PopoverPanel } from "@headlessui/vue";
 import { ChevronDownIcon } from "@heroicons/vue/solid";
-
-const solutions = [
-  {
-    name: "Insights",
-    description: "Measure actions your users take",
-    href: "##",
-    icon: `
-      <svg
-        width="48"
-        height="48"
-        viewBox="0 0 48 48"
-        fill="none"
-        aria-hidden="true"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <rect width="48" height="48" rx="8" fill="#FFEDD5" />
-        <path
-          d="M24 11L35.2583 17.5V30.5L24 37L12.7417 30.5V17.5L24 11Z"
-          stroke="#FB923C"
-          stroke-width="2"
-        />
-        <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
-          d="M16.7417 19.8094V28.1906L24 32.3812L31.2584 28.1906V19.8094L24 15.6188L16.7417 19.8094Z"
-          stroke="#FDBA74"
-          stroke-width="2"
-        />
-        <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
-          d="M20.7417 22.1196V25.882L24 27.7632L27.2584 25.882V22.1196L24 20.2384L20.7417 22.1196Z"
-          stroke="#FDBA74"
-          stroke-width="2"
-        />
-      </svg>
-    `,
-  },
-  {
-    name: "Automations",
-    description: "Create your own targeted content",
-    href: "##",
-    icon: `
-      <svg
-        width="48"
-        height="48"
-        viewBox="0 0 48 48"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <rect width="48" height="48" rx="8" fill="#FFEDD5" />
-        <path
-          d="M28.0413 20L23.9998 13L19.9585 20M32.0828 27.0001L36.1242 34H28.0415M19.9585 34H11.8755L15.9171 27"
-          stroke="#FB923C"
-          stroke-width="2"
-        />
-        <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
-          d="M18.804 30H29.1963L24.0001 21L18.804 30Z"
-          stroke="#FDBA74"
-          stroke-width="2"
-        />
-      </svg>
-    `,
-  },
-];
 </script>
 <template>
   <div class="bg-primary font-sukhumvit">
@@ -142,10 +75,7 @@ const solutions = [
                     :class="open ? '' : 'text-opacity-90'"
                     class="group inline-flex items-center rounded-md bg-slate-100 px-4 py-3 text-base font-bold font-ibm text-primary hover:text-opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
                   >
-                    <span
-                      >ยินดีต้อนรับคุณ,
-                      {{ this.user_name }}</span
-                    >
+                    <span>ยินดีต้อนรับคุณ, {{ this.user_name }}</span>
                     <ChevronDownIcon
                       :class="open ? '' : 'text-opacity-70'"
                       class="ml-2 h-5 w-5 text-primary-dark transition duration-150 ease-in-out group-hover:text-opacity-80"
@@ -173,7 +103,9 @@ const solutions = [
                             class="flow-root rounded-md px-2 py-4 transition duration-150 ease-in-out group hover:bg-gray-100 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                           >
                             <span class="flex items-center">
-                              <span class="text-sm font-bold text-gray-900 group-hover:text-primary transition-all ease-in-out duration-800">
+                              <span
+                                class="text-sm font-bold text-gray-900 group-hover:text-primary transition-all ease-in-out duration-800"
+                              >
                                 แก้ไขข้อมูลส่วนตัว
                               </span>
                             </span>
@@ -183,7 +115,9 @@ const solutions = [
                             class="flow-root rounded-md px-2 py-4 transition duration-150 group ease-in-out hover:bg-gray-100 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                           >
                             <span class="flex items-center">
-                              <span class="text-sm font-bold text-gray-900 group-hover:text-primary transition-all ease-in-out duration-800">
+                              <span
+                                class="text-sm font-bold text-gray-900 group-hover:text-primary transition-all ease-in-out duration-800"
+                              >
                                 ออกจากระบบ
                               </span>
                             </span>
@@ -363,6 +297,7 @@ const solutions = [
   </div>
 </template>
 <script>
+import axios from "axios";
 import { ref } from "vue";
 import {
   Dialog,
@@ -474,15 +409,16 @@ export default {
       user_name: "",
     };
   },
-  updated(){
+  updated() {
     this.user_name = this.$store.getters.getUser.customer_firstname;
     const response = axios.get(
-          "http://localhost:4000/api/customer/"+this.$store.getters.getUser.customer_id
-        );
-    console.log(response)
+      "http://localhost:4000/api/customer/" +
+        this.$store.getters.getUser.customer_id
+    );
+    console.log(response);
     this.user_name = response.customer_firstname;
   },
-  mounted(){
+  mounted() {
     this.user_name = this.$store.getters.getUser.customer_firstname;
   },
   methods: {
