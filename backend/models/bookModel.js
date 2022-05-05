@@ -195,4 +195,145 @@ export const getBookByCategory = (id, result) => {
           result(null, results);
       }
   });   
+};
+
+export const insertCustomer = (data, result) => {
+  db.query("INSERT INTO tb_customer SET ?", [data], (err, results) => {
+    if (err) {
+      console.log(err);
+      result(err, null);
+    } else {
+      result(null, results);
+    }
+  });
+};
+
+export const updateCustomerById = (data, id, res) => {
+  bcrypt.hash(data.customer_password, 10, (err, hash) => {
+    if (err) {
+      return res.status(500).send({
+        msg: err,
+      });
+    } else {
+      // has hashed pw => add to database
+      db.query(
+        `UPDATE tb_customer SET customer_mail = ?, customer_password = ?,customer_firstname = ?,customer_lastname = ?, customer_phone = ?, customer_editAt = CURRENT_TIMESTAMP WHERE customer_id = ?` , [
+          data.customer_mail
+        , hash, 
+          data.customer_firstname
+        , data.customer_lastname, 
+          data.customer_phone
+        , id],
+        (err, result) => {
+          // if (err) {
+          //   throw err;
+          //   return res.status(400).send({
+          //     msg: err,
+          //   });
+          // }
+          // return res.status(201).send({
+          //   msg: "Edit Succesful",
+          // });
+        }
+      );
+    }
+  })
 }
+
+export const deleteCustomerById = (id, result) => {
+  db.query("DELETE FROM tb_customer WHERE customer_id = ?", [id], (err, results) => {
+    if (err) {
+      console.log(err);
+      result(err, null);
+    } else {
+      result(null, results);
+    }
+  });
+};
+
+export const getCustomerById = (id, result) => {
+  db.query("SELECT * FROM tb_customer WHERE customer_id = ?", [id], (err, results) => {             
+      if(err) {
+          console.log(err);
+          result(err, null);
+      } else {
+          result(null, results[0]);
+      }
+  });   
+}
+
+export const getAdminById = (id, result) => {
+  db.query("SELECT * FROM tb_admin WHERE admin_id = ?", [id], (err, results) => {             
+      if(err) {
+          console.log(err);
+          result(err, null);
+      } else {
+          result(null, results[0]);
+      }
+  });   
+}
+
+export const insertAdmin = (data, result) => {
+  db.query("INSERT INTO tb_admin SET ?", [data], (err, results) => {
+    if (err) {
+      console.log(err);
+      result(err, null);
+    } else {
+      result(null, results);
+    }
+  });
+};
+
+export const deleteAdminById = (id, result) => {
+  db.query("DELETE FROM tb_admin WHERE admin_id = ?", [id], (err, results) => {
+    if (err) {
+      console.log(err);
+      result(err, null);
+    } else {
+      result(null, results);
+    }
+  });
+};
+
+export const updateAdminById = (data, id, res) => {
+  bcrypt.hash(data.admin_password, 10, (err, hash) => {
+    if (err) {
+      return res.status(500).send({
+        msg: err,
+      });
+    } else {
+      // has hashed pw => add to database
+      db.query(
+        `UPDATE tb_customer SET admin_mail = ?, admin_password = ?,admin_firstname = ?,admin_lastname = ?, admin_editAt = CURRENT_TIMESTAMP WHERE admin_id = ?` , [
+          data.admin_mail
+        , hash, 
+          data.admin_firstname
+        , data.admin_lastname, 
+        , id],
+        (err, result) => {
+          // if (err) {
+          //   throw err;
+          //   return res.status(400).send({
+          //     msg: err,
+          //   });
+          // }
+          // return res.status(201).send({
+          //   msg: "Edit Succesful",
+          // });
+        }
+      );
+    }
+  })
+};
+
+export const getAddressById = (id, result) => {
+  db.query("SELECT * FROM tb_address WHERE address_id = ?", [id], (err, results) => {             
+      if(err) {
+          console.log(err);
+          result(err, null);
+      } else {
+          result(null, results[0]);
+      }
+  });   
+};
+
