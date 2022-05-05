@@ -86,6 +86,21 @@ export const routes = [
         component: () => import("../views/dashboard/users/AdminList.vue"),
       },
       {
+        path: "/order-incomplete",
+        name: "order-incomplete",
+        component: () => import("../views/dashboard/order/Incomplete.vue"),
+      },
+      {
+        path: "/order-complete",
+        name: "order-complete",
+        component: () => import("../views/dashboard/order/complete.vue"),
+      },
+      {
+        path: "/payment",
+        name: "payment",
+        component: () => import("../views/dashboard/payment/payment.vue"),
+      },
+      {
         path: "/card",
         name: "card",
         component: () => import("../views/Card.vue"),

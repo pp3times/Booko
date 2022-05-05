@@ -1,4 +1,4 @@
-lockfileVersion: 5.3
+lockfileVersion: 5.4
 
 specifiers:
   '@headlessui/vue': ^1.6.0
@@ -13,6 +13,7 @@ specifiers:
   apexcharts: ^3.35.0
   autoprefixer: ^10.4.5
   axios: ^0.27.1
+  form-data: ^4.0.0
   multer: ^1.4.4
   postcss: ^8.4.12
   prettier: ^2.6.2
@@ -20,6 +21,7 @@ specifiers:
   sweetalert2: ^11.4.10
   tailwindcss: ^3.0.24
   unplugin-vue-components: ^0.19.3
+  vee-validate: ^4.5.11
   vite: ^2.9.6
   vue: ^3.2.33
   vue-boring-avatars: ^1.1.0
@@ -32,14 +34,16 @@ dependencies:
   alpinejs: 3.10.2
   apexcharts: 3.35.0
   axios: 0.27.1
+  form-data: 4.0.0
   multer: 1.4.4
   postcss: 8.4.12
   prettier: 2.6.2
   sweetalert2: 11.4.10
+  vee-validate: 4.5.11_vue@3.2.33
   vue: 3.2.33
   vue-boring-avatars: 1.1.0_vue@3.2.33
   vue-router: 4.0.14_vue@3.2.33
-  vue3-apexcharts: 1.4.1_apexcharts@3.35.0+vue@3.2.33
+  vue3-apexcharts: 1.4.1_c4h247nzg7vh5gje2cvfp5l3pq
   vuex: 4.0.2_vue@3.2.33
   vuex-persistedstate: 4.1.0_vuex@4.0.2
 
@@ -1347,6 +1351,15 @@ packages:
   /util-deprecate/1.0.2:
     resolution: {integrity: sha1-RQ1Nyfpw3nMnYvvS1KKJgUGaDM8=}
 
+  /vee-validate/4.5.11_vue@3.2.33:
+    resolution: {integrity: sha512-bNF2TtuRnLnPsw6+Q/P3bMx8c2iJbvQmyikTr9r65PLAdqtdhQxnsIS3ayYNIzNWZ50sysv01DteN9h3XT/gFg==}
+    peerDependencies:
+      vue: ^3.0.0
+    dependencies:
+      '@vue/devtools-api': 6.1.4
+      vue: 3.2.33
+    dev: false
+
   /vite/2.9.6:
     resolution: {integrity: sha512-3IffdrByHW95Yjv0a13TQOQfJs7L5dVlSPuTt432XLbRMriWbThqJN2k/IS6kXn5WY4xBLhK9XoaWay1B8VzUw==}
     engines: {node: '>=12.2.0'}
@@ -1398,7 +1411,7 @@ packages:
       '@vue/shared': 3.2.33
     dev: false
 
-  /vue3-apexcharts/1.4.1_apexcharts@3.35.0+vue@3.2.33:
+  /vue3-apexcharts/1.4.1_c4h247nzg7vh5gje2cvfp5l3pq:
     resolution: {integrity: sha512-96qP8JDqB9vwU7bkG5nVU+E0UGQn7yYQVqUUCLQMYWDuQyu2vE77H/UFZ1yI+hwzlSTBKT9BqnNG8JsFegB3eg==}
     peerDependencies:
       apexcharts: '> 3.0.0'

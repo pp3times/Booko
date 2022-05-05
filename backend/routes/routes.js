@@ -23,7 +23,20 @@ import {
   updateBook,
   deleteBook,
   updateCustomer,
-  showCustomerById
+  showCustomerById,
+  showOrder,
+  showCustomer,
+  updateOrderCheck,
+  showBank,
+  showBankById,
+  updateBank,
+  deleteBank,
+  showPayment,
+  showPaymentById,
+  updatePaymentStatus,
+  deletePayment,
+  updateInvoice,
+  updateOrder
 } from "../controllers/Book.js";
 
 import multer from "multer";
@@ -44,6 +57,7 @@ var storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 // init express router
 const router = express.Router();
+
 
 // Get All Product
 router.get("/books", showBook);
@@ -147,7 +161,7 @@ router.get("/books/:id", showBookById);
 
 
 // router.put('/books/:id', upload.single('myImage'), updateBook);
-router.put("/books/:id", upload.single('myImage'), async function (req, res, next) {
+router.put("/books/:id", upload.single("myImage"), async function (req, res, next) {
   console.log(req.body.book_name);
   if (!req.file) {
       console.log(req.body);
@@ -580,6 +594,48 @@ router.put("/customer/:id", updateCustomer);
 
 // Get Single Product
 router.get("/customer/:id", showCustomerById);
+
+// Get All Order
+router.get("/order", showOrder);
+
+// Get All Customer
+router.get("/customer", showCustomer);
+
+// Update OrderCheck
+router.put("/orderCheck/:id", updateOrderCheck);
+
+router.get("/bank", showBank);
+
+// Create Bank
+router.post("/bank", createBank);
+
+// Get Single Bank
+router.get("/bank/:id", showBankById);
+
+// Update Bank
+router.put("/bank/:id", updateBank);
+
+
+// Delete Bank
+router.delete("/bank/:id", deleteBank);
+
+router.get("/payment", showPayment);
+
+// Get Single payment
+router.get("/payment/:id", showPaymentById);
+
+// Update payment
+router.put("/payment/:id", updatePaymentStatus);
+
+
+// Delete payment
+router.delete("/payment/:id", deletePayment);
+
+// Update Invoice
+router.put("/invoice/:id", updateInvoice);
+
+// Update Order
+router.put("/order/:id", updateOrder);
 
 // export default router
 export default router;
