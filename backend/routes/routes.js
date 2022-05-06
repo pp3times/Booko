@@ -36,7 +36,8 @@ import {
   updatePaymentStatus,
   deletePayment,
   updateInvoice,
-  updateOrder
+  updateOrder,
+  showBankByInvoice
 } from "../controllers/Book.js";
 
 import multer from "multer";
@@ -144,6 +145,31 @@ router.post("/books", upload.single("myImage"), (req, res) => {
         req.body.publisher,
         req.body.selected_category,
         req.body.isbn,
+      ],
+      (err, result) => {
+        if (err) throw err;
+        console.log("file uploaded");
+      }
+    );
+  }
+});
+
+// Upload Payment
+router.post("/payment", upload.single("myImage"), (req, res) => {
+  if (!req.file) {
+    console.log("No file upload");
+  } else {
+    console.log(req.file.filename);
+    var imgsrc = "http://localhost:4000/images/" + req.file.filename;
+    var insertData =
+      "INSERT INTO tb_payment(payment_invoice_id, payment_paybank, payment_amount, payment_datetime, payment_image, payment_createAt) VALUES (?, ?, ?, CURRENT_TIMESTAMP, ?, CURRENT_TIMESTAMP)";
+    db.query(
+      insertData,
+      [
+        req.body.payment_invoice_id,
+        req.body.payment_paybank,
+        req.body.payment_amount,
+        imgsrc,
       ],
       (err, result) => {
         if (err) throw err;
@@ -767,6 +793,9 @@ router.put("/invoice/:id", updateInvoice);
 
 // Update Order
 router.put("/order/:id", updateOrder);
+
+// Get Single Product
+router.get("/bank/:id", showBankByInvoice);
 
 // export default router
 export default router;
