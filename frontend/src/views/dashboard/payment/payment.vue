@@ -20,6 +20,151 @@ function openModal() {
 
 <template>
   <div>
+    <!-- EMS Form -->
+    <TransitionRoot appear :show="create_ems_modal" as="template">
+      <Dialog as="div" @close="closeCreateEMS" class="relative z-10">
+        <TransitionChild
+          as="template"
+          enter="duration-300 ease-out"
+          enter-from="opacity-0"
+          enter-to="opacity-100"
+          leave="duration-200 ease-in"
+          leave-from="opacity-100"
+          leave-to="opacity-0"
+        >
+          <div class="fixed inset-0 bg-black bg-opacity-25" />
+        </TransitionChild>
+
+        <div class="fixed inset-0 overflow-y-auto">
+          <div
+            class="flex min-h-full items-center justify-center p-4 text-center"
+          >
+            <TransitionChild
+              as="template"
+              enter="duration-300 ease-out"
+              enter-from="opacity-0 scale-95"
+              enter-to="opacity-100 scale-100"
+              leave="duration-200 ease-in"
+              leave-from="opacity-100 scale-100"
+              leave-to="opacity-0 scale-95"
+            >
+              <DialogPanel
+                class="
+                  w-full
+                  max-w-lg
+                  transform
+                  overflow-hidden
+                  rounded-2xl
+                  bg-white
+                  px-8
+                  py-8
+                  text-left
+                  align-middle
+                  shadow-xl
+                  transition-all
+                "
+              >
+                <DialogTitle
+                  as="h3"
+                  class="text-xl font-bold leading-6 text-primary"
+                >
+                  EMS
+                </DialogTitle>
+                <div class="mt-5">
+                  <!-- <p class="text-sm text-gray-500">
+                    Your payment has been successfully submitted. We’ve sent you
+                    an email with all of the details of your order.
+                  </p> -->
+                  <form action="" class="space-y-5">
+                    <div>
+                      <label for="bank_name" class="text-md font-medium"
+                        ></label
+                      >
+
+                      <div class="relative mt-1">
+                        <input
+                          type="text"
+                          id="bank_name"
+                          class="
+                            form-input
+                            w-full
+                            px-4
+                            py-3
+                            text-sm
+                            border-gray-200
+                            focus-visible:border-primary-light
+                            focus:border-primary-light
+                            focus:ring-primary
+                            focus:shadow-primary
+                            border
+                            rounded-lg
+                            shadow-sm
+                          "
+                          placeholder="ems"
+                          v-model="new_ems"
+                        />
+                      </div>
+                    </div>
+
+
+                  
+
+                    <div class="mt-5 space-x-2 flex justify-end">
+                      <button
+                        type="button"
+                        class="
+                          focus:outline-none
+                          inline-flex
+                          justify-center
+                          rounded-md
+                          border border-transparent
+                          bg-green-100
+                          px-4
+                          py-2
+                          text-sm
+                          font-medium
+                          text-primary
+                          hover:bg-primary-light
+                          focus-visible:ring-2
+                          focus-visible:ring-primary
+                          focus-visible:ring-offset-2
+                        "
+                        @click="insertEMS()"
+                      >
+                        Submit
+                      </button>
+                      <button
+                        type="button"
+                        class="
+                          focus:outline-none
+                          inline-flex
+                          justify-center
+                          rounded-md
+                          border border-transparent
+                          bg-red-100
+                          px-4
+                          py-2
+                          text-sm
+                          font-medium
+                          text-red-900
+                          hover:bg-red-200
+                          focus-visible:ring-2
+                          focus-visible:ring-red-500
+                          focus-visible:ring-offset-2
+                        "
+                        @click="closeCreateEMS()"
+                      >
+                        Close
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </DialogPanel>
+            </TransitionChild>
+          </div>
+        </div>
+      </Dialog>
+    </TransitionRoot>
     <!-- Edit Bank -->
     <TransitionRoot appear :show="edit_modal" as="template">
       <Dialog as="div" @close="closeEditModal" class="relative z-10">
@@ -818,6 +963,7 @@ function openModal() {
               <th class="text-right text-gray-600">Payment Time</th>
               <th class="text-right text-gray-600">Image</th>
               <th class="text-right text-gray-600">Status</th>
+              <th class="text-right text-gray-600">EMS</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-200">
@@ -855,7 +1001,7 @@ function openModal() {
               <td>{{ payment.payment_amount }}</td>
               <td class="text-right">{{ payment.payment_datetime }}</td>
               <td class="text-right">
-                  <a :href="'http://localhost:3000/'+payment.payment_image" class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
+                  <a :href="payment.payment_image" target="__blank" class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
   View
 </a>
               </td>
@@ -877,9 +1023,31 @@ function openModal() {
                 >
                   Check
                 </button>
+                <button
+                @click="UncheckPayment(payment.payment_invoice_id)"
+                  class="
+                    bg-white
+                    hover:bg-gray-100
+                    text-gray-800
+                    font-semibold
+                    py-2
+                    px-4
+                    border border-gray-400
+                    rounded
+                    shadow
+                  "
+                  v-if="payment.invoice_check == null"
+                >
+                  Uncheck
+                </button>
                 <span v-else
                   >Check By admin ID : {{ payment.invoice_check }}</span
                 >
+              </td>
+              <td class="text-right">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" @click="openCreateEMS(payment.payment_invoice_id)">
+  EMS
+</button>
               </td>
             </tr>
           </tbody>
@@ -953,6 +1121,9 @@ export default {
       all_payment: [],
       admin: null,
       errors: [],
+      new_ems: "",
+      create_ems_modal: false,
+      ems_id: null,
     };
   },
   created() {
@@ -992,6 +1163,13 @@ export default {
         }
       });
     },
+    openCreateEMS(id){
+      this.ems_id = id;
+      this.create_ems_modal = true;
+    },
+    closeCreateEMS(){
+      this.create_ems_modal = false;
+    },
     async getBank() {
       try {
         const response = await axios.get("http://localhost:4000/api/bank");
@@ -1000,6 +1178,17 @@ export default {
         console.log(err);
       }
     },
+    async InsertEMS(id){
+      await axios.put(
+          "http://localhost:4000/api/invoice/"+id,
+          {
+            invoice_ems : this.new_ems,
+            invoice_status : "delivered",
+          }
+        );  
+        alert('Add EMS');
+    },
+    
     async saveBank() {
       try {
     //       new_bank_name: "",
@@ -1105,6 +1294,20 @@ export default {
         console.log(err);
       }
     },
+    async UncheckPayment(invoice_id) {
+      try {
+        await axios.put(
+          "http://localhost:4000/api/invoice/" + invoice_id,
+          {
+            invoice_status : "reserved",
+          }
+        );
+        alert("Invoice Status Change to reserved");
+        this.getPayment();
+      } catch (err) {
+        console.log(err);
+      }
+    }
     // selectAllUsers() {
     // 	this.selectAll.value = !this.selectAll.value;
     // 	this.userList.forEach(user => {
