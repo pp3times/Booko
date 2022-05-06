@@ -20,8 +20,8 @@ function openModal() {
 <template>
   <div>
     <Header />
-    <TransitionRoot appear :show="isOpen" as="template">
-      <Dialog as="div" @close="closeModal" class="relative z-10 font-ibm">
+    <TransitionRoot appear :show="invoice_modal" as="template">
+      <Dialog as="div" @close="closeInvoiceModal" class="relative z-10 font-ibm">
         <TransitionChild
           as="template"
           enter="duration-300 ease-out"
@@ -56,12 +56,25 @@ function openModal() {
                 >
                   หลักฐานการชำระเงิน
                 </DialogTitle>
-                <div class="mt-2">
+                <form action="http://localhost:4000/api/payment"
+                    method="post"
+                    enctype="multipart/form-data">
+                    <div class="mt-2">
+                      <div class="flex flex-col space-y-3 mt-4">
+                    <label for="bank">Invoice ID</label>
+                    <input
+                      type="text"
+                      name="payment_invoice_id"
+                      id="bank"
+                      class="border-2 rounded-md border-gray-2 px-4 py-3"
+                      v-model="pay_invocie_id"
+                    />
+                  </div>
                   <div class="flex flex-col space-y-3 mt-4">
                     <label for="bank">โอนเงินจาก</label>
                     <input
                       type="text"
-                      name="bank"
+                      name="payment_paybank"
                       id="bank"
                       class="border-2 rounded-md border-gray-2 px-4 py-3"
                     />
@@ -73,13 +86,15 @@ function openModal() {
                       name="adminbank"
                       id="adminbank"
                       class="border-2 rounded-md border-gray-2 px-4 py-3"
+                      v-model="bank_name"
+                      disabled
                     />
                   </div>
                   <div class="flex flex-col space-y-3 mt-4">
                     <label for="money">จำนวนเงิน</label>
                     <input
                       type="text"
-                      name="money"
+                      name="payment_amount"
                       id="money"
                       class="border-2 rounded-md border-gray-2 px-4 py-3"
                     />
@@ -88,29 +103,29 @@ function openModal() {
                     <label for="money">สลิปการโอน</label>
                     <input
                       type="file"
-                      name="slip"
+                      name="myImage"
                       id="slip"
                       class="border-2 rounded-md border-gray-2 px-4 py-3"
                     />
                   </div>
                 </div>
-
                 <div class="mt-4 flex space-x-2 justify-end">
                   <button
                     type="button"
                     class="inline-flex justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 text-sm font-medium text-red-900 hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                    @click="closeModal"
+                    @click="closeInvoiceModal()"
                   >
                     ยกเลิก
                   </button>
-                  <button
-                    type="button"
+                  <input
+                    type="submit"
                     class="inline-flex justify-center rounded-md border border-transparent bg-gray-100 px-4 py-2 text-sm font-medium text-primary hover:bg-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-500 focus-visible:ring-offset-2"
-                    @click="closeModal"
-                  >
-                    ส่งหลักฐานการชำระเงิน
-                  </button>
+                    @click="closeInvoiceModal()"
+                    value="ส่งหลักฐานการชำระเงิน"
+                  />
                 </div>
+                    </form>
+
               </DialogPanel>
             </TransitionChild>
           </div>
@@ -188,7 +203,7 @@ function openModal() {
               </router-link>
               <button
                 v-if="invoice.invoice_status === 'reserved'"
-                @click="openModal"
+                @click="openInvoiceModal(invoice.invoice_bank_id, invoice.invoice_id)"
                 class="w-full mt-3 bg-slate-800 text-white px-4 py-3 rounded-md font-bold hover:bg-slate-900 transition-all ease-in-out duration-200"
               >
                 ชำระเงิน
@@ -211,6 +226,11 @@ export default {
       data: [],
       category: [],
       user: [],
+      bank: [],
+      pay_invoice: null,
+      invoice_modal: false,
+      bank_name: "",
+      pay_invocie_id: null,
     };
   },
   created() {
@@ -244,6 +264,29 @@ export default {
       .catch((err) => {
         console.log(err);
       });
+  },
+  methods : {
+    async getBankById() {
+      try {
+        const response = await axios.get(
+          "http://localhost:4000/api/bank/" + this.pay_invoice
+        );
+        console.log(response);
+        this.bank_name = response.data.bank_name + " - " + response.data.bank_account_name +" "+ response.data.bank_account_number;
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    openInvoiceModal(id, pay_invocie_id){
+      this.pay_invoice = id;
+      this.pay_invocie_id = pay_invocie_id;
+      this.getBankById();
+      this.invoice_modal = true;
+    },
+    closeInvoiceModal(){
+      this.invoice_modal = false;
+    },
+
   },
   computed: {
     priceoforder() {

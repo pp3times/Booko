@@ -425,3 +425,15 @@ export const updateInvoiceById = (data, id, result) => {
     }
   );
 };
+
+// Get Bank By Invoice
+export const getBankByInvoice = (result) => {
+  db.query("SELECT * FROM tb_bank INNER JOIN tb_invoice on tb_bank.bank_id = tb_invoice.invoice_bank_id", (err, results) => {
+    if (err) {
+      console.log(err);
+      result(err, null);
+    } else {
+      result(null, results);
+    }
+  });
+};
