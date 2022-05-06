@@ -148,69 +148,6 @@ function openModal() {
                         />
                       </div>
                     </div>
-
-                    <!-- <div
-                      class="grid grid-cols-1 gap-4 text-center sm:grid-cols-3"
-                    >
-                      <div>
-                        <input
-                          class="sr-only"
-                          id="option1"
-                          type="radio"
-                          tabindex="-1"
-                        />
-                        <label
-                          for="option1"
-                          class="block w-full p-3 border border-gray-200 rounded-lg"
-                          tabindex="0"
-                        >
-                          <span class="text-sm font-medium"> Option 1 </span>
-                        </label>
-                      </div>
-
-                      <div>
-                        <input
-                          class="sr-only"
-                          id="option2"
-                          type="radio"
-                          tabindex="-1"
-                        />
-                        <label
-                          for="option2"
-                          class="block w-full p-3 border border-gray-200 rounded-lg"
-                          tabindex="0"
-                        >
-                          <span class="text-sm font-medium"> Option 2 </span>
-                        </label>
-                      </div>
-
-                      <div>
-                        <input
-                          class="sr-only"
-                          id="option3"
-                          type="radio"
-                          tabindex="-1"
-                        />
-                        <label
-                          for="option3"
-                          class="block w-full p-3 border border-gray-200 rounded-lg"
-                          tabindex="0"
-                        >
-                          <span class="text-sm font-medium"> Option 3 </span>
-                        </label>
-                      </div>
-                    </div> -->
-
-                    <!-- <div>
-                      <label class="sr-only" for="message">Message</label>
-                      <textarea
-                        class="w-full p-3 text-sm border-gray-200 rounded-lg"
-                        placeholder="Message"
-                        rows="8"
-                        id="message"
-                      ></textarea>
-                    </div> -->
-
                     <div class="mt-4 flex items-center justify-end space-x-3">
                       <div
                         @click="closeModal"
@@ -248,13 +185,12 @@ function openModal() {
       class="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8 font-sukhumvit"
     >
       <div class="max-w-lg mx-auto flex flex-col items-center">
-        <BaseAvatar name="Jeremy" size="xl" color="red" />
+        <BaseAvatar
+          :name="this.user.customer_firstname"
+          size="xl"
+          color="red"
+        />
         <h1 class="text-2xl font-bold sm:text-3xl mt-10">แก้ไขข้อมูลส่วนตัว</h1>
-
-        <!-- <p class="mt-4 text-gray-500">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Et libero
-          nulla eaque error neque ipsa culpa autem, at itaque nostrum!
-        </p> -->
       </div>
 
       <form action="" class="max-w-md mx-auto mt-8 mb-0 space-y-4">
@@ -267,7 +203,7 @@ function openModal() {
                 type="text"
                 class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
                 placeholder="ชื่อ"
-                v-model="firstname"
+                v-model="edit_firstname"
                 id="firstname"
               />
 
@@ -297,6 +233,7 @@ function openModal() {
                 type="text"
                 class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
                 placeholder="นามสกุล"
+                v-model="edit_lastname"
               />
 
               <span class="absolute inset-y-0 inline-flex items-center right-4">
@@ -319,6 +256,35 @@ function openModal() {
           </div>
         </div>
         <div>
+          <label for="phone" class="sr-only">phone</label>
+
+          <div class="relative">
+            <input
+              type="phone"
+              class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
+              placeholder="Enter phone"
+              v-model="edit_phone"
+            />
+
+            <span class="absolute inset-y-0 inline-flex items-center right-4">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-5 h-5 text-gray-400"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
+                />
+              </svg>
+            </span>
+          </div>
+        </div>
+        <div>
           <label for="email" class="sr-only">Email</label>
 
           <div class="relative">
@@ -326,6 +292,7 @@ function openModal() {
               type="email"
               class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
               placeholder="Enter email"
+              v-model="edit_mail"
             />
 
             <span class="absolute inset-y-0 inline-flex items-center right-4">
@@ -354,6 +321,7 @@ function openModal() {
               type="password"
               class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
               placeholder="Enter password"
+              v-model="edit_password"
             />
 
             <span class="absolute inset-y-0 inline-flex items-center right-4">
@@ -423,6 +391,7 @@ function openModal() {
           <button
             type="submit"
             class="inline-block w-full px-5 py-3 text-sm font-medium text-white bg-primary rounded-lg"
+            @click="updateCustomer"
           >
             แก้ไขข้อมูลส่วนตัว
           </button>
@@ -450,6 +419,13 @@ export default {
       address_province: "",
       address_zipcode: "",
       address_phone: "",
+      edit_id: null,
+      edit_firstname: "",
+      edit_lastname: "",
+      edit_mail: "",
+      edit_password: "",
+      edit_phone: "",
+      old_password: "",
     };
   },
   methods: {
@@ -484,6 +460,37 @@ export default {
           console.log(error);
         });
     },
+    async getCustomerById(id) {
+      try {
+        const response = await axios.get(
+          "http://localhost:4000/api/customer/" + id
+        );
+        this.edit_id = response.data.customer_id;
+        this.edit_mail = response.data.customer_mail;
+        this.edit_firstname = response.data.customer_firstname;
+        this.edit_lastname = response.data.customer_lastname;
+        this.edit_phone = response.data.customer_phone;
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async updateCustomer() {
+      try {
+        await axios.put(
+          "http://localhost:4000/api/customer/" + this.user.customer_id,
+          {
+            customer_mail: this.edit_mail,
+            customer_password: this.edit_password,
+            customer_firstname: this.edit_firstname,
+            customer_lastname: this.edit_lastname,
+            customer_phone: this.edit_phone,
+          }
+        );
+        this.$router.push("/");
+      } catch (err) {
+        console.log(err);
+      }
+    },
     // add address from axios
     // axios
     //   .post("http://localhost:4000/api/address", {
@@ -505,6 +512,7 @@ export default {
       this.$router.push("/sign");
     }
     this.user = this.$store.getters.getUser;
+    this.getCustomerById(this.user.customer_id);
 
     // get address from axios
     axios.get("http://localhost:4000/api/address").then((res) => {
@@ -512,14 +520,6 @@ export default {
         (address) => address.customer_id === this.user.customer_id
       );
     });
-
-    axios
-      .get(
-        "https://raw.githubusercontent.com/earthchie/jquery.Thailand.js/master/jquery.Thailand.js/database/raw_database/raw_database.json"
-      )
-      .then((res) => {
-        this.address_fetch = res.data;
-      });
   },
 };
 </script>

@@ -22,6 +22,11 @@ export const routes = [
     component: userAuth,
   },
   {
+    path: "/payments",
+    name: "payments",
+    component: () => import("../views/Payment.vue"),
+  },
+  {
     path: "/detail/:id",
     name: "detail",
     component: () => import("../views/Detail.vue"),
@@ -36,16 +41,26 @@ export const routes = [
     name: "categorysearch",
     component: () => import("../views/Category.vue"),
   },
-	{
-		path: "/test",
-		name: "testtest",
-		component: () => import("../views/Test.vue"),
-	},
+  {
+    path: "/test",
+    name: "testtest",
+    component: () => import("../views/Test.vue"),
+  },
+  {
+    path: "/invoice/:id",
+    name: "invoice",
+    component: () => import("../views/Invoice.vue"),
+  },
   {
     path: "/me",
     name: "profile",
     component: () => import("../views/Profile.vue"),
   },
+	{
+		path: "/payment",
+		name: "payment",
+		component: () => import("../views/Payment.vue"),
+	},
   {
     path: "/test",
     name: "test",
@@ -84,6 +99,21 @@ export const routes = [
         path: "/admins",
         name: "admin-list",
         component: () => import("../views/dashboard/users/AdminList.vue"),
+      },
+      {
+        path: "/order-incomplete",
+        name: "order-incomplete",
+        component: () => import("../views/dashboard/order/Incomplete.vue"),
+      },
+      {
+        path: "/order-complete",
+        name: "order-complete",
+        component: () => import("../views/dashboard/order/complete.vue"),
+      },
+      {
+        path: "/payment",
+        name: "payment",
+        component: () => import("../views/dashboard/payment/payment.vue"),
       },
       {
         path: "/card",

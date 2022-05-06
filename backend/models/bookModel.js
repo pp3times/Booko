@@ -1,5 +1,6 @@
 // import connection
 import db from "../config/db.js";
+import bcrypt from "bcryptjs";
 
 // Get All Products
 export const getBook = (result) => {
@@ -195,6 +196,11 @@ export const getBookByCategory = (id, result) => {
           result(null, results);
       }
   });   
+
+}
+
+// Update customer to Database
+
 };
 
 export const insertCustomer = (data, result) => {
@@ -207,6 +213,7 @@ export const insertCustomer = (data, result) => {
     }
   });
 };
+
 
 export const updateCustomerById = (data, id, res) => {
   bcrypt.hash(data.customer_password, 10, (err, hash) => {
@@ -237,11 +244,62 @@ export const updateCustomerById = (data, id, res) => {
         }
       );
     }
+
+  });
+  // db.query("UPDATE tb_customer SET customer_mail = ?, customer_password = ?,customer_firstname = ?,customer_lastname = ?, customer_phone = ?, customer_editAt = CURRENT_TIMESTAMP WHERE customer_id = ?", [data.customer_mail, data.customer_password, data.customer_firstname, data.customer_lastname, data.customer_phone, id], (err, results) => {             
+  //     if(err) {
+  //         console.log(err);
+  //         result(err, null);
+  //     } else {
+  //         result(null, results);
+  //     }
+  // });   
+}
+
+// Get Single Customer
+export const getCustomerById = (id, result) => {
+  db.query("SELECT * FROM tb_customer WHERE customer_id = ?", [id], (err, results) => {
+
   })
 }
 
 export const deleteCustomerById = (id, result) => {
   db.query("DELETE FROM tb_customer WHERE customer_id = ?", [id], (err, results) => {
+
+    if (err) {
+      console.log(err);
+      result(err, null);
+    } else {
+
+      result(null, results[0]);
+
+      result(null, results);
+
+    }
+  });
+};
+
+
+// Get All order
+export const getOrder = (result) => {
+  db.query("SELECT * FROM tb_order", (err, results) => {             
+
+export const getCustomerById = (id, result) => {
+  db.query("SELECT * FROM tb_customer WHERE customer_id = ?", [id], (err, results) => {             
+
+      if(err) {
+          console.log(err);
+          result(err, null);
+      } else {
+
+          result(null, results);
+      }
+  });   
+};
+
+// Get All Products
+export const getCustomer = (result) => {
+  db.query("SELECT * FROM tb_customer", (err, results) => {
     if (err) {
       console.log(err);
       result(err, null);
@@ -251,12 +309,66 @@ export const deleteCustomerById = (id, result) => {
   });
 };
 
-export const getCustomerById = (id, result) => {
-  db.query("SELECT * FROM tb_customer WHERE customer_id = ?", [id], (err, results) => {             
-      if(err) {
-          console.log(err);
-          result(err, null);
+// Update ORderCheck to Database
+export const updateOrderCheckById = (data, id, result) => {
+  db.query(
+    "UPDATE tb_order SET order_check = ? WHERE order_id = ?",
+    [data.order_check, id],
+    (err, results) => {
+      if (err) {
+        console.log(err);
+        result(err, null);
       } else {
+        result(null, results);
+      }
+    }
+  );
+};
+
+// Get All Bank
+export const getBank = (result) => {
+  db.query("SELECT * FROM tb_bank", (err, results) => {
+    if (err) {
+      console.log(err);
+      result(err, null);
+    } else {
+      result(null, results);
+    }
+  });
+};
+
+// Get Single Bank
+export const getBankById = (id, result) => {
+  db.query("SELECT * FROM tb_bank WHERE bank_id = ?", [id], (err, results) => {
+    if (err) {
+      console.log(err);
+      result(err, null);
+    } else {
+      result(null, results[0]);
+    }
+  });
+};
+
+// Update Bank to Database
+export const updateBankById = (data, id, result) => {
+  db.query(
+    "UPDATE tb_bank SET bank_name = ?, bank_account_name = ?, bank_account_number = ? WHERE bank_id = ?",
+    [data.bank_name, data.bank_account_name, data.bank_account_number, id],
+    (err, results) => {
+      if (err) {
+        console.log(err);
+        result(err, null);
+      } else {
+        result(null, results);
+      }
+    }
+  );
+};
+
+// Delete Product to Database
+export const deleteBankById = (id, result) => {
+  db.query("DELETE FROM tb_bank WHERE bank_id = ?", [id], (err, results) => {
+
           result(null, results[0]);
       }
   });   
@@ -275,6 +387,7 @@ export const getAdminById = (id, result) => {
 
 export const insertAdmin = (data, result) => {
   db.query("INSERT INTO tb_admin SET ?", [data], (err, results) => {
+
     if (err) {
       console.log(err);
       result(err, null);
@@ -284,8 +397,14 @@ export const insertAdmin = (data, result) => {
   });
 };
 
+
+// Get All Payment
+export const getPayment = (result) => {
+  db.query("SELECT * FROM tb_payment INNER JOIN tb_invoice ON tb_payment.payment_invoice_id = tb_invoice.invoice_id", (err, results) => {
+
 export const deleteAdminById = (id, result) => {
   db.query("DELETE FROM tb_admin WHERE admin_id = ?", [id], (err, results) => {
+
     if (err) {
       console.log(err);
       result(err, null);
@@ -294,6 +413,91 @@ export const deleteAdminById = (id, result) => {
     }
   });
 };
+
+// Get Single Payment
+export const getPaymentById = (id, result) => {
+  db.query("SELECT * FROM tb_payment WHERE payment_id = ?", [id], (err, results) => {
+    if (err) {
+      console.log(err);
+      result(err, null);
+    } else {
+      result(null, results[0]);
+    }
+  });
+};
+
+// Update Payment to Database
+export const updatePaymentStatusById = (data, id, result) => {
+  db.query(
+    "UPDATE tb_payment SET payment_status = ? WHERE payment_id = ?",
+    [data.payment_status, id],
+    (err, results) => {
+      if (err) {
+        console.log(err);
+        result(err, null);
+      } else {
+        result(null, results);
+      }
+    }
+  );
+};
+
+// Delete Product to Database
+export const deletePaymentById = (id, result) => {
+  db.query("DELETE FROM tb_payment WHERE payment_id = ?", [id], (err, results) => {
+    if (err) {
+      console.log(err);
+      result(err, null);
+    } else {
+      result(null, results);
+    }
+  });
+};
+
+// Update Order to Database
+export const updateOrderById = (data, id, result) => {
+  db.query(
+    "UPDATE tb_order SET ? WHERE order_id = ?",
+    [data, id],
+    (err, results) => {
+      if (err) {
+        console.log(err);
+        result(err, null);
+      } else {
+        result(null, results);
+      }
+    }
+  );
+};
+
+// Update Order to Database
+export const updateInvoiceById = (data, id, result) => {
+  db.query(
+    "UPDATE tb_invoice SET ? WHERE invoice_id = ?",
+    [data, id],
+    (err, results) => {
+      if (err) {
+        console.log(err);
+        result(err, null);
+      } else {
+        result(null, results);
+      }
+    }
+  );
+};
+
+// Get Bank By Invoice
+export const getBankByInvoice = (result) => {
+  db.query("SELECT * FROM tb_bank INNER JOIN tb_invoice on tb_bank.bank_id = tb_invoice.invoice_bank_id", (err, results) => {
+    if (err) {
+      console.log(err);
+      result(err, null);
+    } else {
+      result(null, results);
+    }
+  });
+};
+=======
 
 export const updateAdminById = (data, id, res) => {
   bcrypt.hash(data.admin_password, 10, (err, hash) => {
