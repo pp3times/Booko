@@ -21,7 +21,7 @@ function openModal() {
 <template>
   <div>
     <TransitionRoot appear :show="isOpen" as="template">
-      <Dialog as="div" @close="closeModal" class="relative z-10">
+      <Dialog as="div" @close="closeEdit" class="relative z-10">
         <TransitionChild
           as="template"
           enter="duration-300 ease-out"
@@ -131,6 +131,164 @@ function openModal() {
                         </span>
                       </div>
                     </div>
+
+                    <div>
+                      <label for="password" class="text-md font-medium"
+                        >รหัสผ่าน</label
+                      >
+
+                      <div class="relative mt-1">
+                        <input
+                          type="password"
+                          id="password"
+                          class="form-input w-full px-4 py-3 text-sm border-gray-200 focus-visible:border-primary-light focus:border-primary-light focus:ring-primary focus:shadow-primary border rounded-lg shadow-sm"
+                          placeholder="Enter password"
+                          v-model="password"
+                        />
+                      </div>
+                    </div>
+
+                    <!-- <button
+                      @click="signUp"
+                      class="block w-full px-5 py-3 text-md font-medium text-white bg-primary rounded-lg"
+                    >
+                      สมัครสมาชิก
+                    </button> -->
+                    <div class="mt-5 space-x-2 flex justify-end">
+                      <button
+                        type="button"
+                        class="focus:outline-none inline-flex justify-center rounded-md border border-transparent bg-green-100 px-4 py-2 text-sm font-medium text-primary hover:bg-primary-light focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                        @click="saveAdmin"
+                      >
+                        Create
+                      </button>
+                      <button
+                        type="button"
+                        class="focus:outline-none inline-flex justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 text-sm font-medium text-red-900 hover:bg-red-200 focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
+                        @click="closeModal"
+                      >
+                        Close
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </DialogPanel>
+            </TransitionChild>
+          </div>
+        </div>
+      </Dialog>
+    </TransitionRoot>
+    <TransitionRoot appear :show="editIsOpen" as="template">
+      <Dialog as="div" @close="closeModal" class="relative z-10">
+        <TransitionChild
+          as="template"
+          enter="duration-300 ease-out"
+          enter-from="opacity-0"
+          enter-to="opacity-100"
+          leave="duration-200 ease-in"
+          leave-from="opacity-100"
+          leave-to="opacity-0"
+        >
+          <div class="fixed inset-0 bg-black bg-opacity-25" />
+        </TransitionChild>
+
+        <div class="fixed inset-0 overflow-y-auto">
+          <div
+            class="flex min-h-full items-center justify-center p-4 text-center"
+          >
+            <TransitionChild
+              as="template"
+              enter="duration-300 ease-out"
+              enter-from="opacity-0 scale-95"
+              enter-to="opacity-100 scale-100"
+              leave="duration-200 ease-in"
+              leave-from="opacity-100 scale-100"
+              leave-to="opacity-0 scale-95"
+            >
+              <DialogPanel
+                class="w-full max-w-lg transform overflow-hidden rounded-2xl bg-white px-8 py-8 text-left align-middle shadow-xl transition-all"
+              >
+                <DialogTitle
+                  as="h3"
+                  class="text-xl font-bold leading-6 text-primary"
+                >
+                  Add New User
+                </DialogTitle>
+                <div class="mt-5">
+                  <!-- <p class="text-sm text-gray-500">
+                    Your payment has been successfully submitted. We’ve sent you
+                    an email with all of the details of your order.
+                  </p> -->
+                  <form action="" class="space-y-5">
+                    <div>
+                      <label for="firstname" class="text-md font-medium"
+                        >ชื่อจริง
+                        <span class="text-red-500"
+                          >(ไม่ต้องมีคำนำหน้า)</span
+                        ></label
+                      >
+
+                      <div class="relative mt-1">
+                        <input
+                          type="text"
+                          id="firstname"
+                          class="form-input w-full px-4 py-3 text-sm border-gray-200 focus-visible:border-primary-light focus:border-primary-light focus:ring-primary focus:shadow-primary border rounded-lg shadow-sm"
+                          placeholder="กรุณากรอกชื่อจริง"
+                          v-model="edit_firstname"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label for="lastname" class="text-md font-medium"
+                        >นามสกุล</label
+                      >
+
+                      <div class="relative mt-1">
+                        <input
+                          type="text"
+                          id="lastname"
+                          class="form-input w-full px-4 py-3 text-sm border-gray-200 focus-visible:border-primary-light focus:border-primary-light focus:ring-primary focus:shadow-primary border rounded-lg shadow-sm"
+                          placeholder="กรุณากรอกนามสกุล"
+                          v-model="edit_lastname"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label for="email" class="text-md font-medium"
+                        >อีเมลแอดเดรส</label
+                      >
+
+                      <div class="relative mt-1">
+                        <input
+                          type="email"
+                          id="email"
+                          class="form-input w-full pr-12 px-4 py-3 text-sm border-gray-200 focus-visible:border-primary-light focus:border-primary-light focus:ring-primary focus:shadow-primary border rounded-lg shadow-sm"
+                          placeholder="กรุณากรอกอีเมลแอดเดรส"
+                          v-model="edit_mail"
+                        />
+
+                        <span
+                          class="absolute inset-y-0 inline-flex items-center right-4"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="w-5 h-5 text-gray-400"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
+                            />
+                          </svg>
+                        </span>
+                      </div>
+                    </div>
                     <div>
                       <label for="email" class="text-md font-medium"
                         >เบอร์โทรศัพท์มือถือ</label
@@ -142,7 +300,7 @@ function openModal() {
                           id="tel"
                           class="form-input w-full px-4 py-3 text-sm border-gray-200 focus-visible:border-primary-light focus:border-primary-light focus:ring-primary focus:shadow-primary border rounded-lg shadow-sm"
                           placeholder="กรุณากรอกเบอร์โทรศััพท์มือถือ"
-                          v-model="phone"
+                          v-model="edit_phone"
                         />
                       </div>
                     </div>
@@ -158,7 +316,7 @@ function openModal() {
                           id="password"
                           class="form-input w-full px-4 py-3 text-sm border-gray-200 focus-visible:border-primary-light focus:border-primary-light focus:ring-primary focus:shadow-primary border rounded-lg shadow-sm"
                           placeholder="Enter password"
-                          v-model="password"
+                          v-model="edit_password"
                         />
                       </div>
                     </div>
@@ -195,14 +353,14 @@ function openModal() {
                       <button
                         type="button"
                         class="focus:outline-none inline-flex justify-center rounded-md border border-transparent bg-green-100 px-4 py-2 text-sm font-medium text-primary hover:bg-primary-light focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
-                        @click="closeModal"
+                        @click="updateCustomer(edit_id)"
                       >
                         Create
                       </button>
                       <button
                         type="button"
                         class="focus:outline-none inline-flex justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 text-sm font-medium text-red-900 hover:bg-red-200 focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
-                        @click="closeModal"
+                        @click="closeEdit"
                       >
                         Close
                       </button>
@@ -307,14 +465,13 @@ function openModal() {
                 />
               </th>
               <th class="text-left text-gray-600">USER</th>
-              <th class="text-left text-gray-600">ORDER_STATUS</th>
               <th class="text-left text-gray-600">LAST ACTIVITY</th>
               <th class="text-left text-gray-600">JOIN DATE</th>
               <th class="text-right text-gray-600">ACTIONS</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-200">
-            <tr v-for="user in userList" :key="user.id">
+            <tr v-for="admin in userList" :key="admin.admin_id">
               <td class="p-2">
                 <input
                   type="checkbox"
@@ -323,36 +480,19 @@ function openModal() {
                 />
               </td>
               <td class="flex items-center py-4">
-                <img
-                  class="inline-block h-12 w-12 rounded-full ring-2 ring-white"
-                  :src="user.avatar"
-                  alt=""
-                />
                 <div class="px-4">
                   <div>
                     <a href="#" class="text-gray-600 font-bolder">{{
-                      user.name
+                      admin.admin_name
                     }}</a>
                   </div>
                   <div class="font-bold text-sm">
-                    {{ user.email }}
+                    {{ admin.admin_email }}
                   </div>
                 </div>
               </td>
-              <td>
-                <span
-                  v-if="user.isActive"
-                  class="px-2 py-1 rounded text-xs text-white bg-green-500"
-                  >Active</span
-                >
-                <span
-                  v-else
-                  class="px-2 py-1 rounded text-xs text-white bg-red-500"
-                  >Suspended</span
-                >
-              </td>
-              <td>{{ user.lastActivity }}</td>
-              <td>{{ user.joinDate }}</td>
+              <td>{{ admin.admin_createAt }}</td>
+              <td>{{ admin.admin_editAt }}</td>
               <td class="text-right">
                 <Menu as="div" class="relative inline-block text-left">
                   <div>
@@ -389,35 +529,10 @@ function openModal() {
                       class="absolute right-0 w-32 mt-1 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 z-50 focus:outline-none"
                     >
                       <div class="px-1 py-1">
+
                         <MenuItem v-slot="{ active }">
                           <button
-                            :class="[
-                              active
-                                ? 'bg-gray-400 text-white'
-                                : 'text-gray-900',
-                              'group flex rounded-md items-center w-full px-2 py-2 text-sm',
-                            ]"
-                          >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              class="w-5 h-5 mr-2 text-violet-400"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              stroke="currentColor"
-                            >
-                              <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
-                              />
-                            </svg>
-                            Edit
-                          </button>
-                        </MenuItem>
-                        <MenuItem v-slot="{ active }">
-                          <button
-                            @click="deleteUser(user.id)"
+                            @click="deleteUser(admin.admin_id)"
                             :class="[
                               active
                                 ? 'bg-red-400 text-white'
@@ -567,10 +682,10 @@ function openModal() {
 </template>
 
 <script>
-import userList from "@/data/users/userList.json";
 import { Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/vue";
 import { ref } from "vue";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 export default {
   components: {
@@ -579,17 +694,102 @@ export default {
     MenuItems,
     MenuItem,
   },
-
+  data() {
+    return {
+      firstname: "",
+      lastname: "",
+      mail: "",
+      phone: "",
+      password: "",
+      createAt: new Date().toISOString().slice(0, 10),
+      userList: [],
+      all_admin: [],
+      edit_id: null,
+      edit_firstname: "",
+      edit_lastname: "",
+      edit_mail: null,
+      edit_phone: null,
+      edit_password: "",
+      editIsOpen: false,
+    };
+  },
   setup() {
     const selectAll = ref(false);
 
     return {
-      userList,
       selectAll,
     };
   },
 
+  created() {
+    this.getAdmin();
+  },
+
   methods: {
+    async getAdmin() {
+      try {
+        const response = await axios.get("http://localhost:4000/api/admin");
+        this.userList = response.data.result;
+        console.log(response.data);
+        this.userlist.forEach(function (admin) {
+          admin.admin_createAt = new Date(admin.admin_createAt).toDateString();
+          admin.admin_editAt = new Date(admin.admin_editAt).toDateString();
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    openEdit(id) {
+      this.getAdminById(id);
+      this.editIsOpen = true;
+    },
+    closeEdit() {
+      this.editIsOpen = false;
+    },
+    async getAdminById(id) {
+      try {
+        const response = await axios.get(
+          `http://localhost:4000/api/admin/` + id
+        );
+        this.edit_id = response.data.admin_id;
+        this.edit_firstname = response.data.admin_firstname;
+        this.edit_lastname = response.data.admin_lastname;
+        this.edit_password = response.data.admin_password;
+        this.edit_mail = response.data.admin_mail;
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    updateCustomer(customer_id) {
+      let form_Data = new FormData();
+      form_Data.append("customer_firstname", this.edit_firstname);
+      form_Data.append("customer_lastname", this.edit_lastname);
+      form_Data.append("customer_mail", this.edit_mail);
+      form_Data.append("customer_phone", this.edit_phone);
+      form_Data.append("customer_password", this.edit_password);
+
+      axios
+        .put("http://localhost:4000/api/admin/" + customer_id, form_Data)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((e) => console.log(e));
+    },
+    async saveAdmin() {
+      try {
+        await axios.post("http://localhost:4000/api/admin", {
+          admin_firstname: this.firstname,
+          admin_lastname: this.lastname,
+          admin_email: this.mail,
+          admin_password: this.password,
+          admin_createAt: new Date().toISOString().slice(0, 10),
+          admin_editAt: new Date().toISOString().slice(0, 10),
+        });
+        this.$router.go()
+      } catch (err) {
+        console.log(err);
+      }
+    },
     deleteUser(id) {
       Swal.fire({
         title: "Are you sure?",
@@ -602,36 +802,14 @@ export default {
       }).then((result) => {
         if (result.value) {
           Swal.fire("Deleted!", "Your file has been deleted.", "success");
+          axios.delete(`http://localhost:4000/api/admin/${id}`);
+          const newCustomer = this.userList.filter(function (item) {
+            return item.admin_id !== id;
+          });
+          this.userList = newCustomer;
         }
       });
     },
-    // selectAllUsers() {
-    // 	this.selectAll.value = !this.selectAll.value;
-    // 	this.userList.forEach(user => {
-    // 		user.selected = this.selectAll.value;
-    // 	});
-    // },
-    // selectUser(user) {
-    // 	user.selected = !user.selected;
-    // },
-    // deleteSelectedUsers() {
-    // 	const selectedUsers = this.userList.filter(user => user.selected);
-    // 	if (selectedUsers.length > 0) {
-    // 		Swal.fire({
-    // 			title: 'Are you sure?',
-    // 			text: "You won't be able to revert this!",
-    // 			icon: 'warning',
-    // 			showCancelButton: true,
-    // 			confirmButtonColor: '#3085d6',
-    // 			cancelButtonColor: '#d33',
-    // 			confirmButtonText: 'Yes, delete it!'
-    // 		}).then((result) => {
-    // 			if (result.value) {
-    // 				Swal.fire('Deleted!', 'Your file has been deleted.', 'success')
-    // 			}
-    // 		})
-    // 	}
-    // },
   },
 };
 </script>

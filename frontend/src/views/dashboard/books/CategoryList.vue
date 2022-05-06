@@ -69,7 +69,7 @@ function openModal() {
                   as="h3"
                   class="text-lg font-medium leading-6 text-gray-900"
                 >
-                  Add New Book
+                  Add Category
                 </DialogTitle>
                 <div class="mt-2">
                   <!-- <p class="text-sm text-gray-500">
@@ -79,7 +79,7 @@ function openModal() {
                   <form action="" class="space-y-5">
                     <div>
                       <label for="bookname" class="text-md font-medium"
-                        >ชื่อหนังสือ</label
+                        >ชื่อหมวดหมู่</label
                       >
 
                       <div class="relative mt-1">
@@ -88,220 +88,16 @@ function openModal() {
                           id="bookname"
                           class="form-input w-full px-4 py-3 text-sm border-gray-200 focus-visible:border-primary-light focus:border-primary-light focus:ring-primary focus:shadow-primary border rounded-lg shadow-sm"
                           placeholder="กรุณากรอกชื่อหนังสือ"
-                          v-model="bookname"
+                          v-model="category_name"
                         />
                       </div>
                     </div>
 
-                    <div>
-                      <label for="description" class="text-md font-medium"
-                        >รายละเอียดหนังสือ</label
-                      >
-
-                      <div class="relative mt-1">
-                        <input
-                          type="text"
-                          id="description"
-                          class="form-input w-full px-4 py-3 text-sm border-gray-200 focus-visible:border-primary-light focus:border-primary-light focus:ring-primary focus:shadow-primary border rounded-lg shadow-sm"
-                          placeholder="กรุณากรอกนามสกุล"
-                          v-model="description"
-                        />
-                      </div>
-                    </div>
-
-                    <div class="flex space-x-4">
-                      <div class="w-1/3">
-                        <label for="bookpage" class="text-md font-medium"
-                          >จำนวนหน้า</label
-                        >
-
-                        <div class="relative mt-1">
-                          <input
-                            type="number"
-                            id="bookpage"
-                            class="form-input w-full px-4 pr-16 py-3 text-sm border-gray-200 focus-visible:border-primary-light focus:border-primary-light focus:ring-primary focus:shadow-primary border rounded-lg shadow-sm"
-                            placeholder="XXX"
-                            v-model="page"
-                          />
-                          <span
-                            class="absolute inset-y-0 inline-flex items-center right-4"
-                          >
-                            หน้า
-                          </span>
-                        </div>
-                      </div>
-                      <div class="w-1/3">
-                        <label for="price" class="text-md font-medium"
-                          >ราคาหนังสือ</label
-                        >
-
-                        <div class="relative mt-1">
-                          <input
-                            type="number"
-                            id="price"
-                            class="form-input w-full pr-16 px-4 py-3 text-sm border-gray-200 focus-visible:border-primary-light focus:border-primary-light focus:ring-primary focus:shadow-primary border rounded-lg shadow-sm"
-                            placeholder="XXX"
-                            v-model="price"
-                          />
-                          <span
-                            class="absolute inset-y-0 inline-flex items-center right-4"
-                          >
-                            บาท
-                          </span>
-                        </div>
-                      </div>
-                      <div class="w-1/3">
-                        <label for="price" class="text-md font-medium"
-                          >สต็อกสินค้า</label
-                        >
-
-                        <div class="relative mt-1">
-                          <input
-                            type="number"
-                            id="stock"
-                            class="form-input w-full px-4 pr-16 py-3 text-sm border-gray-200 focus-visible:border-primary-light focus:border-primary-light focus:ring-primary focus:shadow-primary border rounded-lg shadow-sm"
-                            placeholder="XX"
-                            v-model="stock"
-                          />
-                          <span
-                            class="absolute inset-y-0 inline-flex items-center right-4"
-                          >
-                            เล่ม
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                    <div>
-                      <label for="author" class="text-md font-medium"
-                        >ผู้แต่ง</label
-                      >
-
-                      <div class="relative mt-1">
-                        <input
-                          type="text"
-                          id="author"
-                          class="form-input w-full px-4 py-3 text-sm border-gray-200 focus-visible:border-primary-light focus:border-primary-light focus:ring-primary focus:shadow-primary border rounded-lg shadow-sm"
-                          placeholder="กรุณากรอกชื่อผู้แต่ง"
-                          v-model="author"
-                        />
-                      </div>
-                    </div>
-                    <div>
-                      <label for="publisher" class="text-md font-medium"
-                        >ชื่อสำนักพิมพ์</label
-                      >
-
-                      <div class="relative mt-1">
-                        <input
-                          type="text"
-                          id="publisher"
-                          class="form-input w-full px-4 py-3 text-sm border-gray-200 focus-visible:border-primary-light focus:border-primary-light focus:ring-primary focus:shadow-primary border rounded-lg shadow-sm"
-                          placeholder="กรุณากรอกชื่อสำนักพิมพ์"
-                          v-model="publisher"
-                        />
-                      </div>
-                    </div>
-                    <div class="flex space-x-4">
-                      <div class="w-1/2">
-                        <label for="category" class="text-md font-medium"
-                          >หมวดหมู่หนังสือ</label
-                        >
-
-                        <div class="relative mt-1">
-                          <select
-                            class="form-select w-full px-4 py-3 text-sm border-gray-200 focus-visible:border-primary-light focus:border-primary-light focus:ring-primary focus:shadow-primary border rounded-lg shadow-sm"
-                          >
-                            <option>เลือกหมวดหมู่</option>
-                            <option>หมวดหมู่ 1</option>
-                            <option>หมวดหมู่ 2</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="w-1/2">
-                        <label for="isbn" class="text-md font-medium"
-                          >ISBN</label
-                        >
-
-                        <div class="relative mt-1">
-                          <input
-                            type="number"
-                            id="isbn"
-                            class="form-input w-full px-4 py-3 text-sm border-gray-200 focus-visible:border-primary-light focus:border-primary-light focus:ring-primary focus:shadow-primary border rounded-lg shadow-sm"
-                            placeholder="XXXXXXXXXXXXX"
-                            v-model="isbn"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    <div>
-                      <label for="email" class="text-md font-medium"
-                        >รูปปกหนังสือ</label
-                      >
-
-                      <div class="relative mt-1">
-                        <div
-                          class="relative h-40 rounded-lg border-dashed border-2 border-gray-200 bg-white flex justify-center items-center hover:cursor-pointer"
-                        >
-                          <div>
-                            <input
-                              type="file"
-                              class="h-full w-full opacity-1"
-                              name=""
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <!-- 
-                      <div class="relative mt-1">
-                        <div
-                          class="relative h-40 rounded-lg border-dashed border-2 border-gray-200 bg-white flex justify-center items-center hover:cursor-pointer"
-                        >
-                          <div class="absolute z-10">
-                            <div class="flex flex-col items-center">
-                              <i
-                                class="fa fa-cloud-upload fa-3x text-gray-200"
-                              ></i>
-                              <span class="block text-gray-400 font-normal"
-                                >Attach you files here</span
-                              >
-                              <span class="block text-gray-400 font-normal"
-                                >or</span
-                              >
-                              <span class="block text-blue-400 font-normal"
-                                >Browse files</span
-                              >
-                            </div>
-                          </div>
-                          <input
-                            type="file"
-                            class="h-full w-full opacity-0"
-                            name=""
-                          />
-                        </div>
-                        <div
-                          class="flex justify-between items-center text-gray-400 mt-2"
-                        >
-                          <span
-                            >Accepted file type: .jpg, .png, .jpeg only</span
-                          >
-                          <span class="flex items-center"
-                            ><i class="fa fa-lock mr-1"></i> secure</span
-                          >
-                        </div>
-                      </div> -->
-                    </div>
-
-                    <!-- <button
-                      @click="signUp"
-                      class="block w-full px-5 py-3 text-md font-medium text-white bg-primary rounded-lg"
-                    >
-                      สมัครสมาชิก
-                    </button> -->
                     <div class="mt-4 space-x-2 flex justify-end">
                       <button
                         type="button"
                         class="focus:outline-none inline-flex justify-center rounded-md border border-transparent bg-green-100 px-4 py-2 text-sm font-medium text-primary hover:bg-primary-light focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
-                        @click="closeModal"
+                        @click="saveCategory"
                       >
                         Create
                       </button>
@@ -413,15 +209,12 @@ function openModal() {
                 />
               </th>
               <th class="text-left text-gray-600">ข้อมูลหนังสือ</th>
-              <th class="text-left text-gray-600">ราคาหนังสือ (บาท)</th>
+              <th class="text-left text-gray-600">จำนวนหนังสือ</th>
               <th class="text-left text-gray-600">สต็อกสินค้า</th>
-              <th class="text-left text-gray-600">ขายครั้งล่าสุด</th>
-              <th class="text-left text-gray-600">เพิ่มหนังสือเมื่อ</th>
-              <th class="text-right text-gray-600">จัดการ</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-200">
-            <tr v-for="(book, index) in books" :key="index">
+            <tr v-for="category in categories" :key="category.id">
               <td class="p-2">
                 <input
                   type="checkbox"
@@ -430,37 +223,16 @@ function openModal() {
                 />
               </td>
               <td class="flex items-center py-4">
-                <img
-                  class="inline-block h-28 ring-2 ring-white"
-                  :src="book.img"
-                  alt=""
-                />
                 <div class="px-4 w-60">
                   <div>
                     <a href="#" class="text-gray-600 font-bolder">
-                      {{ book.name }}
+                      {{ category.category_name }}
                     </a>
-                  </div>
-                  <div class="font-bold text-sm">
-                    แต่งโดย : {{ book.writer }}
                   </div>
                 </div>
               </td>
-              <td>350</td>
-              <td>
-                <span
-                  v-if="book.stock >= 10"
-                  class="px-2 py-1 rounded text-xs text-white bg-green-500"
-                  >{{ book.stock }} เล่ม</span
-                >
-                <span
-                  v-else
-                  class="px-2 py-1 rounded text-xs text-white bg-red-500"
-                  >{{ book.stock }} เล่ม</span
-                >
-              </td>
-              <td>ซื้อล่าสุด</td>
-              <td>วันที่เพิ่ม</td>
+              <td></td>
+
               <td class="text-right">
                 <Menu as="div" class="relative inline-block text-left">
                   <div>
@@ -501,36 +273,11 @@ function openModal() {
                           <button
                             :class="[
                               active
-                                ? 'bg-gray-400 text-white'
-                                : 'text-gray-900',
-                              'group flex rounded-md items-center w-full px-2 py-2 text-sm',
-                            ]"
-                          >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              class="w-5 h-5 mr-2 text-violet-400"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              stroke="currentColor"
-                            >
-                              <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
-                              />
-                            </svg>
-                            Edit
-                          </button>
-                        </MenuItem>
-                        <MenuItem v-slot="{ active }">
-                          <button
-                            :class="[
-                              active
                                 ? 'bg-red-400 text-white'
                                 : 'text-gray-900',
                               'group flex rounded-md items-center w-full px-2 py-2 text-sm',
                             ]"
+                            @click="deleteUser(category.category_id)"
                           >
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -678,6 +425,7 @@ import userList from "@/data/users/userList.json";
 import books from "@/data/book/book.json";
 import { Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/vue";
 import { ref } from "vue";
+import axios from "axios";
 
 export default {
   components: {
@@ -686,7 +434,14 @@ export default {
     MenuItems,
     MenuItem,
   },
-
+  data() {
+    return {
+      categories: [],
+      category_name: "",
+      all_book: [],
+      bookcount: 0,
+    };
+  },
   setup() {
     const selectAll = ref(false);
 
@@ -695,6 +450,68 @@ export default {
       userList,
       selectAll,
     };
+  },
+
+  created() {
+    this.getCategories();
+    this.getBooks();
+  },
+  computed: {
+  },
+  methods: {
+    async getCategories() {
+      try {
+        const response = await axios.get(
+          "http://localhost:4000/api/categories"
+        );
+        this.categories = response.data;
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    deleteUser(id) {
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then((result) => {
+        if (result.value) {
+          Swal.fire("Deleted!", "Your file has been deleted.", "success");
+          axios.delete(`http://localhost:4000/api/categories/${id}`);
+          const newBook = this.categories.filter(function (item) {
+            return item.category_id !== id;
+          });
+          this.categories = newBook;
+        }
+      });
+    },
+    async saveCategory() {
+      try {
+        await axios.post("http://localhost:4000/api/categories", {
+          category_name: this.category_name,
+        });
+        this.$router.go();
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async getBooks() {
+      try {
+        const response = await axios.get("http://localhost:4000/api/books");
+        this.all_book = response.data;
+        // foreach change book_createAt format to date format and change book_updateAt format to date format
+        this.all_book.forEach(function (book) {
+          book.book_createAt = new Date(book.book_createAt).toDateString();
+          book.book_updateAt = new Date(book.book_updateAt).toDateString();
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    },
   },
 };
 </script>

@@ -196,9 +196,25 @@ export const getBookByCategory = (id, result) => {
           result(null, results);
       }
   });   
+
 }
 
 // Update customer to Database
+
+};
+
+export const insertCustomer = (data, result) => {
+  db.query("INSERT INTO tb_customer SET ?", [data], (err, results) => {
+    if (err) {
+      console.log(err);
+      result(err, null);
+    } else {
+      result(null, results);
+    }
+  });
+};
+
+
 export const updateCustomerById = (data, id, res) => {
   bcrypt.hash(data.customer_password, 10, (err, hash) => {
     if (err) {
@@ -228,6 +244,7 @@ export const updateCustomerById = (data, id, res) => {
         }
       );
     }
+
   });
   // db.query("UPDATE tb_customer SET customer_mail = ?, customer_password = ?,customer_firstname = ?,customer_lastname = ?, customer_phone = ?, customer_editAt = CURRENT_TIMESTAMP WHERE customer_id = ?", [data.customer_mail, data.customer_password, data.customer_firstname, data.customer_lastname, data.customer_phone, id], (err, results) => {             
   //     if(err) {
@@ -242,22 +259,39 @@ export const updateCustomerById = (data, id, res) => {
 // Get Single Customer
 export const getCustomerById = (id, result) => {
   db.query("SELECT * FROM tb_customer WHERE customer_id = ?", [id], (err, results) => {
+
+  })
+}
+
+export const deleteCustomerById = (id, result) => {
+  db.query("DELETE FROM tb_customer WHERE customer_id = ?", [id], (err, results) => {
+
     if (err) {
       console.log(err);
       result(err, null);
     } else {
+
       result(null, results[0]);
+
+      result(null, results);
+
     }
   });
 };
 
+
 // Get All order
 export const getOrder = (result) => {
   db.query("SELECT * FROM tb_order", (err, results) => {             
+
+export const getCustomerById = (id, result) => {
+  db.query("SELECT * FROM tb_customer WHERE customer_id = ?", [id], (err, results) => {             
+
       if(err) {
           console.log(err);
           result(err, null);
       } else {
+
           result(null, results);
       }
   });   
@@ -334,6 +368,26 @@ export const updateBankById = (data, id, result) => {
 // Delete Product to Database
 export const deleteBankById = (id, result) => {
   db.query("DELETE FROM tb_bank WHERE bank_id = ?", [id], (err, results) => {
+
+          result(null, results[0]);
+      }
+  });   
+}
+
+export const getAdminById = (id, result) => {
+  db.query("SELECT * FROM tb_admin WHERE admin_id = ?", [id], (err, results) => {             
+      if(err) {
+          console.log(err);
+          result(err, null);
+      } else {
+          result(null, results[0]);
+      }
+  });   
+}
+
+export const insertAdmin = (data, result) => {
+  db.query("INSERT INTO tb_admin SET ?", [data], (err, results) => {
+
     if (err) {
       console.log(err);
       result(err, null);
@@ -343,9 +397,14 @@ export const deleteBankById = (id, result) => {
   });
 };
 
+
 // Get All Payment
 export const getPayment = (result) => {
   db.query("SELECT * FROM tb_payment INNER JOIN tb_invoice ON tb_payment.payment_invoice_id = tb_invoice.invoice_id", (err, results) => {
+
+export const deleteAdminById = (id, result) => {
+  db.query("DELETE FROM tb_admin WHERE admin_id = ?", [id], (err, results) => {
+
     if (err) {
       console.log(err);
       result(err, null);
@@ -354,6 +413,7 @@ export const getPayment = (result) => {
     }
   });
 };
+
 // Get Single Payment
 export const getPaymentById = (id, result) => {
   db.query("SELECT * FROM tb_payment WHERE payment_id = ?", [id], (err, results) => {
@@ -437,3 +497,47 @@ export const getBankByInvoice = (result) => {
     }
   });
 };
+=======
+
+export const updateAdminById = (data, id, res) => {
+  bcrypt.hash(data.admin_password, 10, (err, hash) => {
+    if (err) {
+      return res.status(500).send({
+        msg: err,
+      });
+    } else {
+      // has hashed pw => add to database
+      db.query(
+        `UPDATE tb_customer SET admin_mail = ?, admin_password = ?,admin_firstname = ?,admin_lastname = ?, admin_editAt = CURRENT_TIMESTAMP WHERE admin_id = ?` , [
+          data.admin_mail
+        , hash, 
+          data.admin_firstname
+        , data.admin_lastname, 
+        , id],
+        (err, result) => {
+          // if (err) {
+          //   throw err;
+          //   return res.status(400).send({
+          //     msg: err,
+          //   });
+          // }
+          // return res.status(201).send({
+          //   msg: "Edit Succesful",
+          // });
+        }
+      );
+    }
+  })
+};
+
+export const getAddressById = (id, result) => {
+  db.query("SELECT * FROM tb_address WHERE address_id = ?", [id], (err, results) => {             
+      if(err) {
+          console.log(err);
+          result(err, null);
+      } else {
+          result(null, results[0]);
+      }
+  });   
+};
+

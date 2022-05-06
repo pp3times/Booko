@@ -49,7 +49,7 @@ export default {
     };
   },
   mounted() {
-    this.getSearchQuery(this.$route.params.query);
+    this.keyword = this.$route.params.keyword;
   },
   updated() {
      this.keyword = this.$route.params.keyword;
@@ -85,7 +85,14 @@ export default {
     },
   },
   created() {
-
+    // GET request using axios with error handling
+    axios
+      .get("http://localhost:4000/api/categories")
+      .then((response) => (this.category = response.data))
+      .catch((error) => {
+        this.errorMessage = error.message;
+        console.error("There was an error!", error);
+      });
     axios
       .get("http://localhost:4000/api/books")
       .then((response) => (this.book = response.data))
