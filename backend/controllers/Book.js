@@ -30,7 +30,8 @@ import {
   deletePaymentById,
   updateInvoiceById,
   updateOrderById,
-  getBankByInvoice
+  getBankByInvoice,
+  updatePaymentById
 } from "../models/bookModel.js";
 
 // Get All Products
@@ -404,6 +405,19 @@ export const showBankByInvoice = (req, res) => {
   getBankByInvoice((err, results) => {
     if (err) {
       console.log(err);
+      res.send(err);
+    } else {
+      res.json(results);
+    }
+  });
+};
+
+// Update Payment
+export const updatePayment = (req, res) => {
+  const data = req.body;
+  const id = req.params.id;
+  updatePaymentById(data, id, (err, results) => {
+    if (err) {
       res.send(err);
     } else {
       res.json(results);

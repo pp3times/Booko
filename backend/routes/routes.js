@@ -176,6 +176,7 @@ router.post("/payment", upload.single("myImage"), (req, res) => {
         console.log("file uploaded");
       }
     );
+    db.query("UPDATE tb_invoice SET invoice_status = 'waiting' WHERE invoice_id = ?", [req.body.payment_invoice_id])
   }
 });
 

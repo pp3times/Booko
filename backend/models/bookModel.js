@@ -437,3 +437,19 @@ export const getBankByInvoice = (result) => {
     }
   });
 };
+
+// Update Paymentt to Database
+export const updatePaymentById = (data, id, result) => {
+  db.query(
+    "UPDATE product SET ? WHERE payment_id = ?",
+    [data, id],
+    (err, results) => {
+      if (err) {
+        console.log(err);
+        result(err, null);
+      } else {
+        result(null, results);
+      }
+    }
+  );
+};
