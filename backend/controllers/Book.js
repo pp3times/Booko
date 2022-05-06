@@ -31,16 +31,6 @@ import {
   updateInvoiceById,
   updateOrderById,
   getBankByInvoice,
-  insertCustomer,
-  deleteCustomerById,
-  getCustomerById,
-  updateCustomerById,
-  getAdminById,
-  insertAdmin,
-  deleteAdminById,
-  updateAdminById,
-  getAddressById,
- 
 } from "../models/bookModel.js";
 
 // Get All Products
@@ -139,17 +129,16 @@ export const createCategory = (req, res) => {
   });
 };
 
-
 // Get CategoryId
 export const showCategoryById = (req, res) => {
   getCategoryById(req.params.id, (err, results) => {
-      if (err){
-          res.send(err);
-      }else{
-          res.json(results);
-      }
+    if (err) {
+      res.send(err);
+    } else {
+      res.json(results);
+    }
   });
-}
+};
 
 // Update Category
 export const updateCategory = (req, res) => {
@@ -178,17 +167,16 @@ export const deleteCategory = (req, res) => {
 
 // tb_book
 
-
 // Get BookId
 export const showBookById = (req, res) => {
   getBookById(req.params.id, (err, results) => {
-      if (err){
-          res.send(err);
-      }else{
-          res.json(results);
-      }
+    if (err) {
+      res.send(err);
+    } else {
+      res.json(results);
+    }
   });
-}
+};
 
 // Update Book
 export const updateBook = (req, res) => {
@@ -218,20 +206,19 @@ export const deleteBook = (req, res) => {
 // Get BookbyCategory
 export const showBookByCategory = (req, res) => {
   getBookByCategory(req.params.id, (err, results) => {
-      if (err){
-          res.send(err);
-      }else{
-          res.json(results);
-      }
+    if (err) {
+      res.send(err);
+    } else {
+      res.json(results);
+    }
   });
-
-}
+};
 
 // Update Customer by Id
 export const updateCustomer = (req, res) => {
   const data = req.body;
   const id = req.params.id;
-  updateCustomerById(data, id, res,(err, results) => {
+  updateCustomerById(data, id, res, (err, results) => {
     if (err) {
       res.send(err);
     } else {
@@ -281,12 +268,6 @@ export const updateOrderCheck = (req, res) => {
   const data = req.body;
   const id = req.params.id;
   updateOrderCheckById(data, id, (err, results) => {
-
-};
-
-export const createCustomer = (req, res) => {
-  const data = req.body;
-  insertCustomer(data, (err, results) => {
     if (err) {
       res.send(err);
     } else {
@@ -294,25 +275,18 @@ export const createCustomer = (req, res) => {
     }
   });
 };
-
 
 // Get All Bank
 export const showBank = (req, res) => {
   getBank((err, results) => {
     if (err) {
       console.log(err);
-
-export const deleteCustomer = (req, res) => {
-  const id = req.params.id;
-  deleteCustomerById(id, (err, results) => {
-    if (err) {
       res.send(err);
     } else {
       res.json(results);
     }
   });
 };
-
 
 // Get Single Bank
 export const showBankById = (req, res) => {
@@ -355,23 +329,6 @@ export const showPayment = (req, res) => {
   getPayment((err, results) => {
     if (err) {
       console.log(err);
-
-export const showCustomerById = (req, res) => {
-  getCustomerById(req.params.id, (err, results) => {
-      if (err){
-          res.send(err);
-      }else{
-          res.json(results);
-      }
-  });
-};
-
-export const updateCustomer = (req, res) => {
-  const data = req.body;
-  const id = req.params.id;
-  updateCustomerById(data, id, (err, results) => {
-    if (err) {
-
       res.send(err);
     } else {
       res.json(results);
@@ -395,21 +352,6 @@ export const updatePaymentStatus = (req, res) => {
   const data = req.body;
   const id = req.params.id;
   updatePaymentStatusById(data, id, (err, results) => {
-
-export const showAdminById = (req, res) => {
-  getAdminById(req.params.id, (err, results) => {
-      if (err){
-          res.send(err);
-      }else{
-          res.json(results);
-      }
-  });
-};
-
-export const createAdmin = (req, res) => {
-  const data = req.body;
-  insertAdmin(data, (err, results) => {
-
     if (err) {
       res.send(err);
     } else {
@@ -417,17 +359,11 @@ export const createAdmin = (req, res) => {
     }
   });
 };
-
 
 // Delete Payment
 export const deletePayment = (req, res) => {
   const id = req.params.id;
   deletePaymentById(id, (err, results) => {
-
-export const deleteAdmin = (req, res) => {
-  const id = req.params.id;
-  deleteAdminById(id, (err, results) => {
-
     if (err) {
       res.send(err);
     } else {
@@ -435,19 +371,12 @@ export const deleteAdmin = (req, res) => {
     }
   });
 };
-
 
 // Update Invoice
 export const updateInvoice = (req, res) => {
   const data = req.body;
   const id = req.params.id;
   updateInvoiceById(data, id, (err, results) => {
-
-export const updateAdmin = (req, res) => {
-  const data = req.body;
-  const id = req.params.id;
-  updateAdminById(data, id, (err, results) => {
-
     if (err) {
       res.send(err);
     } else {
@@ -455,7 +384,6 @@ export const updateAdmin = (req, res) => {
     }
   });
 };
-
 
 // Update Order
 export const updateOrder = (req, res) => {
@@ -478,14 +406,5 @@ export const showBankByInvoice = (req, res) => {
     } else {
       res.json(results);
     }
-
-export const showAddressById = (req, res) => {
-  getAddressById(req.params.id, (err, results) => {
-      if (err){
-          res.send(err);
-      }else{
-          res.json(results);
-      }
-
   });
 };
