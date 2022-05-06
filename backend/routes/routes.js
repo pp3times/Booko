@@ -22,7 +22,6 @@ import {
   showBookById,
   updateBook,
   deleteBook,
-
   updateCustomer,
   showCustomerById,
   showOrder,
@@ -38,18 +37,7 @@ import {
   deletePayment,
   updateInvoice,
   updateOrder,
-  showBankByInvoice
-
-  createCustomer,
-  deleteCustomer,
-  showCustomerById,
-  updateCustomer,
-  showAdminById,
-  createAdmin,
-  deleteAdmin,
-  showAddressById,
-
-
+  showBankByInvoice,
 } from "../controllers/Book.js";
 
 import multer from "multer";
@@ -70,7 +58,6 @@ var storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 // init express router
 const router = express.Router();
-
 
 // Get All Product
 router.get("/books", showBook);
@@ -106,30 +93,6 @@ router.delete("/categories/:id", deleteCategory);
 
 // Get Book by Category
 router.get("/categories/:id", showBookByCategory);
-
-// Delete Customer
-router.delete("/customer/:id", deleteCustomer);
-
-// Get Customer by id
-router.get("/customer/:id", showCustomerById);
-
-// Update Customer
-router.put("/customer/:id", updateCustomer)
-
-// Create Customer
-router.post("/customer", createCustomer);
-
-// Get Admin by id
-router.get("/admin/:id", showAdminById);
-
-// Create Admin
-router.post("/admin", createAdmin);
-
-// Delete Admin
-router.delete("/admin/:id", deleteAdmin);
-
-// Get Address by id
-router.get("/address/:id", showAddressById)
 
 // create Book
 // router.post('/books/create', upload.single('myImage'), async function(req, res, next){
@@ -212,7 +175,10 @@ router.post("/payment", upload.single("myImage"), (req, res) => {
         console.log("file uploaded");
       }
     );
-    db.query("UPDATE tb_invoice SET invoice_status = 'waiting' WHERE invoice_id = ?", [req.body.payment_invoice_id])
+    db.query(
+      "UPDATE tb_invoice SET invoice_status = 'waiting' WHERE invoice_id = ?",
+      [req.body.payment_invoice_id]
+    );
   }
 });
 
@@ -223,9 +189,12 @@ router.get("/books", showBook);
 router.get("/books/:id", showBookById);
 
 // router.put('/books/:id', upload.single('myImage'), updateBook);
-router.put("/books/:id", upload.single("myImage"), async function (req, res, next) {
-  console.log(req.body.book_name);
-  if (!req.file) {
+router.put(
+  "/books/:id",
+  upload.single("myImage"),
+  async function (req, res, next) {
+    console.log(req.body.book_name);
+    if (!req.file) {
       console.log(req.body);
       console.log("No file upload");
     } else {
@@ -668,7 +637,6 @@ router.post("/invoice/add", (req, res, next) => {
   );
 });
 
-
 // Update Product
 router.put("/customer/:id", updateCustomer);
 
@@ -778,9 +746,6 @@ router.get("/orderitem/:orderId", (req, res, next) => {
 // get invoice
 router.get("/invoice", (req, res, next) => {
   db.query(`SELECT * FROM tb_invoice;`, (err, result) => {
-
-router.get("/customer", (req, res, next) => {
-  db.query(`SELECT * FROM tb_customer`, (err, result) => {
     if (err) {
       throw err;
       return res.status(400).send({
@@ -788,29 +753,11 @@ router.get("/customer", (req, res, next) => {
       });
     }
     return res.status(200).send({
-      result,
-    });
-  });
-});
-
-router.get("/admin", (req, res, next) => {
-  db.query(`SELECT * FROM tb_admin`, (err, result) => {
-
-    if (err) {
-      throw err;
-      return res.status(400).send({
-        msg: err,
-      });
-    }
-    return res.status(200).send({
-
       msg: "Get Invoice Success!",
-
       result,
     });
   });
 });
-
 // Get All Order
 router.get("/order", showOrder);
 
@@ -831,7 +778,6 @@ router.get("/bank/:id", showBankById);
 // Update Bank
 router.put("/bank/:id", updateBank);
 
-
 // Delete Bank
 router.delete("/bank/:id", deleteBank);
 
@@ -842,7 +788,6 @@ router.get("/payment/:id", showPaymentById);
 
 // Update payment
 router.put("/payment/:id", updatePaymentStatus);
-
 
 // Delete payment
 router.delete("/payment/:id", deletePayment);
@@ -855,11 +800,6 @@ router.put("/order/:id", updateOrder);
 
 // Get Single Product
 router.get("/bank/:id", showBankByInvoice);
-
-
-
-
-
 
 // export default router
 export default router;
