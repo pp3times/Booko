@@ -13,6 +13,13 @@
  - passport-jwt (authentication)
  - passport-google (authentication)
 
+## Highlight Functions
+ - Create bills
+ - User Payment
+ - Update Stock
+ - Admin Dashboard
+ - etc.
+
 ## Use Project
 1. Clone repo
 ```bash
