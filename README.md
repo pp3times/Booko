@@ -14,7 +14,7 @@
  - passport-google (authentication)
 
 ## Highlight Functions
- - Create bills
+ - Create bills and invoice
  - User Payment
  - Update Stock
  - Admin Dashboard
